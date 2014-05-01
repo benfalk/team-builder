@@ -1,0 +1,36 @@
+!!!
+%html
+  %head
+    %title TeamBuilder
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-default.navbar-fixed-top
+      .container
+        .navbar-header
+          %a.navbar-brand{:href => "../"} League Team Builder
+          %button.navbar-toggle{"data-target" => "#navbar-main", "data-toggle" => "collapse", :type => "button"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+        #navbar-main.navbar-collapse.collapse
+          -#%ul.nav.navbar-nav
+          -#  %li
+          -#    %a{:href => "../help/"} Help
+          %button.btn.btn-primary.navbar-right{:type => "button", style:'height: 39px;margin-top: 1px;', :onclick => "document.getElementById('loginForm').submit();"} Login
+          %form#loginForm.navbar-form.navbar-right
+            %input.form-control.col-lg-8{:placeholder => "Summoner Name", :type => "text", style: 'background: #919BA3;color:#fff;'}
+            %input.form-control.col-lg-8{:placeholder => "Password", :type => "password", style: 'background: #919BA3;color:#fff;'}
+
+    = yield
+
+    %footer
+      .container
+        %p.pull-right
+          %a{:href => "#"} Back to top
+        %p
+          © 2014 LOL Team Builder
+          %a{:href => "#"} Privacy
+          ·
+          %a{:href => "#"} Terms
