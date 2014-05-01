@@ -1,0 +1,74 @@
+.mast-head {
+  margin-top: 62px;
+  background-image: image-url("teamBG.jpg");
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 570px;
+  position: relative;
+  text-align: center;
+  margin-bottom: 10px;
+  .mast-title {
+    font-size: 5.1em;
+    text-transform: uppercase;
+    padding: 100px 0 10px;
+    font-weight: 400;
+    text-shadow: 2px 2px 15px #000;
+  }
+  .mast-sub-title {
+    font-size: 1.7em;
+    text-transform: uppercase;
+    padding: 0 0 20px;
+    font-weight: 400;
+    text-shadow: 2px 2px 13px #000;
+  }
+  .summoner-enter {
+    display: inline-block;
+    .small-text {
+      text-align: left;
+      font-size: 0.7em;
+    }
+  }
+  .summoner-name {
+    border: none;
+    padding: 16px;
+    color: #2b3e50;
+    font-weight: 200;
+    font-size: 1.7em;
+    display: block;
+    float: left;
+    width: 400px;
+  }
+  submit {
+    padding: 15px 30px;
+    font-size: 1.7em;
+    display: block;
+    float: left;
+  }
+  .member-numbers {
+    padding-top: 50px;
+    font-size: 1.4em;
+    text-shadow: 0px 0px 10px #000;
+  }
+
+}
+
+.marketing {
+  margin-top: 50px;
+  .jumbotron {
+    p {
+      font-size: 1em;
+    }
+    margin-bottom: 80px;
+  }
+}
+.large-icon {
+  text-align: center;
+  i {
+    font-size: 4em;
+    padding-bottom: 20px;
+  }
+}
+.featurette-divider {
+  margin: 70px 0 40px;
+}
