@@ -1,3 +1,10 @@
+GIT
+  remote: git@github.com:benfalk/lol-api.git
+  revision: 928cc499115ca9da13bd42671b1d58f1fd96fbbd
+  specs:
+    lol-api (0.0.1)
+      faraday
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -53,6 +60,8 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     font-awesome-rails (4.0.3.2)
       railties (>= 3.2, < 5.0)
     haml (4.0.5)
@@ -87,6 +96,7 @@ GEM
     mime-types (1.25.1)
     minitest (5.3.3)
     multi_json (1.9.3)
+    multipart-post (2.0.0)
     nested_form (0.3.2)
     orm_adapter (0.5.0)
     polyglot (0.3.4)
@@ -192,6 +202,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  lol-api!
   mailcatcher
   nested_form
   puma (~> 2.1.0)
