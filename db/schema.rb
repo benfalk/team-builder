@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140430215836) do
+ActiveRecord::Schema.define(version: 20140506004013) do
+
+  create_table "summoners", force: true do |t|
+    t.string   "region"
+    t.string   "name"
+    t.integer  "level"
+    t.boolean  "verified",      default: false
+    t.string   "verify_string"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "summoners", ["region", "name"], name: "index_summoners_on_region_and_name", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
