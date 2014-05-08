@@ -3,6 +3,10 @@
     .mast-title Ready to team up?
     .mast-sub-title Easily join or Create your League of Legends team.
     .summoner-enter
+      = form_for @summoner do |f|
+        = f.text_field :name
+        = f.text_field :region
+        = f.submit 'Enter'
       %form.form-inline{:role => "form"}
         %input.summoner-name{:placeholder => "Enter Sumoner Name", :type => "text"}
         %submit.btn.btn-primary Enter
