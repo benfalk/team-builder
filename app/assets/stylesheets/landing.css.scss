@@ -39,11 +39,31 @@
     float: left;
     width: 400px;
   }
+  .summoner-init {
+    position: relative;
+  }
+  .summoner-region-wrap {
+    display: inline-block;
+    position: absolute;
+    right: 123px;
+  }
+  .customSelect {
+    /* This is the default class that is used */
+    /* Put whatever custom styles you want here */
+    border: none;
+    padding: 16px;
+    color: #5b687c;
+    font-weight: 200;
+    font-size: 1.7em;
+    display: block;
+    width: 69px;
+    display: block;
+  }
   submit {
     padding: 15px 30px;
     font-size: 1.7em;
     display: block;
-    float: left;
+    float: right;
   }
   .member-numbers {
     padding-top: 50px;
@@ -76,3 +96,19 @@
 .page-top-pad {
   padding-top: 40px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

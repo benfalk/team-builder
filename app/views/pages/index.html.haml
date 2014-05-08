@@ -3,13 +3,23 @@
     .mast-title Ready to team up?
     .mast-sub-title Easily join or Create your League of Legends team.
     .summoner-enter
-      %form.form-inline{:role => "form"}
+      %form.form-inline.summoner-init{:role => "form"}
         %input.summoner-name{:placeholder => "Enter Sumoner Name", :type => "text"}
+        :javascript
+          $(document).ready(function() { $("#summoner-region").customSelect(); });
+        .summoner-region-wrap
+          %select#summoner-region
+            %option{:value => "NA"} NA
+            %option{:value => "EUW"} EUW
         %submit.btn.btn-primary Enter
       .small-text
         By clicking enter you are agreeing to the
         %a{:href => "#terms"} terms
     .member-numbers 321,943 members and growing
+
+
+
+
 
 .container
   .page-header
