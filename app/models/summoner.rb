@@ -6,6 +6,7 @@
 class Summoner < ActiveRecord::Base
 
   validates_presence_of :name, :region
+  validate :validate_summoner_name, on: :create
 
   belongs_to :user
 
@@ -16,7 +17,14 @@ class Summoner < ActiveRecord::Base
   end
 
   def name_found?
+    # TODO - Need to really push this into the API...
     LOL::Api::Client.new.summoner_by_names(name).count == 1
+  rescue
+    false
+  end
+
+  def validate_summoner_name
+    errors.add(:name, 'Summoner name not found.') unless name_found?
   end
 
 end

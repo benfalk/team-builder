@@ -3,15 +3,15 @@
     .mast-title Ready to team up?
     .mast-sub-title Easily join or Create your League of Legends team.
     .summoner-enter
-      %form.form-inline.summoner-init{:role => "form"}
-        %input.summoner-name{:placeholder => "Enter Sumoner Name", :type => "text"}
+
+      = form_for @summoner, html: {class:'form-inline summoner-init'} do |f|
+        = f.text_field :name, class:'summoner-name', placeholder:'Enter Sumoner Name'
         :javascript
-          $(document).ready(function() { $("#summoner-region").customSelect(); });
+          $(document).ready(function() { $("#summoner_region").customSelect(); });
         .summoner-region-wrap
-          %select#summoner-region
-            %option{:value => "NA"} NA
-            %option{:value => "EUW"} EUW
-        %submit.btn.btn-primary Enter
+          = f.select :region, options_for_select([['NA', 'NA'], ['EUW', 'EUW']])
+        = f.submit 'Enter', class:'btn btn-primary summoner-submit'
+
       .small-text
         By clicking enter you are agreeing to the
         %a{:href => "#terms"} terms

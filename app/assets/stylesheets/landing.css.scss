@@ -51,15 +51,16 @@
     /* This is the default class that is used */
     /* Put whatever custom styles you want here */
     border: none;
-    padding: 16px;
+    padding: 16px 0;
     color: #5b687c;
     font-weight: 200;
     font-size: 1.7em;
     display: block;
-    width: 69px;
+    width: 74px;
     display: block;
+    text-align: center;
   }
-  submit {
+  .summoner-submit {
     padding: 15px 30px;
     font-size: 1.7em;
     display: block;
