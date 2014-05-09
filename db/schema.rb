@@ -11,11 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140508224315) do
+ActiveRecord::Schema.define(version: 20140509205600) do
 
   create_table "game_stats", force: true do |t|
     t.integer  "summoner_id"
     t.integer  "riot_game_uid"
+    t.text     "raw"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "summoner_stats_summaries", force: true do |t|
+    t.integer  "summoner_id"
     t.text     "raw"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -27,7 +34,6 @@ ActiveRecord::Schema.define(version: 20140508224315) do
     t.integer  "level"
     t.boolean  "verified",      default: false
     t.string   "verify_string"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "riot_uid"
@@ -48,6 +54,7 @@ ActiveRecord::Schema.define(version: 20140508224315) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "summoner_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

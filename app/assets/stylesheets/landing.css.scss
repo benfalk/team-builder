@@ -107,6 +107,21 @@
 
 
 
+.summoner-picker-old {
+  padding: 20px;
+  font-size: 20px !important;
+  color: #333;
+  border: 1px solid #fff;
+  display:block;
+  width: 85px;
+  text-align:center;
+  &:hover{
+    cursor: pointer;
+  }
+
+}
+
+
 .summoner-picker {
 
   font-family: FontAwesome;
@@ -121,7 +136,6 @@
   font-size: 0;
   color: rgba(255, 255, 255, 0.38);
   border: 1px solid #fff;
-  text-align: center;
   display:block;
   width: 85px;
   text-align:center;
@@ -134,9 +148,9 @@
   }
 }
 
-
-
-
+//span.summoner-picker {
+//
+//}
 
 
 
@@ -147,7 +161,9 @@
 
 }
 
-
+.num {
+  color: #df691a;
+}
 
 
 

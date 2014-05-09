@@ -7,6 +7,10 @@
     vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
     vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
 
+
+
+
+
   .row.page-top-pad
     .col-lg-6
       .row
@@ -103,31 +107,32 @@
             %label.col-lg-3.control-label{:for => "select"} Favorite Champs
             .col-lg-9
               .col-lg-3
-                %select#summoner-select-1.summoner-picker
+                %select#summoner-select-1.summoner-picker-old
+                  %option
                   = render 'summoner_list'
               .col-lg-3
-                %select#summoner-select-2.summoner-picker
+                %select#summoner-select-2.summoner-picker-old
+                  %option
                   = render 'summoner_list'
               .col-lg-3
-                %select#summoner-select-3.summoner-picker
+                %select#summoner-select-3.summoner-picker-old
+                  %option
                   = render 'summoner_list'
               .col-lg-3
-                %select#summoner-select-4.summoner-picker
+                %select#summoner-select-4.summoner-picker-old
+                  %option
                   = render 'summoner_list'
 
-              :javascript
-                $(".summoner-picker").customSelect({customClass:'summoner-picker'})
-                $('.summoner-picker').change(function(){
-                  $(this).siblings('span').css({
-                  'background-image':'url(http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/'+$(this).val()+'.png)',
-                  'background-size': 'contain',
-                  'color': 'rgba(255, 255, 255, 0)',
-                  'border': '1px solid #767F97'
-                  })
-
-
+            :javascript
+              $(".summoner-picker-old").customSelect({customClass:'summoner-picker'})
+              $('.summoner-picker-old').change(function(){
+                $(this).siblings('span').css({
+                'background-image':'url(http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/'+$(this).val()+'.png)',
+                'background-size': 'contain',
+                'color': 'rgba(255, 255, 255, 0)',
+                'border': '1px solid #767F97'
                 })
-              -#  http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Aatrox.png
+              })
           .form-group
             %label.col-lg-3.control-label{:for => "select"} Roles
             .col-lg-9
@@ -145,10 +150,8 @@
                   Top
               %label.checkbox-inline
                 %input#inlineCheckbox3{:type => "checkbox", :value => "option3"}
-                  AD
-              %label.checkbox-inline
-                %input#inlineCheckbox3{:type => "checkbox", :value => "option3"}
-                  AP
+                  Cary
+
           .form-group
             %label.col-lg-3.control-label{:for => "select"} Convenient Gaming Times
             .col-lg-9
@@ -160,6 +163,7 @@
 
 
           %legend Verification
+
           .form-group
             %label.col-lg-3.control-label masterie name code
             .col-lg-9
@@ -176,11 +180,37 @@
             .col-lg-3
             = f.submit "Verify and Save", class:'btn btn-primary col-lg-3'
 
+          = debug @summoner
+          = debug @summoner.stats_summary
+          = debug @summoner.game_stats
+
+
+
     .col-lg-4.col-lg-offset-1
-      %h3 Summoner Stats
+
+      %h4 Summoner Role Performance
+      %canvas#canvas{:height => "250", :width => "250", style:'margin-left: -16px;'}
+
+      %h4 Time in game*
+      .row
+        .col-lg-3
+          %span.num 2
+          Days
+        .col-lg-3
+          %span.num 13
+          Hours
+        .col-lg-6
+          %span.num 42
+          Minutes
+      %br
+
+
+
+
+      %h4 Summoner Stats
       %ul.list-group
         %li.list-group-item
-          %span.badge 14
+          %span.badge 2 Days 14 Hours
           Cras justo odio
         %li.list-group-item
           %span.badge 2
@@ -217,384 +247,32 @@
           Morbi leo risus
 
 
-      %h3 Game Stats
-      %ul.list-group
-        %li.list-group-item
-          %span.badge 14
-          Cras justo odio
-        %li.list-group-item
-          %span.badge 2
-          Dapibus ac facilisis in
-        %li.list-group-item
-          %span.badge 1
-          Morbi leo risus
-        %li.list-group-item
-          %span.badge 14
-          Cras justo odio
-        %li.list-group-item
-          %span.badge 2
-          Dapibus ac facilisis in
-        %li.list-group-item
-          %span.badge 1
-          Morbi leo risus
-        %li.list-group-item
-          %span.badge 14
-          Cras justo odio
-        %li.list-group-item
-          %span.badge 2
-          Dapibus ac facilisis in
-        %li.list-group-item
-          %span.badge 1
-          Morbi leo risus
-        %li.list-group-item
-          %span.badge 14
-          Cras justo odio
-        %li.list-group-item
-          %span.badge 2
-          Dapibus ac facilisis in
-        %li.list-group-item
-          %span.badge 1
-          Morbi leo risus
+      %h4 Potential Teammates
+      .list-group
+        %a.list-group-item.active{href: "#"}
+          .row
+            .col-lg-2
+              %img.media-object{src:'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Akali.png', style:'width:44px'}
+            .col-lg-10
+              %h4.list-group-item-heading Potterbaum
+              .row
+                .col-lg-6.list-group-item-text
+                  Las Vegas NV
+                .col-lg-3.list-group-item-text
+                  1
+                .col-lg-3.list-group-item-text
+                  1
+
+
+        %a.list-group-item{href: "#"}
+          %h4.list-group-item-heading SomeName
+          %p.list-group-item-text Something about it.
+        %a.list-group-item{href: "#"}
+          %h4.list-group-item-heading SomeName
+          %p.list-group-item-text Something about it.
+        %a.list-group-item{href: "#"}
+          %h4.list-group-item-heading SomeName
+          .list-group-item-text Something about it.
 
 
 
-
-
-
-
-
-
-
-
-
-
--#
--#
--#"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "MalphiteSquare.png", "data-image-name" => "MalphiteSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20140403164900/leagueoflegends/images/thumb/6/6f/MalphiteSquare.png/48px-MalphiteSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20140403164900/leagueoflegends/images/thumb/6/6f/MalphiteSquare.png/48px-MalphiteSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20140403164900/leagueoflegends/images/thumb/6/6f/MalphiteSquare.png/48px-MalphiteSquare.png" width="48" height="48" data-image-name="MalphiteSquare.png" data-image-key="MalphiteSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Malzahar", title: "Malzahar"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "MalzaharSquare.png", "data-image-name" => "MalzaharSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20120117212750/leagueoflegends/images/thumb/a/a7/MalzaharSquare.png/48px-MalzaharSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20120117212750/leagueoflegends/images/thumb/a/a7/MalzaharSquare.png/48px-MalzaharSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20120117212750/leagueoflegends/images/thumb/a/a7/MalzaharSquare.png/48px-MalzaharSquare.png" width="48" height="48" data-image-name="MalzaharSquare.png" data-image-key="MalzaharSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Maokai", title: "Maokai"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "MaokaiSquare.png", "data-image-name" => "MaokaiSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20110427123352/leagueoflegends/images/thumb/6/64/MaokaiSquare.png/48px-MaokaiSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20110427123352/leagueoflegends/images/thumb/6/64/MaokaiSquare.png/48px-MaokaiSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20110427123352/leagueoflegends/images/thumb/6/64/MaokaiSquare.png/48px-MaokaiSquare.png" width="48" height="48" data-image-name="MaokaiSquare.png" data-image-key="MaokaiSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Master_Yi", title: "Master Yi"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "MasterYiSquare.png", "data-image-name" => "MasterYiSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20130329040917/leagueoflegends/images/thumb/f/fc/MasterYiSquare.png/48px-MasterYiSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20130329040917/leagueoflegends/images/thumb/f/fc/MasterYiSquare.png/48px-MasterYiSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20130329040917/leagueoflegends/images/thumb/f/fc/MasterYiSquare.png/48px-MasterYiSquare.png" width="48" height="48" data-image-name="MasterYiSquare.png" data-image-key="MasterYiSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Miss_Fortune", title: "Miss Fortune"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "MissFortuneSquare.png", "data-image-name" => "MissFortuneSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20120912044337/leagueoflegends/images/thumb/9/9d/MissFortuneSquare.png/48px-MissFortuneSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20120912044337/leagueoflegends/images/thumb/9/9d/MissFortuneSquare.png/48px-MissFortuneSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20120912044337/leagueoflegends/images/thumb/9/9d/MissFortuneSquare.png/48px-MissFortuneSquare.png" width="48" height="48" data-image-name="MissFortuneSquare.png" data-image-key="MissFortuneSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Mordekaiser", title: "Mordekaiser"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "MordekaiserSquare.png", "data-image-name" => "MordekaiserSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20121205003418/leagueoflegends/images/thumb/4/4d/MordekaiserSquare.png/48px-MordekaiserSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20121205003418/leagueoflegends/images/thumb/4/4d/MordekaiserSquare.png/48px-MordekaiserSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20121205003418/leagueoflegends/images/thumb/4/4d/MordekaiserSquare.png/48px-MordekaiserSquare.png" width="48" height="48" data-image-name="MordekaiserSquare.png" data-image-key="MordekaiserSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Morgana", title: "Morgana"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "MorganaSquare.png", "data-image-name" => "MorganaSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20120912044444/leagueoflegends/images/thumb/d/d8/MorganaSquare.png/48px-MorganaSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20120912044444/leagueoflegends/images/thumb/d/d8/MorganaSquare.png/48px-MorganaSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20120912044444/leagueoflegends/images/thumb/d/d8/MorganaSquare.png/48px-MorganaSquare.png" width="48" height="48" data-image-name="MorganaSquare.png" data-image-key="MorganaSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Nami", title: "Nami"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "NamiSquare.png", "data-image-name" => "NamiSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20121130222134/leagueoflegends/images/thumb/d/d2/NamiSquare.png/48px-NamiSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20121130222134/leagueoflegends/images/thumb/d/d2/NamiSquare.png/48px-NamiSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20121130222134/leagueoflegends/images/thumb/d/d2/NamiSquare.png/48px-NamiSquare.png" width="48" height="48" data-image-name="NamiSquare.png" data-image-key="NamiSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Nasus", title: "Nasus"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "NasusSquare.png", "data-image-name" => "NasusSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20131123021402/leagueoflegends/images/thumb/5/58/NasusSquare.png/48px-NasusSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20131123021402/leagueoflegends/images/thumb/5/58/NasusSquare.png/48px-NasusSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20131123021402/leagueoflegends/images/thumb/5/58/NasusSquare.png/48px-NasusSquare.png" width="48" height="48" data-image-name="NasusSquare.png" data-image-key="NasusSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Nautilus", title: "Nautilus"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "NautilusSquare.png", "data-image-name" => "NautilusSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20120214103012/leagueoflegends/images/thumb/b/b5/NautilusSquare.png/48px-NautilusSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20120214103012/leagueoflegends/images/thumb/b/b5/NautilusSquare.png/48px-NautilusSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20120214103012/leagueoflegends/images/thumb/b/b5/NautilusSquare.png/48px-NautilusSquare.png" width="48" height="48" data-image-name="NautilusSquare.png" data-image-key="NautilusSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Nidalee", title: "Nidalee"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "NidaleeSquare.png", "data-image-name" => "NidaleeSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20130214201432/leagueoflegends/images/thumb/7/7c/NidaleeSquare.png/48px-NidaleeSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20130214201432/leagueoflegends/images/thumb/7/7c/NidaleeSquare.png/48px-NidaleeSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20130214201432/leagueoflegends/images/thumb/7/7c/NidaleeSquare.png/48px-NidaleeSquare.png" width="48" height="48" data-image-name="NidaleeSquare.png" data-image-key="NidaleeSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Nocturne", title: "Nocturne"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "NocturneSquare.png", "data-image-name" => "NocturneSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20131030145036/leagueoflegends/images/thumb/6/65/NocturneSquare.png/48px-NocturneSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20131030145036/leagueoflegends/images/thumb/6/65/NocturneSquare.png/48px-NocturneSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20131030145036/leagueoflegends/images/thumb/6/65/NocturneSquare.png/48px-NocturneSquare.png" width="48" height="48" data-image-name="NocturneSquare.png" data-image-key="NocturneSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Nunu", title: "Nunu"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "NunuSquare.png", "data-image-name" => "NunuSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20130710122117/leagueoflegends/images/thumb/e/ef/NunuSquare.png/48px-NunuSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20130710122117/leagueoflegends/images/thumb/e/ef/NunuSquare.png/48px-NunuSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20130710122117/leagueoflegends/images/thumb/e/ef/NunuSquare.png/48px-NunuSquare.png" width="48" height="48" data-image-name="NunuSquare.png" data-image-key="NunuSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Olaf", title: "Olaf"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "OlafSquare.png", "data-image-name" => "OlafSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20131001135721/leagueoflegends/images/thumb/2/2b/OlafSquare.png/48px-OlafSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20131001135721/leagueoflegends/images/thumb/2/2b/OlafSquare.png/48px-OlafSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20131001135721/leagueoflegends/images/thumb/2/2b/OlafSquare.png/48px-OlafSquare.png" width="48" height="48" data-image-name="OlafSquare.png" data-image-key="OlafSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Orianna", title: "Orianna"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "OriannaSquare.png", "data-image-name" => "OriannaSquare.png", "data-src" => "http://img1.wikia.nocookie.net/__cb20110613150730/leagueoflegends/images/thumb/b/b0/OriannaSquare.png/48px-OriannaSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img1.wikia.nocookie.net/__cb20110613150730/leagueoflegends/images/thumb/b/b0/OriannaSquare.png/48px-OriannaSquare.png", width: "48"}/
--#        %noscript <img src="http://img1.wikia.nocookie.net/__cb20110613150730/leagueoflegends/images/thumb/b/b0/OriannaSquare.png/48px-OriannaSquare.png" width="48" height="48" data-image-name="OriannaSquare.png" data-image-key="OriannaSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Pantheon", title: "Pantheon"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "PantheonSquare.png", "data-image-name" => "PantheonSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20130511140006/leagueoflegends/images/thumb/9/9b/PantheonSquare.png/48px-PantheonSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20130511140006/leagueoflegends/images/thumb/9/9b/PantheonSquare.png/48px-PantheonSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20130511140006/leagueoflegends/images/thumb/9/9b/PantheonSquare.png/48px-PantheonSquare.png" width="48" height="48" data-image-name="PantheonSquare.png" data-image-key="PantheonSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Poppy", title: "Poppy"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "PoppySquare.png", "data-image-name" => "PoppySquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20091224060019/leagueoflegends/images/thumb/e/e3/PoppySquare.png/48px-PoppySquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20091224060019/leagueoflegends/images/thumb/e/e3/PoppySquare.png/48px-PoppySquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20091224060019/leagueoflegends/images/thumb/e/e3/PoppySquare.png/48px-PoppySquare.png" width="48" height="48" data-image-name="PoppySquare.png" data-image-key="PoppySquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Quinn", title: "Quinn"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "QuinnSquare.png", "data-image-name" => "QuinnSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20130329034057/leagueoflegends/images/thumb/7/7c/QuinnSquare.png/48px-QuinnSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20130329034057/leagueoflegends/images/thumb/7/7c/QuinnSquare.png/48px-QuinnSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20130329034057/leagueoflegends/images/thumb/7/7c/QuinnSquare.png/48px-QuinnSquare.png" width="48" height="48" data-image-name="QuinnSquare.png" data-image-key="QuinnSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Rammus", title: "Rammus"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "RammusSquare.png", "data-image-name" => "RammusSquare.png", "data-src" => "http://img1.wikia.nocookie.net/__cb20091218195207/leagueoflegends/images/thumb/7/7c/RammusSquare.png/48px-RammusSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img1.wikia.nocookie.net/__cb20091218195207/leagueoflegends/images/thumb/7/7c/RammusSquare.png/48px-RammusSquare.png", width: "48"}/
--#        %noscript <img src="http://img1.wikia.nocookie.net/__cb20091218195207/leagueoflegends/images/thumb/7/7c/RammusSquare.png/48px-RammusSquare.png" width="48" height="48" data-image-name="RammusSquare.png" data-image-key="RammusSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Renekton", title: "Renekton"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "RenektonSquare.png", "data-image-name" => "RenektonSquare.png", "data-src" => "http://img1.wikia.nocookie.net/__cb20120617125907/leagueoflegends/images/thumb/f/fc/RenektonSquare.png/48px-RenektonSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img1.wikia.nocookie.net/__cb20120617125907/leagueoflegends/images/thumb/f/fc/RenektonSquare.png/48px-RenektonSquare.png", width: "48"}/
--#        %noscript <img src="http://img1.wikia.nocookie.net/__cb20120617125907/leagueoflegends/images/thumb/f/fc/RenektonSquare.png/48px-RenektonSquare.png" width="48" height="48" data-image-name="RenektonSquare.png" data-image-key="RenektonSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Rengar", title: "Rengar"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "RengarSquare.png", "data-image-name" => "RengarSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20120810054403/leagueoflegends/images/thumb/f/f1/RengarSquare.png/48px-RengarSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20120810054403/leagueoflegends/images/thumb/f/f1/RengarSquare.png/48px-RengarSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20120810054403/leagueoflegends/images/thumb/f/f1/RengarSquare.png/48px-RengarSquare.png" width="48" height="48" data-image-name="RengarSquare.png" data-image-key="RengarSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Riven", title: "Riven"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "RivenSquare.png", "data-image-name" => "RivenSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20130710121848/leagueoflegends/images/thumb/4/46/RivenSquare.png/48px-RivenSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20130710121848/leagueoflegends/images/thumb/4/46/RivenSquare.png/48px-RivenSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20130710121848/leagueoflegends/images/thumb/4/46/RivenSquare.png/48px-RivenSquare.png" width="48" height="48" data-image-name="RivenSquare.png" data-image-key="RivenSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Rumble", title: "Rumble"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "RumbleSquare.png", "data-image-name" => "RumbleSquare.png", "data-src" => "http://img1.wikia.nocookie.net/__cb20110427122657/leagueoflegends/images/thumb/1/13/RumbleSquare.png/48px-RumbleSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img1.wikia.nocookie.net/__cb20110427122657/leagueoflegends/images/thumb/1/13/RumbleSquare.png/48px-RumbleSquare.png", width: "48"}/
--#        %noscript <img src="http://img1.wikia.nocookie.net/__cb20110427122657/leagueoflegends/images/thumb/1/13/RumbleSquare.png/48px-RumbleSquare.png" width="48" height="48" data-image-name="RumbleSquare.png" data-image-key="RumbleSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Ryze", title: "Ryze"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "RyzeSquare.png", "data-image-name" => "RyzeSquare.png", "data-src" => "http://img1.wikia.nocookie.net/__cb20120801131929/leagueoflegends/images/thumb/2/28/RyzeSquare.png/48px-RyzeSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img1.wikia.nocookie.net/__cb20120801131929/leagueoflegends/images/thumb/2/28/RyzeSquare.png/48px-RyzeSquare.png", width: "48"}/
--#        %noscript <img src="http://img1.wikia.nocookie.net/__cb20120801131929/leagueoflegends/images/thumb/2/28/RyzeSquare.png/48px-RyzeSquare.png" width="48" height="48" data-image-name="RyzeSquare.png" data-image-key="RyzeSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Sejuani", title: "Sejuani"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "SejuaniSquare.png", "data-image-name" => "SejuaniSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20130430130347/leagueoflegends/images/thumb/9/93/SejuaniSquare.png/48px-SejuaniSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20130430130347/leagueoflegends/images/thumb/9/93/SejuaniSquare.png/48px-SejuaniSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20130430130347/leagueoflegends/images/thumb/9/93/SejuaniSquare.png/48px-SejuaniSquare.png" width="48" height="48" data-image-name="SejuaniSquare.png" data-image-key="SejuaniSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Shaco", title: "Shaco"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "ShacoSquare.png", "data-image-name" => "ShacoSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20091218195236/leagueoflegends/images/thumb/9/93/ShacoSquare.png/48px-ShacoSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20091218195236/leagueoflegends/images/thumb/9/93/ShacoSquare.png/48px-ShacoSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20091218195236/leagueoflegends/images/thumb/9/93/ShacoSquare.png/48px-ShacoSquare.png" width="48" height="48" data-image-name="ShacoSquare.png" data-image-key="ShacoSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Shen", title: "Shen"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "ShenSquare.png", "data-image-name" => "ShenSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20100319000456/leagueoflegends/images/thumb/d/d3/ShenSquare.png/48px-ShenSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20100319000456/leagueoflegends/images/thumb/d/d3/ShenSquare.png/48px-ShenSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20100319000456/leagueoflegends/images/thumb/d/d3/ShenSquare.png/48px-ShenSquare.png" width="48" height="48" data-image-name="ShenSquare.png" data-image-key="ShenSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Shyvana", title: "Shyvana"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "ShyvanaSquare.png", "data-image-name" => "ShyvanaSquare.png", "data-src" => "http://img1.wikia.nocookie.net/__cb20111101205452/leagueoflegends/images/thumb/f/f6/ShyvanaSquare.png/48px-ShyvanaSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img1.wikia.nocookie.net/__cb20111101205452/leagueoflegends/images/thumb/f/f6/ShyvanaSquare.png/48px-ShyvanaSquare.png", width: "48"}/
--#        %noscript <img src="http://img1.wikia.nocookie.net/__cb20111101205452/leagueoflegends/images/thumb/f/f6/ShyvanaSquare.png/48px-ShyvanaSquare.png" width="48" height="48" data-image-name="ShyvanaSquare.png" data-image-key="ShyvanaSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Singed", title: "Singed"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "SingedSquare.png", "data-image-name" => "SingedSquare.png", "data-src" => "http://img1.wikia.nocookie.net/__cb20091218195328/leagueoflegends/images/thumb/9/96/SingedSquare.png/48px-SingedSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img1.wikia.nocookie.net/__cb20091218195328/leagueoflegends/images/thumb/9/96/SingedSquare.png/48px-SingedSquare.png", width: "48"}/
--#        %noscript <img src="http://img1.wikia.nocookie.net/__cb20091218195328/leagueoflegends/images/thumb/9/96/SingedSquare.png/48px-SingedSquare.png" width="48" height="48" data-image-name="SingedSquare.png" data-image-key="SingedSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Sion", title: "Sion"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "SionSquare.png", "data-image-name" => "SionSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20091218195336/leagueoflegends/images/thumb/6/61/SionSquare.png/48px-SionSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20091218195336/leagueoflegends/images/thumb/6/61/SionSquare.png/48px-SionSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20091218195336/leagueoflegends/images/thumb/6/61/SionSquare.png/48px-SionSquare.png" width="48" height="48" data-image-name="SionSquare.png" data-image-key="SionSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Sivir", title: "Sivir"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "SivirSquare.png", "data-image-name" => "SivirSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20131124195956/leagueoflegends/images/thumb/e/e1/SivirSquare.png/48px-SivirSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20131124195956/leagueoflegends/images/thumb/e/e1/SivirSquare.png/48px-SivirSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20131124195956/leagueoflegends/images/thumb/e/e1/SivirSquare.png/48px-SivirSquare.png" width="48" height="48" data-image-name="SivirSquare.png" data-image-key="SivirSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Skarner", title: "Skarner"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "SkarnerSquare.png", "data-image-name" => "SkarnerSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20110809201431/leagueoflegends/images/thumb/8/80/SkarnerSquare.png/48px-SkarnerSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20110809201431/leagueoflegends/images/thumb/8/80/SkarnerSquare.png/48px-SkarnerSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20110809201431/leagueoflegends/images/thumb/8/80/SkarnerSquare.png/48px-SkarnerSquare.png" width="48" height="48" data-image-name="SkarnerSquare.png" data-image-key="SkarnerSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Sona", title: "Sona"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "SonaSquare.png", "data-image-name" => "SonaSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20130329041042/leagueoflegends/images/thumb/5/56/SonaSquare.png/48px-SonaSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20130329041042/leagueoflegends/images/thumb/5/56/SonaSquare.png/48px-SonaSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20130329041042/leagueoflegends/images/thumb/5/56/SonaSquare.png/48px-SonaSquare.png" width="48" height="48" data-image-name="SonaSquare.png" data-image-key="SonaSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Soraka", title: "Soraka"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "SorakaSquare.png", "data-image-name" => "SorakaSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20140124030744/leagueoflegends/images/thumb/8/8d/SorakaSquare.png/48px-SorakaSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20140124030744/leagueoflegends/images/thumb/8/8d/SorakaSquare.png/48px-SorakaSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20140124030744/leagueoflegends/images/thumb/8/8d/SorakaSquare.png/48px-SorakaSquare.png" width="48" height="48" data-image-name="SorakaSquare.png" data-image-key="SorakaSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Swain", title: "Swain"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "SwainSquare.png", "data-image-name" => "SwainSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20101005195413/leagueoflegends/images/thumb/8/8c/SwainSquare.png/48px-SwainSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20101005195413/leagueoflegends/images/thumb/8/8c/SwainSquare.png/48px-SwainSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20101005195413/leagueoflegends/images/thumb/8/8c/SwainSquare.png/48px-SwainSquare.png" width="48" height="48" data-image-name="SwainSquare.png" data-image-key="SwainSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Syndra", title: "Syndra"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "SyndraSquare.png", "data-image-name" => "SyndraSquare.png", "data-src" => "http://img1.wikia.nocookie.net/__cb20120828063438/leagueoflegends/images/thumb/6/65/SyndraSquare.png/48px-SyndraSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img1.wikia.nocookie.net/__cb20120828063438/leagueoflegends/images/thumb/6/65/SyndraSquare.png/48px-SyndraSquare.png", width: "48"}/
--#        %noscript <img src="http://img1.wikia.nocookie.net/__cb20120828063438/leagueoflegends/images/thumb/6/65/SyndraSquare.png/48px-SyndraSquare.png" width="48" height="48" data-image-name="SyndraSquare.png" data-image-key="SyndraSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Talon", title: "Talon"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "TalonSquare.png", "data-image-name" => "TalonSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20110825002740/leagueoflegends/images/thumb/f/f9/TalonSquare.png/48px-TalonSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20110825002740/leagueoflegends/images/thumb/f/f9/TalonSquare.png/48px-TalonSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20110825002740/leagueoflegends/images/thumb/f/f9/TalonSquare.png/48px-TalonSquare.png" width="48" height="48" data-image-name="TalonSquare.png" data-image-key="TalonSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Taric", title: "Taric"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "TaricSquare.png", "data-image-name" => "TaricSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20110613151120/leagueoflegends/images/thumb/c/c4/TaricSquare.png/48px-TaricSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20110613151120/leagueoflegends/images/thumb/c/c4/TaricSquare.png/48px-TaricSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20110613151120/leagueoflegends/images/thumb/c/c4/TaricSquare.png/48px-TaricSquare.png" width="48" height="48" data-image-name="TaricSquare.png" data-image-key="TaricSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Teemo", title: "Teemo"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "TeemoSquare.png", "data-image-name" => "TeemoSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20140402021425/leagueoflegends/images/thumb/0/04/TeemoSquare.png/48px-TeemoSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20140402021425/leagueoflegends/images/thumb/0/04/TeemoSquare.png/48px-TeemoSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20140402021425/leagueoflegends/images/thumb/0/04/TeemoSquare.png/48px-TeemoSquare.png" width="48" height="48" data-image-name="TeemoSquare.png" data-image-key="TeemoSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Thresh", title: "Thresh"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "ThreshSquare.png", "data-image-name" => "ThreshSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20130110021156/leagueoflegends/images/thumb/7/7b/ThreshSquare.png/48px-ThreshSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20130110021156/leagueoflegends/images/thumb/7/7b/ThreshSquare.png/48px-ThreshSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20130110021156/leagueoflegends/images/thumb/7/7b/ThreshSquare.png/48px-ThreshSquare.png" width="48" height="48" data-image-name="ThreshSquare.png" data-image-key="ThreshSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Tristana", title: "Tristana"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "TristanaSquare.png", "data-image-name" => "TristanaSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20091218195500/leagueoflegends/images/thumb/0/06/TristanaSquare.png/48px-TristanaSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20091218195500/leagueoflegends/images/thumb/0/06/TristanaSquare.png/48px-TristanaSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20091218195500/leagueoflegends/images/thumb/0/06/TristanaSquare.png/48px-TristanaSquare.png" width="48" height="48" data-image-name="TristanaSquare.png" data-image-key="TristanaSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Trundle", title: "Trundle"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "TrundleSquare.png", "data-image-name" => "TrundleSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20130430130154/leagueoflegends/images/thumb/c/c4/TrundleSquare.png/48px-TrundleSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20130430130154/leagueoflegends/images/thumb/c/c4/TrundleSquare.png/48px-TrundleSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20130430130154/leagueoflegends/images/thumb/c/c4/TrundleSquare.png/48px-TrundleSquare.png" width="48" height="48" data-image-name="TrundleSquare.png" data-image-key="TrundleSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Tryndamere", title: "Tryndamere"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "TryndamereSquare.png", "data-image-name" => "TryndamereSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20130216000820/leagueoflegends/images/thumb/5/5f/TryndamereSquare.png/48px-TryndamereSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20130216000820/leagueoflegends/images/thumb/5/5f/TryndamereSquare.png/48px-TryndamereSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20130216000820/leagueoflegends/images/thumb/5/5f/TryndamereSquare.png/48px-TryndamereSquare.png" width="48" height="48" data-image-name="TryndamereSquare.png" data-image-key="TryndamereSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Twisted_Fate", title: "Twisted Fate"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "TwistedFateSquare.png", "data-image-name" => "TwistedFateSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20121018075023/leagueoflegends/images/thumb/1/1f/TwistedFateSquare.png/48px-TwistedFateSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20121018075023/leagueoflegends/images/thumb/1/1f/TwistedFateSquare.png/48px-TwistedFateSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20121018075023/leagueoflegends/images/thumb/1/1f/TwistedFateSquare.png/48px-TwistedFateSquare.png" width="48" height="48" data-image-name="TwistedFateSquare.png" data-image-key="TwistedFateSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Twitch", title: "Twitch"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "TwitchSquare.png", "data-image-name" => "TwitchSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20140422001233/leagueoflegends/images/thumb/7/79/TwitchSquare.png/48px-TwitchSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20140422001233/leagueoflegends/images/thumb/7/79/TwitchSquare.png/48px-TwitchSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20140422001233/leagueoflegends/images/thumb/7/79/TwitchSquare.png/48px-TwitchSquare.png" width="48" height="48" data-image-name="TwitchSquare.png" data-image-key="TwitchSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Udyr", title: "Udyr"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "UdyrSquare.png", "data-image-name" => "UdyrSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20091218195656/leagueoflegends/images/thumb/d/d1/UdyrSquare.png/48px-UdyrSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20091218195656/leagueoflegends/images/thumb/d/d1/UdyrSquare.png/48px-UdyrSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20091218195656/leagueoflegends/images/thumb/d/d1/UdyrSquare.png/48px-UdyrSquare.png" width="48" height="48" data-image-name="UdyrSquare.png" data-image-key="UdyrSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Urgot", title: "Urgot"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "UrgotSquare.png", "data-image-name" => "UrgotSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20100821202313/leagueoflegends/images/thumb/8/88/UrgotSquare.png/48px-UrgotSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20100821202313/leagueoflegends/images/thumb/8/88/UrgotSquare.png/48px-UrgotSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20100821202313/leagueoflegends/images/thumb/8/88/UrgotSquare.png/48px-UrgotSquare.png" width="48" height="48" data-image-name="UrgotSquare.png" data-image-key="UrgotSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Varus", title: "Varus"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "VarusSquare.png", "data-image-name" => "VarusSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20120425041212/leagueoflegends/images/thumb/c/c2/VarusSquare.png/48px-VarusSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20120425041212/leagueoflegends/images/thumb/c/c2/VarusSquare.png/48px-VarusSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20120425041212/leagueoflegends/images/thumb/c/c2/VarusSquare.png/48px-VarusSquare.png" width="48" height="48" data-image-name="VarusSquare.png" data-image-key="VarusSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Vayne", title: "Vayne"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "VayneSquare.png", "data-image-name" => "VayneSquare.png", "data-src" => "http://img1.wikia.nocookie.net/__cb20110511160403/leagueoflegends/images/thumb/9/95/VayneSquare.png/48px-VayneSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img1.wikia.nocookie.net/__cb20110511160403/leagueoflegends/images/thumb/9/95/VayneSquare.png/48px-VayneSquare.png", width: "48"}/
--#        %noscript <img src="http://img1.wikia.nocookie.net/__cb20110511160403/leagueoflegends/images/thumb/9/95/VayneSquare.png/48px-VayneSquare.png" width="48" height="48" data-image-name="VayneSquare.png" data-image-key="VayneSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Veigar", title: "Veigar"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "VeigarSquare.png", "data-image-name" => "VeigarSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20110316004312/leagueoflegends/images/thumb/8/8f/VeigarSquare.png/48px-VeigarSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20110316004312/leagueoflegends/images/thumb/8/8f/VeigarSquare.png/48px-VeigarSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20110316004312/leagueoflegends/images/thumb/8/8f/VeigarSquare.png/48px-VeigarSquare.png" width="48" height="48" data-image-name="VeigarSquare.png" data-image-key="VeigarSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Vel%27Koz", title: "Vel'Koz"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "Vel%27KozSquare.png", "data-image-name" => "Vel'KozSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20140214210400/leagueoflegends/images/thumb/0/05/Vel%27KozSquare.png/48px-Vel%27KozSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20140214210400/leagueoflegends/images/thumb/0/05/Vel%27KozSquare.png/48px-Vel%27KozSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20140214210400/leagueoflegends/images/thumb/0/05/Vel%27KozSquare.png/48px-Vel%27KozSquare.png" width="48" height="48" data-image-name="Vel&#39;KozSquare.png" data-image-key="Vel%27KozSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Vi", title: "Vi"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "ViSquare.png", "data-image-name" => "ViSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20121212052755/leagueoflegends/images/thumb/c/c0/ViSquare.png/48px-ViSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20121212052755/leagueoflegends/images/thumb/c/c0/ViSquare.png/48px-ViSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20121212052755/leagueoflegends/images/thumb/c/c0/ViSquare.png/48px-ViSquare.png" width="48" height="48" data-image-name="ViSquare.png" data-image-key="ViSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Viktor", title: "Viktor"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "ViktorSquare.png", "data-image-name" => "ViktorSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20111222172103/leagueoflegends/images/thumb/a/a3/ViktorSquare.png/48px-ViktorSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20111222172103/leagueoflegends/images/thumb/a/a3/ViktorSquare.png/48px-ViktorSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20111222172103/leagueoflegends/images/thumb/a/a3/ViktorSquare.png/48px-ViktorSquare.png" width="48" height="48" data-image-name="ViktorSquare.png" data-image-key="ViktorSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Vladimir", title: "Vladimir"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "VladimirSquare.png", "data-image-name" => "VladimirSquare.png", "data-src" => "http://img1.wikia.nocookie.net/__cb20121025183912/leagueoflegends/images/thumb/7/75/VladimirSquare.png/48px-VladimirSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img1.wikia.nocookie.net/__cb20121025183912/leagueoflegends/images/thumb/7/75/VladimirSquare.png/48px-VladimirSquare.png", width: "48"}/
--#        %noscript <img src="http://img1.wikia.nocookie.net/__cb20121025183912/leagueoflegends/images/thumb/7/75/VladimirSquare.png/48px-VladimirSquare.png" width="48" height="48" data-image-name="VladimirSquare.png" data-image-key="VladimirSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Volibear", title: "Volibear"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "VolibearSquare.png", "data-image-name" => "VolibearSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20111129224537/leagueoflegends/images/thumb/f/f9/VolibearSquare.png/48px-VolibearSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20111129224537/leagueoflegends/images/thumb/f/f9/VolibearSquare.png/48px-VolibearSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20111129224537/leagueoflegends/images/thumb/f/f9/VolibearSquare.png/48px-VolibearSquare.png" width="48" height="48" data-image-name="VolibearSquare.png" data-image-key="VolibearSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Warwick", title: "Warwick"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "WarwickSquare.png", "data-image-name" => "WarwickSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20120619100928/leagueoflegends/images/thumb/4/42/WarwickSquare.png/48px-WarwickSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20120619100928/leagueoflegends/images/thumb/4/42/WarwickSquare.png/48px-WarwickSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20120619100928/leagueoflegends/images/thumb/4/42/WarwickSquare.png/48px-WarwickSquare.png" width="48" height="48" data-image-name="WarwickSquare.png" data-image-key="WarwickSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Wukong", title: "Wukong"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "WukongSquare.png", "data-image-name" => "WukongSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20110731191412/leagueoflegends/images/thumb/6/6d/WukongSquare.png/48px-WukongSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20110731191412/leagueoflegends/images/thumb/6/6d/WukongSquare.png/48px-WukongSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20110731191412/leagueoflegends/images/thumb/6/6d/WukongSquare.png/48px-WukongSquare.png" width="48" height="48" data-image-name="WukongSquare.png" data-image-key="WukongSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Xerath", title: "Xerath"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "XerathSquare.png", "data-image-name" => "XerathSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20140204123621/leagueoflegends/images/thumb/7/7a/XerathSquare.png/48px-XerathSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20140204123621/leagueoflegends/images/thumb/7/7a/XerathSquare.png/48px-XerathSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20140204123621/leagueoflegends/images/thumb/7/7a/XerathSquare.png/48px-XerathSquare.png" width="48" height="48" data-image-name="XerathSquare.png" data-image-key="XerathSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Xin_Zhao", title: "Xin Zhao"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "XinZhaoSquare.png", "data-image-name" => "XinZhaoSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20120619163755/leagueoflegends/images/thumb/b/bf/XinZhaoSquare.png/48px-XinZhaoSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20120619163755/leagueoflegends/images/thumb/b/bf/XinZhaoSquare.png/48px-XinZhaoSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20120619163755/leagueoflegends/images/thumb/b/bf/XinZhaoSquare.png/48px-XinZhaoSquare.png" width="48" height="48" data-image-name="XinZhaoSquare.png" data-image-key="XinZhaoSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Yasuo", title: "Yasuo"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "YasuoSquare.png", "data-image-name" => "YasuoSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20131213161007/leagueoflegends/images/thumb/c/c0/YasuoSquare.png/48px-YasuoSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20131213161007/leagueoflegends/images/thumb/c/c0/YasuoSquare.png/48px-YasuoSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20131213161007/leagueoflegends/images/thumb/c/c0/YasuoSquare.png/48px-YasuoSquare.png" width="48" height="48" data-image-name="YasuoSquare.png" data-image-key="YasuoSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Yorick", title: "Yorick"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "YorickSquare.png", "data-image-name" => "YorickSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20110622160122/leagueoflegends/images/thumb/d/d8/YorickSquare.png/48px-YorickSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20110622160122/leagueoflegends/images/thumb/d/d8/YorickSquare.png/48px-YorickSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20110622160122/leagueoflegends/images/thumb/d/d8/YorickSquare.png/48px-YorickSquare.png" width="48" height="48" data-image-name="YorickSquare.png" data-image-key="YorickSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Zac", title: "Zac"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "ZacSquare.png", "data-image-name" => "ZacSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20130317162905/leagueoflegends/images/thumb/8/81/ZacSquare.png/48px-ZacSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20130317162905/leagueoflegends/images/thumb/8/81/ZacSquare.png/48px-ZacSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20130317162905/leagueoflegends/images/thumb/8/81/ZacSquare.png/48px-ZacSquare.png" width="48" height="48" data-image-name="ZacSquare.png" data-image-key="ZacSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Zed", title: "Zed"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "ZedSquare.png", "data-image-name" => "ZedSquare.png", "data-src" => "http://img1.wikia.nocookie.net/__cb20121102025349/leagueoflegends/images/thumb/b/bb/ZedSquare.png/48px-ZedSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img1.wikia.nocookie.net/__cb20121102025349/leagueoflegends/images/thumb/b/bb/ZedSquare.png/48px-ZedSquare.png", width: "48"}/
--#        %noscript <img src="http://img1.wikia.nocookie.net/__cb20121102025349/leagueoflegends/images/thumb/b/bb/ZedSquare.png/48px-ZedSquare.png" width="48" height="48" data-image-name="ZedSquare.png" data-image-key="ZedSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Ziggs", title: "Ziggs"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "ZiggsSquare.png", "data-image-name" => "ZiggsSquare.png", "data-src" => "http://img2.wikia.nocookie.net/__cb20120201131554/leagueoflegends/images/thumb/5/55/ZiggsSquare.png/48px-ZiggsSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img2.wikia.nocookie.net/__cb20120201131554/leagueoflegends/images/thumb/5/55/ZiggsSquare.png/48px-ZiggsSquare.png", width: "48"}/
--#        %noscript <img src="http://img2.wikia.nocookie.net/__cb20120201131554/leagueoflegends/images/thumb/5/55/ZiggsSquare.png/48px-ZiggsSquare.png" width="48" height="48" data-image-name="ZiggsSquare.png" data-image-key="ZiggsSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Zilean", title: "Zilean"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "ZileanSquare.png", "data-image-name" => "ZileanSquare.png", "data-src" => "http://img3.wikia.nocookie.net/__cb20091218195802/leagueoflegends/images/thumb/a/ac/ZileanSquare.png/48px-ZileanSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img3.wikia.nocookie.net/__cb20091218195802/leagueoflegends/images/thumb/a/ac/ZileanSquare.png/48px-ZileanSquare.png", width: "48"}/
--#        %noscript <img src="http://img3.wikia.nocookie.net/__cb20091218195802/leagueoflegends/images/thumb/a/ac/ZileanSquare.png/48px-ZileanSquare.png" width="48" height="48" data-image-name="ZileanSquare.png" data-image-key="ZileanSquare.png" />
--#  %li
--#    %span.character_icon{style: "white-space: nowrap"}
--#      %a{href: "/wiki/Zyra", title: "Zyra"}
--#        %img.lzyPlcHld.lzyTrns.lzyLoaded{"data-image-key" => "ZyraSquare.png", "data-image-name" => "ZyraSquare.png", "data-src" => "http://img4.wikia.nocookie.net/__cb20121111132956/leagueoflegends/images/thumb/1/1a/ZyraSquare.png/48px-ZyraSquare.png", height: "48", onload: "if(typeof ImgLzy==='object'){ImgLzy.load(this)}", src: "http://img4.wikia.nocookie.net/__cb20121111132956/leagueoflegends/images/thumb/1/1a/ZyraSquare.png/48px-ZyraSquare.png", width: "48"}/
--#        %noscript <img src="http://img4.wikia.nocookie.net/__cb20121111132956/leagueoflegends/images/thumb/1/1a/ZyraSquare.png/48px-ZyraSquare.png" width="48" height="48" data-image-name="ZyraSquare.png" data-image-key="ZyraSquare.png" />
