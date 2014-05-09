@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140506004013) do
+ActiveRecord::Schema.define(version: 20140508224315) do
+
+  create_table "game_stats", force: true do |t|
+    t.integer  "summoner_id"
+    t.integer  "riot_game_uid"
+    t.text     "raw"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "summoners", force: true do |t|
     t.string   "region"
@@ -22,6 +30,7 @@ ActiveRecord::Schema.define(version: 20140506004013) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "riot_uid"
   end
 
   add_index "summoners", ["region", "name"], name: "index_summoners_on_region_and_name", unique: true
