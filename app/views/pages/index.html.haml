@@ -5,11 +5,12 @@
     .summoner-enter
 
       = form_for @summoner, html: {class:'form-inline summoner-init'} do |f|
-        = f.text_field :name, class:'summoner-name', placeholder:'Enter Sumoner Name'
-        :javascript
-          $(document).ready(function() { $("#summoner_region").customSelect(); });
+        = f.text_field :name, class:'summoner-name', placeholder:'Enter Summoner Name'
         .summoner-region-wrap
           = f.select :region, options_for_select([['NA', 'NA'], ['EUW', 'EUW']])
+        :javascript
+          $("#summoner_region").customSelect()
+
         = f.submit 'Enter', class:'btn btn-primary summoner-submit'
 
       .small-text

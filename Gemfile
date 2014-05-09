@@ -9,6 +9,7 @@ gem 'puma', '~> 2.1.0'
 gem 'select2-rails'
 gem 'simple_form'
 gem 'nested_form'
+gem 'chart-js-rails'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
