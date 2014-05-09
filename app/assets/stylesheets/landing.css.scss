@@ -59,6 +59,10 @@
     width: 74px;
     display: block;
     text-align: center;
+
+  }
+  .customSelect.customSelectHover {
+    background: #f4efe4;
   }
   .summoner-submit {
     padding: 15px 30px;
@@ -103,9 +107,45 @@
 
 
 
+.summoner-picker {
+
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+
+  padding: 20px;
+  font-size: 0;
+  color: rgba(255, 255, 255, 0.38);
+  border: 1px solid #fff;
+  text-align: center;
+  display:block;
+  width: 85px;
+  text-align:center;
+  &:hover{
+    cursor: pointer;
+  }
+  :after {
+    content: "\f067";
+    font-size: 40px;
+  }
+}
 
 
 
+
+
+
+
+.field_with_errors {
+  input{
+    border-color: #f00;
+  }
+
+}
 
 
 
