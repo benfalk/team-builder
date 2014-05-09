@@ -1,7 +1,7 @@
 class SummonersController < ApplicationController
   
   def create
-    @summoner = Summoner.new(create_params)
+    @summoner = Summoner.prepare_binding(create_params)
     respond_to do |format|
       if @summoner.save
         format.html { redirect_to new_user_registration_url }

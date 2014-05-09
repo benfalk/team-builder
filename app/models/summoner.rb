@@ -5,6 +5,12 @@
 #
 class Summoner < ActiveRecord::Base
 
+  def self.prepare_binding(params)
+    params = params[:summoner] if params[:summoner]
+    params.keys.each { |k| params[k].downcase! }
+    where(region: params[:region], name: params[:name]).first || new(params)
+  end
+
   validates_presence_of :name, :region
 
   validate :validate_summoner_name, on: :create
