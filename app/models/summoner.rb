@@ -9,13 +9,15 @@ class Summoner < ActiveRecord::Base
 
   validate :validate_summoner_name, on: :create
 
-  belongs_to :user
+  has_one :user
+
+  has_one :stats_summary, class_name: 'Summoner::StatsSummary'
 
   has_many :game_stats, class_name: 'GameStats'
 
   before_create :create_verify_string
 
-  after_create :fetch_riot_uid
+  after_create :fetch_riot_info, :populate_stats_summary, :boot_game_stats
 
   def create_verify_string
     self.verify_string = Array.new(18){ rand(36).to_s(36) }.join
@@ -34,8 +36,18 @@ class Summoner < ActiveRecord::Base
 
   private
 
-  def fetch_riot_uid
-    update(riot_uid: LOL::Api::Client.new.summoner_by_names(name).first.last['id'])
+  def fetch_riot_info
+    stats = LOL::Api::Client.new.summoner_by_names(name).first.last 
+    update(riot_uid: stats['id'], level: stats['summonerLevel'])
+  end
+
+  def populate_stats_summary
+    build_stats_summary
+    stats_summary.update_from_api!
+  end
+
+  def boot_game_stats
+    GameStats.update_recent_for(self)
   end
 
 end
