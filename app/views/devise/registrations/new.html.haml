@@ -39,16 +39,15 @@
           .form-group
             %label.col-lg-3.control-label{:for => "inputEmail"} Last Name
             .col-lg-9
-              %input#inputEmail.form-control{:placeholder => "Laat Name", :type => "text"}
+              %input#inputEmail.form-control{:placeholder => "Last Name", :type => "text"}
           .form-group
             %label.col-lg-3.control-label{:for => "inputEmail"} Email*
             .col-lg-9
               = f.email_field :email, class:'form-control', :placeholder => "Email"
           .form-group
-            %label.col-lg-3.control-label{:for => "textArea"} About Yourself
+            %label.col-lg-3.control-label{:for => "textArea"} About You
             .col-lg-9
               %textarea#textArea.form-control{:rows => "3"}
-              %span.help-block A longer block of help text that breaks onto a new line and may extend beyond one line.
           .form-group
             %label.col-lg-3.control-label{:for => "select"} City
             .col-lg-9
@@ -162,10 +161,10 @@
           %legend Verification
 
           .form-group
-            %label.col-lg-3.control-label Masterie name code
+            %label.col-lg-3.control-label Mastery name code
             .col-lg-9
               %h3{style:'margin-top: 3px;'}
-              = "<div class=\"well well-sm\">#{@summoner.verify_string}</pre></div>".html_safe
+              = "<div class=\"well well-sm mastery-code\">#{@summoner.verify_string}</pre></div>".html_safe
           %p
             To verify your account just create a new masteries page and name it the code above.
             When you hit "Verify and Save" we will go and look for a masteries page with the name
@@ -208,7 +207,7 @@
       %h4 Summoner Role Performance
       %canvas#canvas{:height => "250", :width => "250", style:'margin-left: -16px;'}
 
-      %h4 Time in game*
+      %h4 Time in game
       .row
         .col-lg-3
           %span.num
@@ -284,6 +283,7 @@
           })
 
           console.log()
+
 
 
       -#%h4 Potential Teammates

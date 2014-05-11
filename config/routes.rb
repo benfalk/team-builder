@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users
   resources :summoners, only:[:create]
   root 'pages#index'
 
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   # Example of regular route:
+  get 'team/' => 'pages#team'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
