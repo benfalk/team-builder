@@ -167,7 +167,8 @@
           .form-group
             %label.col-lg-3.control-label masterie name code
             .col-lg-9
-              %h3{style:'margin-top: 3px;'} 455434h5jd43j2434kr
+              %h3{style:'margin-top: 3px;'}
+              = @summoner.verify_string
           %p
             To verify your account just create a new masteries page and name it the code above.
             When you hit "Verify and Save" we will go and look for a masteries page with the name
@@ -179,14 +180,33 @@
             .col-lg-3
             .col-lg-3
             = f.submit "Verify and Save", class:'btn btn-primary col-lg-3'
-
-          = debug @summoner
-          = debug @summoner.stats_summary
-          = debug @summoner.game_stats
-
-
+      %br
+      %br
+        -#= debug @summoner
+        -#= debug @summoner.stats_summary
+        - @summoner.game_stats.each do |game|
+          = debug game
+        -#  - game.raw.each_pair do |key, value|
+        -#    = key
+        -#    = value
 
     .col-lg-4.col-lg-offset-1
+
+      - total_wins = 0
+      - total_kills = 0
+      - totalTurretsKilled = 0
+      - totalAssists = 0
+      - days = ((@summoner.level * 413.42)/60)/24
+      - hours = (24*(days - days.to_i))
+      - minutes = (60*(hours - hours.to_i))
+
+      - @summoner.stats_summary.raw.each do |type|
+        - if type['playerStatSummaryType'] != 'CoopVsAI'
+          - total_wins += type['wins'].to_i
+          - total_kills += type['aggregatedStats']['totalChampionKills'].to_i
+          - totalTurretsKilled += type['aggregatedStats']['totalTurretsKilled'].to_i
+          - totalAssists += type['aggregatedStats']['totalAssists'].to_i
+
 
       %h4 Summoner Role Performance
       %canvas#canvas{:height => "250", :width => "250", style:'margin-left: -16px;'}
@@ -194,13 +214,16 @@
       %h4 Time in game*
       .row
         .col-lg-3
-          %span.num 2
+          %span.num
+            = days.to_i
           Days
         .col-lg-3
-          %span.num 13
+          %span.num
+            = hours.to_i
           Hours
         .col-lg-6
-          %span.num 42
+          %span.num
+            = minutes.to_i
           Minutes
       %br
 
@@ -210,69 +233,82 @@
       %h4 Summoner Stats
       %ul.list-group
         %li.list-group-item
-          %span.badge 2 Days 14 Hours
-          Cras justo odio
+          %span.badge
+            = @summoner.level
+          Level
         %li.list-group-item
-          %span.badge 2
-          Dapibus ac facilisis in
+          %span.badge
+            = total_wins
+          Games Won
         %li.list-group-item
-          %span.badge 1
-          Morbi leo risus
+          %span.badge
+            = total_kills
+          Champion Kills
         %li.list-group-item
-          %span.badge 14
-          Cras justo odio
+          %span.badge
+            = totalTurretsKilled
+          Turrets Killed
         %li.list-group-item
-          %span.badge 2
-          Dapibus ac facilisis in
-        %li.list-group-item
-          %span.badge 1
-          Morbi leo risus
-        %li.list-group-item
-          %span.badge 14
-          Cras justo odio
-        %li.list-group-item
-          %span.badge 2
-          Dapibus ac facilisis in
-        %li.list-group-item
-          %span.badge 1
-          Morbi leo risus
-        %li.list-group-item
-          %span.badge 14
-          Cras justo odio
-        %li.list-group-item
-          %span.badge 2
-          Dapibus ac facilisis in
-        %li.list-group-item
-          %span.badge 1
-          Morbi leo risus
+          %span.badge
+            = totalAssists
+          Assists
 
 
-      %h4 Potential Teammates
+
+
+      %h4 Recent Games
       .list-group
-        %a.list-group-item.active{href: "#"}
+        .list-group-item
           .row
-            .col-lg-2
-              %img.media-object{src:'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Akali.png', style:'width:44px'}
-            .col-lg-10
-              %h4.list-group-item-heading Potterbaum
-              .row
-                .col-lg-6.list-group-item-text
-                  Las Vegas NV
-                .col-lg-3.list-group-item-text
-                  1
-                .col-lg-3.list-group-item-text
-                  1
+            .col-lg-4.list-group-item-text
+              Champ
+            .col-lg-2.list-group-item-text
+              KDA
+            .col-lg-3.list-group-item-text
+              Role
+            .col-lg-3.list-group-item-text
+              Outcome
+        - @summoner.game_stats.each do |game|
+
+          .list-group-item
+            .row
+              .col-lg-4.list-group-item-text
+                = game.raw['championId']
+              .col-lg-2.list-group-item-text
+                = (game.raw['stats']['numDeaths'].to_i == 0) ? 0 : (game.raw['stats']['championsKilled'].to_i + game.raw['stats']['assists'].to_i) / game.raw['stats']['numDeaths'].to_i
+              .col-lg-3.list-group-item-text
+                = game.raw['teamId']
+              .col-lg-3.list-group-item-text
+                = game.raw['stats']['win'] ? 'Won' : 'Lost'
 
 
-        %a.list-group-item{href: "#"}
-          %h4.list-group-item-heading SomeName
-          %p.list-group-item-text Something about it.
-        %a.list-group-item{href: "#"}
-          %h4.list-group-item-heading SomeName
-          %p.list-group-item-text Something about it.
-        %a.list-group-item{href: "#"}
-          %h4.list-group-item-heading SomeName
-          .list-group-item-text Something about it.
+
+      -#%h4 Potential Teammates
+      -#.list-group
+      -#  %a.list-group-item.active{href: "#"}
+      -#    .row
+      -#      .col-lg-2
+      -#        %img.media-object{src:'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Akali.png', style:'width:44px'}
+      -#      .col-lg-10
+      -#        %h4.list-group-item-heading Potterbaum
+      -#        .row
+      -#          .col-lg-6.list-group-item-text
+      -#            Las Vegas NV
+      -#          .col-lg-3.list-group-item-text
+      -#            1
+      -#          .col-lg-3.list-group-item-text
+      -#            1
+      -#
+      -#
+      -#  %a.list-group-item{href: "#"}
+      -#    %h4.list-group-item-heading SomeName
+      -#    %p.list-group-item-text Something about it.
+      -#  %a.list-group-item{href: "#"}
+      -#    %h4.list-group-item-heading SomeName
+      -#    %p.list-group-item-text Something about it.
+      -#  %a.list-group-item{href: "#"}
+      -#    %h4.list-group-item-heading SomeName
+      -#    .list-group-item-text Something about it.
 
 
 
