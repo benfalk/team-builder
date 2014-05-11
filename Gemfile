@@ -10,6 +10,8 @@ gem 'select2-rails'
 gem 'simple_form'
 gem 'nested_form'
 gem 'chart-js-rails'
+gem 'underscore-rails'
+gem 'momentjs-rails'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

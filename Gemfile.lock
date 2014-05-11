@@ -97,6 +97,8 @@ GEM
       thin
     mime-types (1.25.1)
     minitest (5.3.3)
+    momentjs-rails (2.6.0)
+      railties (>= 3.1)
     multi_json (1.9.3)
     multipart-post (2.0.0)
     nested_form (0.3.2)
@@ -190,6 +192,7 @@ GEM
     uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    underscore-rails (1.6.0)
     warden (1.2.3)
       rack (>= 1.0)
 
@@ -207,6 +210,7 @@ DEPENDENCIES
   jquery-rails
   lol-api!
   mailcatcher
+  momentjs-rails
   nested_form
   puma (~> 2.1.0)
   rails (= 4.1.0)
@@ -219,3 +223,4 @@ DEPENDENCIES
   sqlite3
   turbolinks
   uglifier (>= 1.3.0)
+  underscore-rails

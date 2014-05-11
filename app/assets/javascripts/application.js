@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require select2
 //= require Chart
+//= require underscore
+//= require moment
 //= require_tree .
