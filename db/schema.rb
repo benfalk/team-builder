@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509205600) do
+ActiveRecord::Schema.define(version: 20140512210259) do
+
+  create_table "champion_preferences", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "champion_id"
+    t.string   "preference"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "champions", force: true do |t|
+    t.string   "name"
+    t.string   "title"
+    t.integer  "riot_id"
+    t.string   "key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "game_stats", force: true do |t|
     t.integer  "summoner_id"
@@ -55,6 +72,13 @@ ActiveRecord::Schema.define(version: 20140509205600) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "summoner_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "short_bio"
+    t.string   "location_city"
+    t.string   "location_state"
+    t.string   "play_style"
+    t.string   "gaming_times"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
