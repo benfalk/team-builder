@@ -4,7 +4,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     @summoner = Summoner.find(params[:summoner])
     build_resource({summoner_id: @summoner.id})
-    
   end
 
 end
