@@ -43,7 +43,9 @@ class Summoner < ActiveRecord::Base
   def verify_account!
     masteries = api.summoner_masteries_by_ids(riot_uid)
     page_names = masteries[riot_uid.to_s]['pages'].map { |m| m['name'] }
-    update(verified: page_names.any? { |name| name == verify_string })
+    if ! verified? && page_names.any? { |name| name == verify_string }
+      update(verified: true)
+    end
   end
 
   private
