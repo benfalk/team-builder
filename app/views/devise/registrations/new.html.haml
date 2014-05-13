@@ -13,13 +13,25 @@
 
   .row.page-top-pad
     .col-lg-6
-      .row
-        .col-lg-3
-          %i.fa.fa-user{style:'font-size:5em;'}
-        .col-lg-9
-          %h1 POTTERBAUM
-
       = form_for resource, as: resource_name, url: registration_path(resource_name), html:{class:'page-top-pad form-horizontal'} do |f|
+        .row
+          .col-lg-3
+            .fileupload
+              %input{:type => "file"}/
+              .profile-pic-square
+                %i.fa.fa-user{style:'font-size:5em;'}
+                Add
+          .col-lg-9
+            %h1 POTTERBAUM
+            .karma
+              Karma
+              .val
+                %i.fa.fa-fire
+                Neutral
+
+
+
+
         - if @user.errors.any?
           #error_explanation.bs-callout.bs-callout-danger
             %h4
