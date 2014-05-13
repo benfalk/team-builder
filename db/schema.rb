@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140512210259) do
+ActiveRecord::Schema.define(version: 20140513222646) do
 
   create_table "champion_preferences", force: true do |t|
     t.integer  "user_id"
@@ -34,6 +34,21 @@ ActiveRecord::Schema.define(version: 20140512210259) do
     t.integer  "summoner_id"
     t.integer  "riot_game_uid"
     t.text     "raw"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "role_preferences", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.string   "preference"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", force: true do |t|
+    t.string   "map"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
