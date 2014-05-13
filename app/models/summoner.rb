@@ -31,7 +31,7 @@ class Summoner < ActiveRecord::Base
 
   def name_found?
     # TODO - Need to really push this into the API...
-    LOL::Api::Client.new.summoner_by_names(name).count == 1
+    api.summoner_by_names(name).count == 1
   rescue
     false
   end
@@ -40,10 +40,20 @@ class Summoner < ActiveRecord::Base
     errors.add(:name, 'Summoner name not found.') unless name_found?
   end
 
+  def verify_account!
+    masteries = api.summoner_masteries_by_ids(riot_uid)
+    page_names = masteries[riot_uid.to_s]['pages'].map { |m| m['name'] }
+    update(verified: page_names.any? { |name| name == verify_string })
+  end
+
   private
 
+  def api
+    LOL::Api::Client.new
+  end
+
   def fetch_riot_info
-    stats = LOL::Api::Client.new.summoner_by_names(name).first.last 
+    stats = api.summoner_by_names(name).first.last 
     update(riot_uid: stats['id'], level: stats['summonerLevel'])
   end
 
