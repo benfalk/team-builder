@@ -12,6 +12,8 @@ gem 'nested_form'
 gem 'chart-js-rails'
 gem 'underscore-rails'
 gem 'momentjs-rails'
+gem 'carrierwave'
+gem 'rmagick'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'

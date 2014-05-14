@@ -1,3 +1,5 @@
+require "#{Rails.root}/app/uploaders/avatar_uploader"
+
 class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
@@ -24,6 +26,8 @@ class User < ActiveRecord::Base
   has_many :favorite_champions, through: :favorite_champion_preferences, source: :champion
 
   has_many :favorite_roles, through: :favorite_role_preferences, source: :role
+
+  mount_uploader :avatar, AvatarUploader
 
   def attempt_summoner_verification
     summoner.verify_account! unless summoner.nil? or summoner.verified?
