@@ -18,10 +18,34 @@
         .row
           .col-lg-3
             .fileupload
-              %input{:type => "file"}/
-              .profile-pic-square
+              = f.file_field :avatar
+              #user_avatar_preview.profile-pic-square
                 %i.fa.fa-user{style:'font-size:5em;'}
                 Add
+              :javascript
+                function readURL(input) {
+
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            $('#user_avatar_preview').css(
+                            {'background-image':'url('+e.target.result+')',
+                            'border': 'none'}
+                            ).html('')
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+                $("#user_avatar").change(function(){
+                    readURL(this);
+                });
+
+
+
+
           .col-lg-9
             %h1 POTTERBAUM
             .karma
