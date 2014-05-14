@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
 
   has_many :role_preferences
 
+  has_many :team_memberships
+
   has_many :favorite_role_preferences, ->{ where preference: :favorite }, class_name: 'RolePreference'
 
   has_many :favorite_champion_preferences, ->{ where preference: :favorite }, class_name: 'ChampionPreference'
@@ -33,6 +35,8 @@ class User < ActiveRecord::Base
   has_many :favorite_champions, through: :favorite_champion_preferences, source: :champion
 
   has_many :favorite_roles, through: :favorite_role_preferences, source: :role
+
+  has_many :teams, through: :team_memberships, source: :team
 
   mount_uploader :avatar, AvatarUploader
 

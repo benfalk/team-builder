@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140514160309) do
+ActiveRecord::Schema.define(version: 20140514215354) do
 
   create_table "champion_preferences", force: true do |t|
     t.integer  "user_id"
@@ -72,6 +72,25 @@ ActiveRecord::Schema.define(version: 20140514160309) do
   end
 
   add_index "summoners", ["region", "name"], name: "index_summoners_on_region_and_name", unique: true
+
+  create_table "team_memberships", force: true do |t|
+    t.integer  "team_id"
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.string   "membership_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "teams", force: true do |t|
+    t.string   "name"
+    t.text     "about_us"
+    t.string   "avatar"
+    t.string   "play_style"
+    t.string   "region"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

@@ -1,0 +1,30 @@
+.container.page-top-pad
+  .row
+    .col-lg-6
+      = form_for(@team) do |f| 
+        %fieldset
+          %legend Details
+          .form-group
+            %label.col-lg-3.control-label Avatar
+            .col-lg-9
+              = f.file_field :avatar
+          .form-group
+            %label.col-lg-3.control-label Team Name
+            .col-lg-9
+              = f.text_field :name, class: 'form-control', placeholder: 'Team Name'
+          .form-group
+            %label.col-lg-3.control-label About Us
+            .col-lg-9
+              = f.text_area :about_us, class: 'form-control'
+          .form-group
+            %label.col-lg-3.control-label Play Style
+            .col-lg-9
+              %label.radio-inline
+                = f.radio_button :play_style, 'competitive', checked: true
+                Competitive
+              %label.radio-inline
+                = f.radio_button :play_style, 'casual'
+                Casual
+          .form-group
+            .col-lg-9
+              = f.submit 'Create Team', class: 'btn btn-primary col-lg-3'
