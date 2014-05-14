@@ -258,3 +258,55 @@
                          a large part of the input clickable in most browsers */
   height: 200px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.activity {
+  text-align: left;
+
+}
+
+.note {
+  padding: 15px 0 0;
+  .from {
+    color: #df691a;
+    font-size: 9px;
+    text-align: left;
+  }
+  .time {
+    color: #909fa9;
+    font-size: 9px;
+    text-align: center;
+  }
+  .message {
+    font-size: 0.8em;
+  }
+  .system {
+    font-size: 10px;
+    color: #f0ad4e;
+  }
+  .lost {
+    color: #d9534f;
+  }
+  .win {
+    color: #5cb85c;
+  }
+}
+
+
+
+

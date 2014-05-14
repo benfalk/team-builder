@@ -1,0 +1,91 @@
+.container.page-top-pad
+  .row.page-top-pad
+    .col-lg-3
+      %legend Comrades
+      .list-group
+        %a.list-group-item{href: "#"}
+          .pull-right Level 29
+          BenFalk
+        %a.list-group-item{href: "#"}
+          .pull-right Level 29
+          BenFalk
+        %a.list-group-item{href: "#"}
+          .pull-right Level 29
+          BenFalk
+
+    .col-lg-9
+      -#%legend
+      -#  Our Picks
+      -#
+      -#%table.table.table-hover
+      -#  %thead
+      -#    %tr
+      -#      %th Team Roster
+      -#      %th Location
+      -#      %th item
+      -#      %th item
+      -#      %th item
+      -#      %th KDA
+      -#      %th Role
+      -#      %th Skill
+      -#      %th{colspan:'2'} Pick
+      -#  %tbody
+      -#    - @hash = [1,1,1,1,1,1,1,1,1,1]
+      -#    - @hash.each do |k, v|
+      -#      = render 'user'
+      -#
+
+
+      %legend
+        Recent
+
+      %table.table.table-hover
+        %thead
+          %tr
+            %th Team Roster
+            %th Location
+            %th item
+            %th item
+            %th item
+            %th KDA
+            %th Role
+            %th Skill
+            %th{colspan:'2'} Pick
+        %tbody
+          - @hash = (1..20).to_a
+          - @hash.each do |k, v|
+            = render 'user'
+
+
+
+
+      .row
+        .col-lg-12
+
+
+
+
+
+      :javascript
+        $('.has-tooltip').tooltip()
+
+
+
+
+
+
+
+
+
+
+
+
+
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
+
+  = debug current_user
