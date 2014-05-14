@@ -2,6 +2,13 @@ require "#{Rails.root}/app/uploaders/avatar_uploader"
 
 class User < ActiveRecord::Base
 
+  GAMING_TIME_OPTIONS = {
+    'Nights & Weekends'=> 'nights_and_weekends',
+    'All Day Everyday'=> 'all_day_everyday',
+    'Weekends Only'=> 'weekends_only',
+    'Daytime Only'=> 'daytime_only'
+  }
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
