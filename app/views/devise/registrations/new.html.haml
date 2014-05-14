@@ -14,6 +14,7 @@
   .row.page-top-pad
     .col-lg-6
       = form_for resource, as: resource_name, url: registration_path(resource_name), html:{class:'page-top-pad form-horizontal'} do |f|
+        = f.hidden_field :summoner_id
         .row
           .col-lg-3
             .fileupload
@@ -47,11 +48,11 @@
           .form-group
             %label.col-lg-3.control-label{:for => "inputEmail", autofocus: true} First Name
             .col-lg-9
-              %input#inputEmail.form-control{:placeholder => "First Name", :type => "text"}
+              = f.text_field :first_name, class: 'form-control', placeholder: 'First Name'
           .form-group
             %label.col-lg-3.control-label{:for => "inputEmail"} Last Name
             .col-lg-9
-              %input#inputEmail.form-control{:placeholder => "Last Name", :type => "text"}
+              = f.text_field :last_name, class: 'form-control', placeholder: 'Last Name'
           .form-group
             %label.col-lg-3.control-label{:for => "inputEmail"} Email*
             .col-lg-9
@@ -59,15 +60,15 @@
           .form-group
             %label.col-lg-3.control-label{:for => "textArea"} About You
             .col-lg-9
-              %textarea#textArea.form-control{:rows => "3"}
+              = f.text_area :short_bio, class:'form-control'
           .form-group
             %label.col-lg-3.control-label{:for => "select"} City
             .col-lg-9
-              %input#inputEmail.form-control{:placeholder => "City", :type => "text"}
+              = f.text_field :location_city, class:'form-control', :placeholder => "City"
           .form-group
             %label.col-lg-3.control-label{:for => "select"} State/Province
             .col-lg-9
-              %input#inputEmail.form-control{:placeholder => "State/Province", :type => "text"}
+              = f.text_field :location_state, class:'form-control', :placeholder => "State"
           .form-group
             %label.col-lg-3.control-label{:for => "inputEmail"} Password*
             .col-lg-9
@@ -82,38 +83,34 @@
             %label.col-lg-3.control-label Play Style
             .col-lg-9
               %label.radio-inline
-                %input{:checked => "", :name => "optionsRadios", :type => "radio", :value => "option1"}
-                  Competitive
+                = f.radio_button :play_style, 'competitive', checked: true
+                Competitive
               %label.radio-inline
-                %input{:name => "optionsRadios", :type => "radio", :value => "option2"}
-                  Casual
+                = f.radio_button :play_style, 'casual'
+                Casual
           .form-group
             %label.col-lg-3.control-label{:for => "select"} Favorite Champs
             .col-lg-9
               .col-lg-3
-                %select#summoner-select-1.js-summoner-picker.summoner-picker-old
+                %select#summoner-select-1.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
                   %option
 
               .col-lg-3
-                %select#summoner-select-2.js-summoner-picker.summoner-picker-old
+                %select#summoner-select-2.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
                   %option
 
               .col-lg-3
-                %select#summoner-select-3.js-summoner-picker.summoner-picker-old
+                %select#summoner-select-3.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
                   %option
 
               .col-lg-3
-                %select#summoner-select-4.js-summoner-picker.summoner-picker-old
+                %select#summoner-select-4.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
                   %option
 
 
             :javascript
 
               buildSummonersoptionsList($('.js-summoner-picker'))
-
-
-
-
 
               $(".summoner-picker-old").customSelect({customClass:'summoner-picker'})
               $('.summoner-picker-old').change(function(){
@@ -144,30 +141,15 @@
           .form-group
             %label.col-lg-3.control-label{:for => "select"} Roles
             .col-lg-9
-              %label.checkbox-inline
-                %input#inlineCheckbox1{:type => "checkbox", :value => "option1"}
-                  Jungle
-              %label.checkbox-inline
-                %input#inlineCheckbox2{:type => "checkbox", :value => "option2"}
-                  Support
-              %label.checkbox-inline
-                %input#inlineCheckbox3{:type => "checkbox", :value => "option3"}
-                  Mid
-              %label.checkbox-inline
-                %input#inlineCheckbox3{:type => "checkbox", :value => "option3"}
-                  Top
-              %label.checkbox-inline
-                %input#inlineCheckbox3{:type => "checkbox", :value => "option3"}
-                  Cary
+              - Role.all.each do |role|
+                %label.checkbox-inline
+                  = check_box_tag 'user[favorite_role_ids][]', role.id, f.object.favorite_role_ids.include?(role.id), id: "user_favorite_role_ids_#{role.name.downcase}"
+                  = role.name
 
           .form-group
             %label.col-lg-3.control-label{:for => "select"} Convenient Gaming Times
             .col-lg-9
-              %select#select.form-control
-                %option Nights and weekends
-                %option Ally day everyday
-                %option weekends only
-                %option daytime only
+              = f.select :gaming_times, options_for_select(User::GAMING_TIME_OPTIONS,f.object.gaming_times), {}, class: 'form-control'
 
 
           %legend Verification
