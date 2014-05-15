@@ -14,6 +14,20 @@ class GameStats < ActiveRecord::Base
       end
     end
 
+    def top_played_with
+      counts = {}
+      all.to_a.each do |game|
+        team = game.raw['teamId']
+        game.raw['fellowPlayers'].each do |player|
+          if player['teamId'] == team
+            counts[player['summonerId']] ||= 0
+            counts[player['summonerId']] += 1
+          end
+        end
+      end
+      counts
+    end
+
   end
 
 end

@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:benfalk/lol-api.git
-  revision: 928cc499115ca9da13bd42671b1d58f1fd96fbbd
+  revision: 5d9c5a5166e0f1c0773be4bf173c27f27d01b1f8
   specs:
     lol-api (0.0.1)
       faraday

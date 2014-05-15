@@ -45,11 +45,11 @@
           - @team.team_memberships.each do |tm|
             %tr
               %td 
-                = tm.user.summoner.name
+                = tm.summoner.name
               %td 
-                = tm.user.full_name
+                = tm.user.try(:full_name)
               %td 
-                = tm.user.location
+                = tm.user.try(:location)
               %td 
                 = tm.membership_type
               %td 2

@@ -8,7 +8,9 @@ class TeamsController < ApplicationController
 
   def create
     @team = Team.new(team_create_params)
-    @team.team_memberships << TeamMembership.new(user: current_user, membership_type: :captain) 
+    @team.team_memberships << TeamMembership.new( user: current_user,
+                                                  membership_type: :captain,
+                                                  summoner: current_user.summoner ) 
     respond_to do |format|
       if @team.save
         format.html { redirect_to team_url(@team) }
@@ -21,7 +23,7 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.includes(team_memberships:[{user:[:summoner]},:role]).find(params[:id])
+    @team = Team.including_membership_data.find(params[:id])
     respond_to do |format|
       format.html
       format.json { render json: @team }

@@ -11,6 +11,19 @@ class SummonersController < ApplicationController
     end
   end
 
+  def lookup
+    @summoner = Summoner.prepare_binding(params.permit(:name,:region))
+    respond_to do |format|
+      if @summoner.id || @summoner.save
+        format.html
+        format.json { render json: @summoner }
+      else
+        format.html
+        format.json { render json: @summoner.errors.full_messages, status: 400 }
+      end
+    end
+  end
+
   private
 
   def create_params
