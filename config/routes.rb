@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'team/' => 'pages#team'
   get 'comrades/' => 'pages#comrades'
   get 'join/' => 'pages#join'
+  get 'playbook/' => 'pages#playbook'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
