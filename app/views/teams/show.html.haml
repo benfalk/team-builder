@@ -1,6 +1,92 @@
-.row.page-top-pad
-  .col-lg-9
-    %h1
-      = @team.name
-    %h2
-      = @team.about_us
+.container.page-top-pad
+  .row.page-top-pad
+    .col-lg-3
+      %legend Team Comm
+      - participants = ['echo123','benjamin.falk','changingworld358']
+      %a.skype-button{:href => "skype:#{participants.join(';')}?call&topic=Team%20Call", title:" Conference: #{participants.join(', ')}", 'data-placement'=>"top"}
+        %img{src:'/assets/skype.png'}
+        Start Group Call
+      :javascript
+        $('.skype-button').tooltip()
+
+      %hr
+
+      %form.form-inline{role: 'form'}
+        .form-group
+          %input.form-control{placeholder: 'Message', type: 'text'}
+        %button.btn.btn-default.chat-post{type: 'submit'} Post
+      .activity
+        .note
+          .system
+            .row
+              .col-lg-7
+                Team Created
+              .col-lg-5
+                Jun 8 3:24 PM
+
+
+
+    .col-lg-9
+      %legend
+        %a.btn.pull-right Edit
+        = @team.name
+
+      %table.table
+        %thead
+          %tr
+            %th Team Roster
+            %th Name
+            %th Location
+            %th
+            %th KDA
+            %th Role
+            %th Skill
+        %tbody
+          %tr
+            %td potterbaum
+            %td Brad Potterbaum
+            %td Las Vegas NV
+            %td Team Captain
+            %td 2
+            %td support
+            %td{style:'width:200px'}
+              .progress
+                .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "80", role: "progressbar", style: "width: 80%"}
+                  %span.sr-only 80% Complete
+
+
+
+
+      .row
+        .col-lg-12
+          No chart data at this time.
+
+
+
+
+
+      %br
+      %br
+      %legend
+        Match History
+      No match history at this time.
+
+
+
+  %br
+  %br
+  %br
+
+
+
+
+
+
+
+
+
+
+
+
+
+
