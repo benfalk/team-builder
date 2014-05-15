@@ -1,0 +1,28 @@
+.map-sr
+  %canvas#play{:height => "1100", :width => "1200"}
+  :javascript
+    var canvas = new fabric.Canvas('play');
+
+
+      // arrow
+      fabric.loadSVGFromURL('assets/156.svg', function(objects, options) {
+        var shape = fabric.util.groupSVGElements(objects, options);
+        shape.set({
+          left: 200,
+          top: 200,
+          angle: 70,
+          scaleX: 3,
+          scaleY: 3,
+          flipY: true
+        });
+
+        canvas.add(shape);
+        canvas.calcOffset();
+      });
+
+
+
+
+
+
+
