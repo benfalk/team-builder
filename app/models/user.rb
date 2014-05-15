@@ -50,4 +50,12 @@ class User < ActiveRecord::Base
     errors.add(:summoner, 'could not be verified') unless summoner.verified?
   end
 
+  def full_name
+    "#{first_name} #{last_name}".squish!
+  end
+
+  def location
+    "#{location_city} #{location_state}".squish!
+  end
+
 end
