@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
+
   resource :account, only:[:edit,:update] do
     get 'overview', on: :collection, action: :overview
   end
+
   resources :summoners, only:[:create] do
     get 'lookup/:region/:name', on: :collection, as: :lookup, action: :lookup
   end
+
   resources :teams do
     resources :memberships, only:[:index,:update,:create,:destroy]
   end
+
   root 'pages#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
