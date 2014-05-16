@@ -14,14 +14,36 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
+        %ul.nav.navbar-nav.pull-right
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Teams
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"} Team Name
+              %li.divider
+              %li
+                = link_to 'Create New Team', new_team_path
+
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Account
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"} Profile
+              %li
+                %a{:href => "#"} Sign Out
+
         #navbar-main.navbar-collapse.collapse
           -#%ul.nav.navbar-nav
           -#  %li
           -#    %a{:href => "../help/"} Help
-          %button.btn.btn-primary.navbar-right{:type => "button", style:'height: 39px;margin-top: 1px;', :onclick => "document.getElementById('loginForm').submit();"} Login
-          %form#loginForm.navbar-form.navbar-right
-            %input.form-control.col-lg-8{:placeholder => "Summoner Name", :type => "text", style: 'background: #919BA3;color:#fff;'}
-            %input.form-control.col-lg-8{:placeholder => "Password", :type => "password", style: 'background: #919BA3;color:#fff;'}
+          -#%button.btn.btn-primary.navbar-right{:type => "button", style:'height: 39px;margin-top: 1px;', :onclick => "document.getElementById('loginForm').submit();"} Login
+          -#= form_for resource, as: resource_name, url: session_path(resource_name), html:{class:' navbar-form navbar-right'} do |f|
+          -#  = f.email_field :email, autofocus: true
+          -#  = f.password_field :password, autocomplete: "off", :placeholder => "Password", style: 'background: #919BA3;color:#fff;'
 
     = yield
 

@@ -221,6 +221,7 @@
 
 
 .load-more {
+  display: block;
   text-align: center;
   padding-bottom: 80px;
 }
@@ -377,7 +378,22 @@
 
 
 
+.teams-table{
+  tbody {
+    tr {
+      td {
+        vertical-align: middle;
+      }
+    }
+  }
+  td {
+    font-size: 1.3em;
 
+    img {
+      width: 36px;
+    }
+  }
+}
 
 
 

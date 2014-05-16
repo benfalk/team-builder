@@ -1,0 +1,100 @@
+.container.page-top-pad
+  .row
+    .col-lg-12
+      .page-header
+        %h1 Teaming Up
+        %p Welcome to LOL Team Builder. You can Join an exciting team or create your own below.
+
+      .row
+        .col-lg-2
+          = image_tag current_user.avatar_url, style:'width:100%'
+        .col-lg-4
+          Name:
+          = current_user.first_name
+          = current_user.last_name
+          %br
+          Email:
+          = current_user.email
+          %br
+          Location:
+          = current_user.location_city
+          = current_user.location_state
+          %br
+          Play Style:
+          = current_user.play_style
+          %br
+          Gaming Times:
+          = current_user.gaming_times
+        .col-lg-6
+          %p
+            = current_user.short_bio
+
+
+  .row.page-top-pad
+    .col-lg-12
+      %legend
+        Your Perfect Pick
+        = link_to 'Create New Team', new_team_path, class:' btn pull-right'
+
+      %table.table.table-hover.teams-table
+        %thead
+          %tr
+            %th
+            %th Team Name
+            %th League
+            %th Style
+            %th Location
+            %th Position
+            %th Wins
+            %th Founded
+            %th Server
+            %th Join Request
+        %tbody
+          - @hash = (1...3).to_a
+          - @hash.each do |v|
+            %tr
+              %td
+                %img{src:'assets/G2_logo.png'}
+              %td GAMERS 2
+              %td Silver
+              %td Casual
+              %td Las Vegas
+              %td Support
+              %td 9
+              %td February 24th, 2014
+              %td NA
+              %td
+                .btn.btn-success Send Request
+
+          %tr
+            %td{colspan:'8', style:'text-align:center; font-size:1em; color:#f0ad4e;'}
+              Outside your Location
+
+          - @hash = (1...12).to_a
+          - @hash.each do |v|
+            %tr
+              %td
+
+              %td Renegade Cavalcade
+              %td Silver
+              %td Professional
+              %td Madrid Spain
+              %td Support
+              %td 5
+              %td February 24th, 2014
+              %td NA
+              %td
+                .btn.btn-success Send Request
+
+      %a.btn.load-more Show More
+
+
+
+
+
+
+
+
+
+
+
