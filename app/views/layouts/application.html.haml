@@ -15,16 +15,19 @@
             %span.icon-bar
             %span.icon-bar
         %ul.nav.navbar-nav.pull-right
-          %li.dropdown
-            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-              Teams
-              %b.caret
-            %ul.dropdown-menu
-              %li
-                %a{:href => "#"} Team Name
-              %li.divider
-              %li
-                = link_to 'Create New Team', new_team_path
+          - if current_user.present?
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                Teams
+                %b.caret
+              %ul.dropdown-menu
+                - current_user.teams.each do |t|
+                  %li
+                    = link_to t.name, team_path(t)
+
+                %li.divider
+                %li
+                  = link_to 'Create New Team', new_team_path
 
           %li.dropdown
             %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
@@ -32,9 +35,15 @@
               %b.caret
             %ul.dropdown-menu
               %li
-                %a{:href => "#"} Profile
+                = link_to 'Profile', '#'
               %li
-                %a{:href => "#"} Sign Out
+                = link_to 'Edit Email/Password', edit_user_registration_path
+              %li
+                - if current_user.present?
+                  = link_to 'Logout', destroy_user_session_path, :method => :delete
+                - else
+                  = link_to 'Login', new_user_session_path
+
 
         #navbar-main.navbar-collapse.collapse
           -#%ul.nav.navbar-nav

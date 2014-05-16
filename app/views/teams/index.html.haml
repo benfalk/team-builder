@@ -5,26 +5,28 @@
         %h1 Teaming Up
         %p Welcome to LOL Team Builder. You can Join an exciting team or create your own below.
 
-      .row
+      .row.profile-row
         .col-lg-2
-          = image_tag current_user.avatar_url, style:'width:100%'
+          = image_tag current_user.avatar_url
         .col-lg-4
-          Name:
+          %h3
+            = current_user.summoner.name
+
           = current_user.first_name
           = current_user.last_name
+
+
           %br
-          Email:
-          = current_user.email
-          %br
-          Location:
+          %i.fa.fa-map-marker
           = current_user.location_city
           = current_user.location_state
-          %br
-          Play Style:
-          = current_user.play_style
-          %br
-          Gaming Times:
-          = current_user.gaming_times
+          %small
+            %br
+            Play Style:
+            = current_user.play_style
+            %br
+            Gaming Times:
+            = current_user.gaming_times
         .col-lg-6
           %p
             = current_user.short_bio
