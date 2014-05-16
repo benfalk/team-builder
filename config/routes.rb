@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations' }
+  resource :account, only:[:edit,:update] do
+    get 'overview', on: :collection, action: :overview
+  end
   resources :summoners, only:[:create] do
     get 'lookup/:region/:name', on: :collection, as: :lookup, action: :lookup
   end
