@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end
 
   resources :teams do
-    resources :memberships, only:[:index,:update,:create,:destroy]
+    resources :memberships, except:[:show]
   end
 
   root 'pages#index'

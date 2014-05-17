@@ -2,6 +2,16 @@ class MembershipsController < ApplicationController
   
   before_action :authenticate_user!, only:[:update,:create,:destroy]
 
+  def edit
+    @team = Team.find(params[:team_id])
+    @membership = @team.find(params[:id])
+  end
+
+  def new
+    @team = Team.find(params[:team_id])
+    @membership = @team.team_memberships.build
+  end
+
   def index
     @team = Team.including_membership_data.find(params[:team_id])
     @memberships = @team.team_memberships
@@ -30,10 +40,23 @@ class MembershipsController < ApplicationController
     @membership = @team.team_memberships.build(create_params)
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to teams_url(@team) }
+        format.html { redirect_to team_path(@team), notice: "#{@membership.summoner_name} added!" }
         format.json { render json: { success: true, errors: @membership.errors.full_messages } }
       else
-        format.html { redirect_to teams_url(@team), alert: 'Unable to add team member' }
+        format.html { redirect_to team_url(@team), alert: 'Unable to add team member' }
+        format.json { render json: { success: false, errors: @membership.errors.full_messages } }
+      end
+    end
+  end
+
+  def destroy
+    @membership = Team.find(params[:team_id]).team_memberships.find(params[:id])
+    respond_to do |format|
+      if @membership.destroy
+        format.html { redirect_to teams_url(@membership.team) }
+        format.json { render json: { success: true, errors: @membership.errors.full_messages } }
+      else
+        format.html { redirect_to teams_url(@membership.team), alert: 'Unable to remove team member' }
         format.json { render json: { success: false, errors: @membership.errors.full_messages } }
       end
     end
@@ -54,7 +77,8 @@ class MembershipsController < ApplicationController
       :team_membership
     ).permit(
       :role_id,
-      :summoner_id
+      :summoner_id,
+      :summoner_name
     )
   end
   

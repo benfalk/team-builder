@@ -28,6 +28,7 @@
 
     .col-lg-9
       %legend
+        = link_to 'Add Summoner', new_team_membership_path(@team), class: 'btn pull-right'
         %a.btn.pull-right Edit
         = @team.name
 
