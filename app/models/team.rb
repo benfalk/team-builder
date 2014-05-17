@@ -6,4 +6,6 @@ class Team < ActiveRecord::Base
 
   has_many :users, through: :team_memberships, source: :user
 
+  mount_uploader :avatar, AvatarUploader
+
 end
