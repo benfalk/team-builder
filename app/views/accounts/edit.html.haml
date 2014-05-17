@@ -14,162 +14,169 @@
   .row.page-top-pad
 
     = form_for @user, url: account_path(), html:{class:'page-top-pad form-horizontal'} do |f|
-      .col-lg-6
-        = f.hidden_field :summoner_id
-        .row
-          .col-lg-3
-            .fileupload
-              = f.file_field :avatar
-              #user_avatar_preview.profile-pic-square
-                %i.fa.fa-user{style:'font-size:5em;'}
-                Add
-              :javascript
-                function readURL(input) {
+      .row
+        .col-lg-12
+          = f.hidden_field :summoner_id
+          .row
+            .col-lg-2
+              .fileupload
+                = f.file_field :avatar
+                - unless current_user.avatar_url.blank?
+                  #user_avatar_preview.profile-pic-square-with-pic
+                    = image_tag current_user.avatar_url
+                - else
+                  #user_avatar_preview.profile-pic-square
+                    %i.fa.fa-user{style:'font-size:5em;'}
+                    %br
+                    Add
+                :javascript
+                  function readURL(input) {
 
-                    if (input.files && input.files[0]) {
-                        var reader = new FileReader();
+                      if (input.files && input.files[0]) {
+                          var reader = new FileReader();
 
-                        reader.onload = function (e) {
-                            $('#user_avatar_preview').css(
-                            {'background-image':'url('+e.target.result+')',
-                            'border': 'none'}
-                            ).html('')
-                        }
+                          reader.onload = function (e) {
+                              $('#user_avatar_preview').css(
+                              {'background-image':'url('+e.target.result+')',
+                              'border': 'none'}
+                              ).html('')
+                          }
 
-                        reader.readAsDataURL(input.files[0]);
-                    }
-                }
+                          reader.readAsDataURL(input.files[0]);
+                      }
+                  }
 
-                $("#user_avatar").change(function(){
-                    readURL(this);
-                });
-
-
-
-
-          .col-lg-9
-            %h1 POTTERBAUM
-            .karma
-              Karma
-              .val
-                %i.fa.fa-fire
-                Neutral
+                  $("#user_avatar").change(function(){
+                      readURL(this);
+                  });
 
 
 
 
-        - if @user.errors.any?
-          #error_explanation.bs-callout.bs-callout-danger
-            %h4
-              = pluralize(@user.errors.count, "error")
-              prohibited this user from being saved:
-            %ul
-              - @user.errors.full_messages.each do |msg|
-                %li
-                  * #{msg}
+            .col-lg-10
+              %h1 POTTERBAUM
+              .karma
+                Karma
+                .val
+                  %i.fa.fa-fire
+                  Neutral
 
-        %fieldset
-          %legend Personal
+
+
+
+          - if @user.errors.any?
+            #error_explanation.bs-callout.bs-callout-danger
+              %h4
+                = pluralize(@user.errors.count, "error")
+                prohibited this user from being saved:
+              %ul
+                - @user.errors.full_messages.each do |msg|
+                  %li
+                    * #{msg}
+      .row
+        .col-lg-6
+          %fieldset
+            %legend Personal
+            .form-group
+              %label.col-lg-3.control-label{:for => "inputEmail", autofocus: true} First Name
+              .col-lg-9
+                = f.text_field :first_name, class: 'form-control', placeholder: 'First Name'
+            .form-group
+              %label.col-lg-3.control-label{:for => "inputEmail"} Last Name
+              .col-lg-9
+                = f.text_field :last_name, class: 'form-control', placeholder: 'Last Name'
+            .form-group
+              %label.col-lg-3.control-label{:for => "textArea"} About You
+              .col-lg-9
+                = f.text_area :short_bio, class:'form-control'
+            .form-group
+              %label.col-lg-3.control-label{:for => "select"} City
+              .col-lg-9
+                = f.text_field :location_city, class:'form-control', :placeholder => "City"
+            .form-group
+              %label.col-lg-3.control-label{:for => "select"} State/Province
+              .col-lg-9
+                = f.text_field :location_state, class:'form-control', :placeholder => "State"
+        .col-lg-6
+          %legend Game Play
           .form-group
-            %label.col-lg-3.control-label{:for => "inputEmail", autofocus: true} First Name
+            %label.col-lg-3.control-label Play Style
             .col-lg-9
-              = f.text_field :first_name, class: 'form-control', placeholder: 'First Name'
+              %label.radio-inline
+                = f.radio_button :play_style, 'competitive', checked: true
+                Competitive
+              %label.radio-inline
+                = f.radio_button :play_style, 'casual'
+                Casual
           .form-group
-            %label.col-lg-3.control-label{:for => "inputEmail"} Last Name
+            %label.col-lg-3.control-label{:for => "select"} Favorite Champs
             .col-lg-9
-              = f.text_field :last_name, class: 'form-control', placeholder: 'Last Name'
-          .form-group
-            %label.col-lg-3.control-label{:for => "textArea"} About You
-            .col-lg-9
-              = f.text_area :short_bio, class:'form-control'
-          .form-group
-            %label.col-lg-3.control-label{:for => "select"} City
-            .col-lg-9
-              = f.text_field :location_city, class:'form-control', :placeholder => "City"
-          .form-group
-            %label.col-lg-3.control-label{:for => "select"} State/Province
-            .col-lg-9
-              = f.text_field :location_state, class:'form-control', :placeholder => "State"
-      .col-lg-6
-        %legend Game Play
-        .form-group
-          %label.col-lg-3.control-label Play Style
-          .col-lg-9
-            %label.radio-inline
-              = f.radio_button :play_style, 'competitive', checked: true
-              Competitive
-            %label.radio-inline
-              = f.radio_button :play_style, 'casual'
-              Casual
-        .form-group
-          %label.col-lg-3.control-label{:for => "select"} Favorite Champs
-          .col-lg-9
-            .col-lg-3
-              %select#summoner-select-1.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
-                %option
+              .col-lg-3
+                %select#summoner-select-1.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
+                  %option
 
-            .col-lg-3
-              %select#summoner-select-2.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
-                %option
+              .col-lg-3
+                %select#summoner-select-2.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
+                  %option
 
-            .col-lg-3
-              %select#summoner-select-3.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
-                %option
+              .col-lg-3
+                %select#summoner-select-3.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
+                  %option
 
-            .col-lg-3
-              %select#summoner-select-4.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
-                %option
+              .col-lg-3
+                %select#summoner-select-4.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
+                  %option
 
 
-          :javascript
-
-            buildSummonersoptionsList($('.js-summoner-picker'))
-
-            $(".summoner-picker-old").customSelect({customClass:'summoner-picker'})
-            $('.summoner-picker-old').change(function(){
-              $(this).siblings('span').css({
-              'background-image':'url(http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/'+$(this).val()+'.png)',
-              'background-size': 'contain',
-              'color': 'rgba(255, 255, 255, 0)',
-              'border': '1px solid #767F97'
-              })
-            })
-
-
-            var gameChamps = []
-
-          - @summoner.game_stats.each do |game|
             :javascript
-              gameChamps.push(#{game.raw['championId']})
 
-          :javascript
-            var i=1
-            _.each(_.uniq(gameChamps),function(id){
-              $('#summoner-select-'+i).val(getSummoner(id).key).change()
-              i++
-            })
+              buildSummonersoptionsList($('.js-summoner-picker'))
+
+              $(".summoner-picker-old").customSelect({customClass:'summoner-picker'})
+              $('.summoner-picker-old').change(function(){
+                $(this).siblings('span').css({
+                'background-image':'url(http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/'+$(this).val()+'.png)',
+                'background-size': 'contain',
+                'color': 'rgba(255, 255, 255, 0)',
+                'border': '1px solid #767F97'
+                })
+              })
+
+
+              var gameChamps = []
+
+            - @summoner.game_stats.each do |game|
+              :javascript
+                gameChamps.push(#{game.raw['championId']})
+
+            :javascript
+              var i=1
+              _.each(_.uniq(gameChamps),function(id){
+                $('#summoner-select-'+i).val(getSummoner(id).key).change()
+                i++
+              })
 
 
 
-        .form-group
-          %label.col-lg-3.control-label{:for => "select"} Roles
-          .col-lg-9
-            - Role.all.each do |role|
-              %label.checkbox-inline
-                = check_box_tag 'user[favorite_role_ids][]', role.id, f.object.favorite_role_ids.include?(role.id), id: "user_favorite_role_ids_#{role.name.downcase}"
-                = role.name
+          .form-group
+            %label.col-lg-3.control-label{:for => "select"} Roles
+            .col-lg-9
+              - Role.all.each do |role|
+                %label.checkbox-inline
+                  = check_box_tag 'user[favorite_role_ids][]', role.id, f.object.favorite_role_ids.include?(role.id), id: "user_favorite_role_ids_#{role.name.downcase}"
+                  = role.name
 
-        .form-group
-          %label.col-lg-3.control-label{:for => "select"} Convenient Gaming Times
-          .col-lg-9
-            = f.select :gaming_times, options_for_select(User::GAMING_TIME_OPTIONS,f.object.gaming_times), {}, class: 'form-control'
+          .form-group
+            %label.col-lg-3.control-label{:for => "select"} Convenient Gaming Times
+            .col-lg-9
+              = f.select :gaming_times, options_for_select(User::GAMING_TIME_OPTIONS,f.object.gaming_times), {}, class: 'form-control'
 
-        
-        .form-group
 
-          %a.btn.btn-default.col-lg-3{:href => "../"} Cancel
-          .col-lg-3
-          .col-lg-3
-          = f.submit "Verify and Save", class:'btn btn-primary col-lg-3'
+          .form-group
+            .col-lg-3
+            .col-lg-2
+            %a.btn.btn-default.col-lg-3{:href => "../"} Cancel
+            .col-lg-1
+            = f.submit "Save", class:'btn btn-primary col-lg-3'
     %br
     %br

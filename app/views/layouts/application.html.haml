@@ -6,6 +6,9 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    - flash.each do |key, value|
+      :javascript
+        toastr.error("#{key}: #{value}")
     .navbar.navbar-default.navbar-fixed-top
       .container
         .navbar-header
@@ -35,7 +38,7 @@
               %b.caret
             %ul.dropdown-menu
               %li
-                = link_to 'Profile', '#'
+                = link_to 'Profile', edit_account_path
               %li
                 = link_to 'Edit Email/Password', edit_user_registration_path
               %li
