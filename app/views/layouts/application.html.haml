@@ -22,6 +22,8 @@
             %span.icon-bar
         %ul.nav.navbar-nav.pull-right
           - if current_user.present?
+            %li
+              = link_to 'Overview', overview_account_path
             %li.dropdown
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 Teams
@@ -33,7 +35,15 @@
 
                 %li.divider
                 %li
-                  = link_to 'Create New Team', new_team_path
+                  = link_to new_team_path do
+                    %i.fa.fa-plus
+                    &nbsp;Create Team
+
+                %li
+                  = link_to teams_path do
+                    %i.fa.fa-users
+                    &nbsp; Join Team
+
 
           - if current_user.present?
             %li.dropdown

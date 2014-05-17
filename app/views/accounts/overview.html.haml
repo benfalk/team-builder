@@ -92,12 +92,8 @@
           %a.btn.pull-right  Join
 
         .list-group
-          %a.list-group-item
-            Some team name
-          %a.list-group-item
-            Some team name
-          %a.list-group-item
-            Some team name
+          - current_user.teams.each do |t|
+            = link_to t.name, team_path(t), class:'list-group-item'
 
 
         %h4 Teammate Activity
@@ -109,7 +105,7 @@
           Your Match History
         - @hash = [1,2,3,4,5]
         - @hash.each do |k, v|
-          = render '/pages/team'
+          = render 'match'
 
         :javascript
           $('.has-tooltip').tooltip()

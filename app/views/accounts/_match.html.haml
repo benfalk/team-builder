@@ -1,0 +1,91 @@
+.match
+  .row.well{style:'margin:2px; padding:15px 0'}
+    .col-lg-2
+      = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png', class:'champ'
+    .col-lg-3{style:'text-align:left; color:#d9534f; padding-top:8px;'}
+      %strong LOSE
+    .col-lg-3{style:'text-align:center; padding-top:8px;'} 7 - 15
+    .col-lg-4{style:'text-align:right; padding-top:8px;'} Wed Jun 14th 8:45pm
+
+  %table.table
+    %thead
+      %tr
+        %th SUMMONER
+        %th SPELLS
+        %th KDA
+        %th ITEMS
+        %th FARM
+        %th CREEPS
+        %th WARDS
+        %th DAMAGE
+        %th ROLE
+    %tbody
+      - @hash = [1,2,3,4,5]
+      - @hash.each do |k, v|
+        %tr
+          %td
+            %i.fa.fa-user
+            potterbaum
+          %td
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+          %td 2/12/10
+          %td
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+          %td 9k
+          %td 72
+          %td 00
+          %td 9.5k
+          %td{style:'width:200px'}
+            .progress
+              .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => '80', role: 'progressbar', style: 'width: 80%'}
+                %span.sr-only 80% Complete
+          %td
+
+          %td
+
+
+
+      %tr
+        %td{colspan:'10', style:'text-align:center'}
+          %hr
+
+      - @hash = [1,2,3,4,5]
+      - @hash.each do |k, v|
+        %tr
+          %td
+            %i.fa.fa-user
+            potterbaum
+          %td
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+          %td 2/12/10
+          %td
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+          %td 9k
+          %td 72
+          %td 00
+          %td 9.5k
+          %td{style:'width:200px'}
+            .progress
+              .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => '80', role: 'progressbar', style: 'width: 80%'}
+                %span.sr-only 80% Complete
+          %td
+            %i.fa.fa-plus.has-tooltip{style:'color:#5cb85c', 'data-placement' => 'top', 'data-toggle' => 'tooltip', title: 'Request Comrade'}
+          %td
+            %i.fa.fa-minus-circle.has-tooltip{style:'color:#d9534f', 'data-placement' => 'top', 'data-toggle' => 'tooltip', title: 'Mark Foe'}
+
+  .row
+    .col-lg-12

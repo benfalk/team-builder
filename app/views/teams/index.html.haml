@@ -2,41 +2,28 @@
   .row
     .col-lg-12
       .page-header
-        %h1 Teaming Up
-        %p Welcome to LOL Team Builder. You can Join an exciting team or create your own below.
-
-      .row.profile-row
-        .col-lg-2
-          = image_tag current_user.avatar_url
-        .col-lg-4
-          %h3
-            = current_user.summoner.name
-
-          = current_user.first_name
-          = current_user.last_name
-
-
-          %br
-          %i.fa.fa-map-marker
-          = current_user.location_city
-          = current_user.location_state
-          %small
+        .row
+          .col-lg-3
+            %h1 Perfect Fit
+          .col-lg-2.win
+            %br
+            %br
+            %i.fa.fa-map-marker
+            = current_user.location_city
+            = current_user.location_state
+          .col-lg-2.win
+            %br
             %br
             Play Style:
             = current_user.play_style
+          .col-lg-4.win
             %br
-            Gaming Times:
-            = current_user.gaming_times
-        .col-lg-6
-          %p
-            = current_user.short_bio
+            %br
+            Times:
+            = current_user.gaming_times.tr!('_', ' ')
 
-
-  .row.page-top-pad
-    .col-lg-12
-      %legend
-        Your Perfect Pick
-        = link_to 'Create New Team', new_team_path, class:' btn pull-right'
+        We have found these available positions perfect for you! If you dont find a position you want then create your own team.
+        = link_to 'Create New Team', new_team_path, class:'pull-right'
 
       %table.table.table-hover.teams-table
         %thead
@@ -69,7 +56,7 @@
                 .btn.btn-success Send Request
 
           %tr
-            %td{colspan:'8', style:'text-align:center; font-size:1em; color:#f0ad4e;'}
+            %td{colspan:'8', style:'text-align:center; font-size:1em; color: #fff;'}
               Outside your Location
 
           - @hash = (1...12).to_a
