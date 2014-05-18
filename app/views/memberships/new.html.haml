@@ -16,8 +16,13 @@
       %tr
         %th CURRENT ROSTER
         %th LOCATION
-        %th
+        %th Level
         %th ROLE
+        %th KDA
+        %th STYLE
+        %th Times
+        %th CHAMPS
+        %th
     %tbody
       - @hash = [1]
       - @hash.each do |k, v|
@@ -27,9 +32,22 @@
             potterbaum
           %td
             Las Vegas
-          %td Captin
+          %td
+            24
           %td
             Support
+          %td
+            0/0/0
+          %td
+            casual
+          %td
+            Nights and weekends
+          %td
+            .champ-list-short-small
+              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
 
 
 
@@ -38,7 +56,9 @@
   %br
   %br
   %br
-  %legend Pending Requests
+  %br
+
+  %legend Except Requests
   %table.table.team-builder-table.table-hover
     %thead
       %tr
@@ -80,6 +100,50 @@
           %td
             .btn.btn-success Except
 
+
+  %legend Recently played with
+  %table.table.team-builder-table.table-hover
+    %thead
+      %tr
+        %th CANDIDATES
+        %th LOCATION
+        %th Level
+        %th ROLE
+        %th KDA
+        %th STYLE
+        %th Times
+        %th CHAMPS
+        %th
+    %tbody
+      - @hash = [1,1]
+      - @hash.each do |k, v|
+        %tr
+          %td
+            = image_tag 'dummy_avatar.png', class:'small-avatar'
+            potterbaum
+          %td
+            Las Vegas
+          %td
+            24
+          %td
+            Support
+          %td
+            0/0/0
+          %td
+            casual
+          %td
+            Nights and weekends
+          %td
+            .champ-list-short-small
+              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+
+          %td
+            .btn.btn-primary &nbsp; Invite &nbsp;
+
+
   %legend Fitting Candidates
   %table.table.team-builder-table.table-hover
     %thead
@@ -120,5 +184,5 @@
               = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
 
           %td
-            .btn.btn-success &nbsp; Invite &nbsp;
+            .btn.btn-primary &nbsp; Invite &nbsp;
   -#= debug @team
