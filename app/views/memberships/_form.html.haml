@@ -1,14 +1,16 @@
-= form_for @membership do |f|
-  .row
-    .col-lg-6
-      %fieldset
-        .form-group
-          %label.col-lg-3.control-label Summoner
-          .col-lg-9
-            = f.text_field :summoner_name, class: 'form-control'
-        .form-group
-          %label.col-lg-3.control-label Role
-          .col-lg-9
-            = f.select :role_id, options_for_select(Role.all.pluck(:name,:id)), {}, class: 'form-control'
-        .form-group
-          = f.submit 'Save', class: 'btn btn-primary save-membership'
+= form_for @membership, html:{class:'page-top-pad form-horizontal', style:'padding-top: 20px;'} do |f|
+
+  %fieldset.row
+    .col-lg-7
+      .form-group
+        %label.col-lg-2.control-label Summoner
+        .col-lg-9
+          = f.text_field :summoner_name, class: 'form-control'
+    .col-lg-3
+      .form-group
+        %label.col-lg-2.control-label Role
+        .col-lg-9
+          = f.select :role_id, options_for_select(Role.all.pluck(:name,:id)), {}, class: 'form-control'
+    .col-lg-2
+      .form-group
+        = f.submit 'Quick Add', class: 'btn btn-primary save-membership'
