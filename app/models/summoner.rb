@@ -17,6 +17,8 @@ class Summoner < ActiveRecord::Base
 
   has_one :user
 
+  has_and_belongs_to_many :games
+
   has_one :stats_summary, class_name: 'Summoner::StatsSummary'
 
   has_many :game_stats, class_name: 'GameStats'

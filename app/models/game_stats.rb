@@ -48,7 +48,6 @@ class GameStats < ActiveRecord::Base
   end
 
   def played_at
-    #raw['createDate']
     Time.at(raw['createDate']/1000).to_datetime
   end
 
