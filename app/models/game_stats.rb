@@ -4,6 +4,8 @@ class GameStats < ActiveRecord::Base
 
   belongs_to :played_champion, class_name: 'Champion', foreign_key: :played_champion_id
 
+  belongs_to :game
+
   serialize :raw, Hash
 
   class << self
@@ -49,6 +51,10 @@ class GameStats < ActiveRecord::Base
 
   def played_at
     Time.at(raw['createDate']/1000).to_datetime
+  end
+
+  def summoner_riot_ids
+    raw['fellowPlayers'].map { |p| p['summonerId'] }
   end
 
 end

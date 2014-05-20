@@ -11,6 +11,26 @@ class Summoner < ActiveRecord::Base
     where(region: params[:region], name: params[:name]).first || new(params)
   end
 
+  # Given a list of summoner ids, most likely from game states
+  # this method creates summoners in the database if they are not found
+  # and looks up their names
+  def self.harvest_summoners(region,ids)
+    missing = ids - where(riot_uid: ids).pluck(:riot_uid)
+    return if missing.empty?
+    summoners = LOL::Api::Client.new.summoner_by_ids(missing)
+    summoners.each_pair do |id,data|
+      Summoner.new( riot_uid: data['id'],
+                      name: data['name'].downcase,
+                      level: data['summonerLevel'],
+                      region: region ).save(validate: false)
+      sleep 5
+    end
+  end
+
+  def self.raw_create(data)
+    new(data)
+  end
+
   validates_presence_of :name, :region
 
   validate :validate_summoner_name, on: :create
@@ -57,7 +77,7 @@ class Summoner < ActiveRecord::Base
   end
 
   def fetch_riot_info
-    stats = api.summoner_by_names(name).first.last 
+    stats = api.summoner_by_names(URI::escape(name)).first.last 
     update(riot_uid: stats['id'], level: stats['summonerLevel'])
   end
 
