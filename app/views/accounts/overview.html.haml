@@ -70,7 +70,7 @@
                 Total Assists:&nbsp;&nbsp;
                 = totalAssists
 
-        .row.pad{style:'padding-top:0; height:101px;overflow: scroll;'}
+        .row.pad{style:'padding-top:0; height:101px;overflow: auto;'}
           .col-lg-7
             %p.bio
               = current_user.short_bio.html_safe
@@ -101,9 +101,7 @@
       .col-lg-9
         %legend
           Your Match History
-        - @hash = [1,2,3,4,5]
-        - @hash.each do |k, v|
-          = render 'match'
+          = render partial: 'match', collection: current_user.summoner.game_stats, as: :match
 
         :javascript
           $('.has-tooltip').tooltip()

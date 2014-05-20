@@ -2,6 +2,8 @@ class GameStats < ActiveRecord::Base
   
   belongs_to :summoner
 
+  belongs_to :played_champion, class_name: 'Champion', foreign_key: :played_champion_id
+
   serialize :raw, Hash
 
   class << self
@@ -28,6 +30,26 @@ class GameStats < ActiveRecord::Base
       counts
     end
 
+    def determine_played_champions
+      games = where(played_champion_id:nil).to_a
+      champ_riot_ids = games.map { |g| g.raw['championId'] }
+      champs = Champion.where(riot_id: champ_riot_ids).to_a
+      games.each do |game|
+        champs.find { |c| c.riot_id == game.raw['championId'] }.tap do |champ|
+          game.update(played_champion_id: champ.id) if champ
+        end
+      end
+    end
+
+  end
+
+  def won?
+    raw['stats']['win']
+  end
+
+  def played_at
+    #raw['createDate']
+    Time.at(raw['createDate']/1000).to_datetime
   end
 
 end
