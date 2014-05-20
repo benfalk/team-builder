@@ -75,10 +75,8 @@
             %p.bio
               = current_user.short_bio.html_safe
           .col-lg-5.champ-list-short
-            = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-            = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-            = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-            = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+            - current_user.favorite_champions.each do |champ|
+              = image_tag champ.avatar_url
 
       .col-lg-3.right-Well
         %canvas#canvas{:height => "250", :width => "250", style:'margin-left: -16px;'}
