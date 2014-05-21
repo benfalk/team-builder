@@ -14,7 +14,7 @@ class GameStats < ActiveRecord::Base
       games = LOL::Api::Client.new.game_recent_by_id(summoner.riot_uid)['games']
       games.each do |game|
         game_stats = GameStats.where(riot_game_uid: game['gameId'], summoner_id: summoner.id).first_or_create
-        game_stats.update(raw: game)
+        game_stats.update(raw: game, played_champion_id: Champion.convert_riot_id(game['championId']))
       end
     end
 
