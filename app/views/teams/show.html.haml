@@ -76,7 +76,7 @@
       %br
       %legend
         Match History
-      No match history at this time.
+      = render partial: 'match', collection: @team.games.order(played_at: :desc), as: :match
 
 
 
