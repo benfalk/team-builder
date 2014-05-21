@@ -15,6 +15,12 @@ gem 'momentjs-rails'
 gem 'carrierwave'
 gem 'rmagick'
 
+# Background processing system
+gem 'sidekiq'
+
+# Background scheduled task system that works with Sidekiq
+gem 'sidetiq', git: 'https://github.com/tobiassvn/sidetiq'
+
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -45,6 +51,7 @@ group :development do
   gem 'mailcatcher'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'foreman'
 end
 
 # Use ActiveModel has_secure_password

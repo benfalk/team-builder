@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
+  after_create do
+    GameBuilder.perform_async(summoner_id)
+  end
+
   def attempt_summoner_verification
     summoner.verify_account! unless summoner.nil? or summoner.verified?
   end
