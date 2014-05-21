@@ -99,6 +99,29 @@
         No teammates yet, Join or create a team.
 
       .col-lg-9
+
+
+
+
+
+
+
+
+
+
+        = render 'play_calender'
+
+
+
+
+
+
+
+
+
+
+
+
         %legend
           Your Match History
           = render partial: 'match', collection: current_user.summoner.game_stats, as: :match
