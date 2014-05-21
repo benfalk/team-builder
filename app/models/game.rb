@@ -8,9 +8,12 @@ class Game < ActiveRecord::Base
     
     def from_stats(stats)
       game = Game.where(riot_id: stats.riot_game_uid).first_or_create
-      Summoner.harvest_summoners(stats.summoner.region, stats.summoner_riot_ids)
+      if game.summoners.empty?
+        Summoner.harvest_summoners(stats.summoner.region, stats.summoner_riot_ids)
+      end
       GameStats.where(riot_game_uid: stats.riot_game_uid).update_all(game_id: game.id)
-      game
+      game.bind_to_summoners
+      game.update(played_at: stats.played_at)
     end
 
   end
@@ -24,8 +27,8 @@ class Game < ActiveRecord::Base
   def overview
     @_overview ||= begin
       players = all_players.sort_by { |p| p['teamId'] }
-      _summoners = summoners
-      _stats = game_stats
+      _summoners = summoners.to_a
+      _stats = game_stats.to_a
       players.each do |player|
         player['stats'] = _stats.find{|s| player['summonerId'] == s.summoner.riot_uid}
         player['champion'] = champions.find{|c| c.riot_id == player['championId']}

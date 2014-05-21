@@ -19,12 +19,12 @@ class Summoner < ActiveRecord::Base
     return if missing.empty?
     summoners = LOL::Api::Client.new.summoner_by_ids(missing)
     summoners.each_pair do |id,data|
-      Summoner.new( riot_uid: data['id'],
+      Summoner.create!( riot_uid: data['id'],
                       name: data['name'].downcase,
                       level: data['summonerLevel'],
-                      region: region ).save(validate: false)
-      sleep 5
+                      region: region )
     end
+    sleep 1
   end
 
   def self.raw_create(data)
@@ -33,7 +33,7 @@ class Summoner < ActiveRecord::Base
 
   validates_presence_of :name, :region
 
-  validate :validate_summoner_name, on: :create
+  #validate :validate_summoner_name, on: :create
 
   has_one :user
 
@@ -45,7 +45,7 @@ class Summoner < ActiveRecord::Base
 
   before_create :create_verify_string
 
-  after_create :fetch_riot_info, :populate_stats_summary, :boot_game_stats
+  #after_create :fetch_riot_info, :populate_stats_summary, :boot_game_stats
 
   def create_verify_string
     self.verify_string = Array.new(18){ rand(36).to_s(36) }.join
@@ -68,6 +68,12 @@ class Summoner < ActiveRecord::Base
     if ! verified? && page_names.any? { |name| name == verify_string }
       update(verified: true)
     end
+  end
+
+  def update_from_api!
+    fetch_riot_info
+    populate_stats_summary
+    boot_game_stats
   end
 
   private

@@ -21,7 +21,7 @@ class Team < ActiveRecord::Base
   end
 
   def games
-    Game.where(id: game_ids)
+    Game.where(id: game_ids).includes(:summoners,{game_stats:[:summoner]})
   end
 
 end
