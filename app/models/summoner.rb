@@ -48,7 +48,7 @@ class Summoner < ActiveRecord::Base
   #after_create :fetch_riot_info, :populate_stats_summary, :boot_game_stats
 
   def create_verify_string
-    self.verify_string = Array.new(18){ rand(36).to_s(36) }.join
+    self.verify_string = Array.new(18){ rand(36).to_s(36) }.join.upcase
   end
 
   def name_found?
