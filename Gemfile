@@ -52,6 +52,7 @@ group :development do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'foreman'
+  gem 'capistrano-rails'
 end
 
 # Use ActiveModel has_secure_password
