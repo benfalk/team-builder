@@ -15,6 +15,7 @@ gem 'momentjs-rails'
 gem 'carrierwave'
 gem 'rmagick'
 
+gem 'pg'
 gem 'capistrano3-puma'
 
 # Background processing system
