@@ -6,6 +6,18 @@ class Game < ActiveRecord::Base
 
   class << self
     
+    def amount_played_by_day
+      result = group("DATE(played_at)").count
+      case ActiveRecord::Base.connection.adapter_name
+        when 'SQLite'
+          result
+        when 'PostgreSQL'
+          result.to_a.map { |a| [a[0].strftime('%Y-%m-%d'),a[1]] }.to_h
+        else
+          result
+      end
+    end
+
     def from_stats(stats)
       game = Game.where(riot_id: stats.riot_game_uid).first_or_create
       if game.summoners.empty?
