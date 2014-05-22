@@ -8,7 +8,7 @@ set :repo_url, 'git@github.com:benfalk/team-builder.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-# set :deploy_to, '/var/www/my_app'
+set :deploy_to, "/home/deployer/#{fetch(:application)}"
 
 # Default value for :scm is :git
 # set :scm, :git
