@@ -22,12 +22,16 @@
                 * #{msg}
 
       .row
-        .col-lg-2
+        .col-lg-3
           .fileupload
             = f.file_field :avatar
-            #user_avatar_preview.profile-pic-square
-              %i.fa.fa-picture-o{style:'font-size:5em;'}
-              Team Avatar
+            - unless @team.avatar_url.blank?
+              #user_avatar_preview.team-avatar
+                = image_tag @team.avatar_url
+            - else
+              #user_avatar_preview.team-pic-square
+                %i.fa.fa-picture-o{style:'font-size:5em;'}
+                Team Avatar
             :javascript
               function readURL(input) {
 
@@ -38,14 +42,14 @@
                           $('#user_avatar_preview').css(
                           {'background-image':'url('+e.target.result+')',
                           'border': 'none'}
-                          ).html('')
+                          ).html('').addClass('team-avatar')
                       }
 
                       reader.readAsDataURL(input.files[0]);
                   }
               }
 
-              $("#user_avatar").change(function(){
+              $("#team_avatar").change(function(){
                   readURL(this);
               });
 
@@ -60,7 +64,7 @@
               %label.col-lg-3.control-label{autofocus: true} About Us
               .col-lg-9
                 = f.text_area :about_us, class: 'form-control'
-        .col-lg-5
+        .col-lg-4
           %fieldset
             .form-group
               %label.col-lg-3.control-label Play Style
