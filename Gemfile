@@ -5,7 +5,7 @@ gem 'rails', '4.1.0'
 gem 'font-awesome-rails'
 gem 'haml-rails'
 gem 'devise'
-gem 'puma', '~> 2.1.0'
+gem 'puma', '~> 2.8'
 gem 'select2-rails'
 gem 'simple_form'
 gem 'nested_form'
@@ -14,6 +14,8 @@ gem 'underscore-rails'
 gem 'momentjs-rails'
 gem 'carrierwave'
 gem 'rmagick'
+
+gem 'capistrano3-puma'
 
 # Background processing system
 gem 'sidekiq'
