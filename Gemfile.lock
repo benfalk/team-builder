@@ -141,7 +141,7 @@ GEM
     net-ssh (2.9.1)
     orm_adapter (0.5.0)
     polyglot (0.3.4)
-    puma (2.1.1)
+    puma (2.8.2)
       rack (>= 1.1, < 2.0)
     rack (1.5.2)
     rack-protection (1.5.3)
@@ -271,7 +271,7 @@ DEPENDENCIES
   mailcatcher
   momentjs-rails
   nested_form
-  puma (~> 2.1.0)
+  puma (~> 2.8)
   rails (= 4.1.0)
   rmagick
   rspec-rails
