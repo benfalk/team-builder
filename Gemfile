@@ -55,6 +55,7 @@ group :development do
   gem 'factory_girl_rails'
   gem 'foreman'
   gem 'capistrano-rails'
+  gem 'capistrano-sidekiq'
 end
 
 # Use ActiveModel has_secure_password
