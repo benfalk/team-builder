@@ -506,3 +506,30 @@ table.team-builder-table {
 
  }
 }
+
+// TEAM
+
+table.team-table {
+  tr td {
+    color: #f0ad4e;
+  }
+}
+
+table.matches {
+  tr{
+//    opacity: 0.2;
+    &.friend {
+//      opacity: 1;
+      color: #f0ad4e;
+    }
+  }
+}
+
+.empty-item {
+  display: inline-block;
+  border: 1px solid #636568;
+  width: 13px;
+  height: 13px;
+  margin: 1px;
+  vertical-align: middle;
+}

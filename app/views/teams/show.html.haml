@@ -32,7 +32,7 @@
         %a.btn.pull-right Edit
         = @team.name
 
-      %table.table
+      %table.table.team-table
         %thead
           %tr
             %th Team Roster
@@ -45,7 +45,7 @@
         %tbody
           - team_ids = []
           - @team.team_memberships.each do |tm|
-            - team_ids.push(tm.id)
+            - team_ids.push(tm.summoner_id)
             %tr
               %td 
                 = tm.summoner.name
