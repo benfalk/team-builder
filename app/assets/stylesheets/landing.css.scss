@@ -509,10 +509,33 @@ table.team-builder-table {
 
 // TEAM
 
+.team-avatar {
+  overflow: hidden;
+  height: 181px;
+  margin: 9px 0;
+  border-radius: 10px;
+  background-position: center;
+  background-size: contain;
+}
+
+.team-pic-square {
+  text-align: center;
+  padding: 30px 68px;
+  border: 1px dashed #fff;
+  border-radius: 10px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 160px;
+  width: 248px;
+  overflow: hidden;
+}
+
 table.team-table {
   tr td {
     color: #f0ad4e;
   }
+  min-height: 123px;
 }
 
 table.matches {

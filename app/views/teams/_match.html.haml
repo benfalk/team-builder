@@ -30,8 +30,14 @@
             %i.fa.fa-user
             = p['summoner'].name
           %td
-            %img{src:"http://lkimg.zamimg.com/images/spells/#{ p['stats'].raw['spell1'] if p['stats'] }.png", style:'width:15px'}
-            %img{src:"http://lkimg.zamimg.com/images/spells/#{ p['stats'].raw['spell2'] if p['stats'] }.png", style:'width:15px'}
+            - ['spell1','spell2'].each do |i|
+              - if p['stats']
+                - unless p['stats'].raw['stats'][i].blank?
+                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ p['stats'].raw[i] if p['stats'] }.png", style:'width:15px'}
+                - else
+                  .empty-item
+              - else
+                .empty-item
           %td
             = p['stats'].raw['stats']['item0'] if p['stats']
           %td
@@ -67,17 +73,25 @@
             %i.fa.fa-user
             = p['summoner'].name
           %td
-            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
-            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
-          %td 2/12/10
+            - ['spell1','spell2'].each do |i|
+              - if p['stats']
+                - unless p['stats'].raw['stats'][i].blank?
+                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ p['stats'].raw[i] if p['stats'] }.png", style:'width:15px'}
+                - else
+                  .empty-item
+              - else
+                .empty-item
           %td
-            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
-            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
-            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
-            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
-            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
-            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
-            %img{src:'http://lkimg.zamimg.com/images/spells/4.png', style:'width:15px'}
+            = p['stats'].raw['stats']['item0'] if p['stats']
+          %td
+            - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
+              - if p['stats']
+                - unless p['stats'].raw['stats'][i].blank?
+                  %img{src:"http://lkimg.zamimg.com/shared/riot/images/items/#{p['stats'].raw['stats'][i] if p['stats']}_32.png", style:'width:15px'}
+                - else
+                  .empty-item
+              - else
+                .empty-item
           %td 9k
           %td 72
           %td 00
@@ -95,7 +109,7 @@
   .row
     .col-lg-4
       .lolr
-        %img{src:'/assets/lolr.png', style:'width:130px'}
+        = image_tag 'lolr.png', style:'width:130px'
         %br
         %i.fa.fa-arrow-up
         Upload lolreplay for archives.

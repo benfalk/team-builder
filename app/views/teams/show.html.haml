@@ -1,10 +1,13 @@
 .container.page-top-pad
   .row.page-top-pad
     .col-lg-3
+      - unless @team.avatar_url.blank?
+        .team-avatar{style:"background-image:url(#{@team.avatar_url})"}
+
       %legend Team Comm
       - participants = ['echo123','benjamin.falk','changingworld358']
       %a.skype-button{:href => "skype:#{participants.join(';')}?call&topic=Team%20Call", title:" Conference: #{participants.join(', ')}", 'data-placement'=>"top"}
-        %img{src:'/assets/skype.png'}
+        = image_tag 'skype.png'
         Start Group Call
       :javascript
         $('.skype-button').tooltip()
@@ -30,7 +33,7 @@
       %legend
         = link_to 'Add Summoner', new_team_membership_path(@team), class: 'btn pull-right'
         %a.btn.pull-right Edit
-        = @team.name
+        = @team.name.upcase
 
       %table.table.team-table
         %thead
@@ -68,7 +71,9 @@
 
       .row
         .col-lg-12
-          No chart data at this time.
+          %legend
+            Gold Per Minute
+          = render 'gold_chart'
 
 
 
