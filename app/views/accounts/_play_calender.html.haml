@@ -1,29 +1,29 @@
 
 :css
   #cal {
-    font: 10px sans-serif;
-    shape-rendering: crispEdges;
-    margin-top:10px;
+  font: 10px sans-serif;
+  shape-rendering: crispEdges;
+  margin-top:10px;
   }
 
   .day {
-    fill: #3f5060;
-    stroke: #2b3e50;
-    stroke-width: 1;
+  fill: #3f5060;
+  stroke: #2b3e50;
+  stroke-width: 1;
   }
 
   .month {
-    fill: none;
-    stroke: #fff;
-    stroke-width: 1;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1;
   }
 
   .month-name {
-    fill:  #AAACAF;
+  fill:  #AAACAF;
   }
 
   .day-name {
-    fill:  #AAACAF;
+  fill:  #AAACAF;
   }
 
   .RdYlGn .g0{fill:rgba(63, 80, 96, 0.7);}
@@ -62,20 +62,21 @@
   margin-right:5px;
   }
 
-   .contrib-legend .legend li {
-   display: inline-block;
-   width: 10px;
-   height: 10px;
-   }
+  .contrib-legend .legend li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  }
+
+  .tipsy { font-size: 10px; position: absolute; padding: 5px; z-index: 100000; }
+  .tipsy-inner { background-color: #000; color: #FFF; max-width: 200px; padding: 5px 8px 4px 8px; text-align: center; overflow:hidden; }
+
+  /* Rounded corners */
+  .tipsy-inner { border-radius: 3px; }
 
 
-    -##tooltip {
-    -#  position: absolute;
-    -#  left: 200px;
-    -#  top: 94px;
-    -#}
 #cal
--##tooltip
+
 :javascript
   var width = 850,
      height = 140,
@@ -89,7 +90,6 @@
     format = d3.time.format("%Y-%m-%d"),
     currentDate  = new Date(),
     endDate    = new Date();
-
     endDate.setTime(currentDate.getTime() - (365 * 24 * 60 * 60 * 1000));
 
   var svg = d3.select("#cal").selectAll("svg")
@@ -120,9 +120,6 @@
      .text('F');
 
 
-
-
-  // days start
   var first_day = parseInt(day(endDate))
 
   var rect = svg.selectAll(".day")
@@ -135,11 +132,6 @@
      .attr("y", function(d) {  return day(d) * cellSize; })
      .datum(format)
 
-  rect.append("title")
-     .text(function(d) { return d; });
-
-  $(rect).tooltip()
-
   rect.attr("class", function(d) {
     if(data[d]){
       return "day g" + (data[d]<9 || data[d]==15 || data[d]==20 ? data[d] : 9 );
@@ -147,10 +139,7 @@
       return "day g0"
     }
   })
-  //.on('mouseover', hover)
-  .select("title")
-     .text(function(d) { return d + ": " + (data[d] ? data[d] : 0) + " Games"; });
-
+  .attr("title", function(d) { return d + "&nbsp;&nbsp;&nbsp;" + (data[d] ? data[d] : 0) + " Games";})
 
   var month = svg.selectAll(".month")
     .data(function(d) { return d3.time.months(new Date(d[0]), new Date(d[1])); })
@@ -162,24 +151,20 @@
     .style("text-anchor", "middle")
     .text(function(d) { return month(d); });
 
-  // add a baseline
     d3.select('#baseline')
       .style('width', data.length*22 + 'px');
 
-
-  //// tooltip
-  //function hover(d) {
-  //  d3.select("#tooltip")
-  //    .html(d.item + "<br/><span style='color:#444'>" + d + "</span>");
-  //}
-
+  $('svg rect').tipsy({
+    gravity: 'w',
+    html: true
+  });
 
 
 
 .contrib-footer.clearfix
   .contrib-info
-    Summary of games played each day.
-  .contrib-legend{:title => "A summary of pull requests, issues opened, and commits to the default and gh-pages branches."}
+    Summary of games played per day.
+  .contrib-legend{:title => "Summary of games played per day."}
     %span Less
     %ul.legend
       %li{:style => "background-color: rgba(63, 80, 96, 0.9)"}
