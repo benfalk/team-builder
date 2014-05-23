@@ -124,7 +124,7 @@
 
         %legend
           Your Match History
-          = render partial: 'match', collection: current_user.summoner.game_stats, as: :match
+          = render partial: 'match', collection: @game_stats, as: :match
 
         :javascript
           $('.has-tooltip').tooltip()
