@@ -109,7 +109,7 @@
 
 
 
-        = render 'play_calender'
+        = render partial:'play_calender', locals:{data: current_user.summoner.games.amount_played_by_day}
 
 
 
