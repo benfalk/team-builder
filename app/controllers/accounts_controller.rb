@@ -25,7 +25,7 @@ class AccountsController < ApplicationController
   end
 
   def overview
-    @game_stats = current_user.summoner.game_stats.includes({game:[:summoners]},:played_champion)    
+    @game_stats = current_user.summoner.game_stats.includes({game:[:summoners]},:played_champion).order(played_at: :desc)
   end
 
   private

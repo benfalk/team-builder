@@ -14,7 +14,10 @@ class GameStats < ActiveRecord::Base
       games = LOL::Api::Client.new.game_recent_by_id(summoner.riot_uid)['games']
       games.each do |game|
         game_stats = GameStats.where(riot_game_uid: game['gameId'], summoner_id: summoner.id).first_or_create
-        game_stats.update(raw: game, played_champion_id: Champion.convert_riot_id(game['championId']))
+        game_stats.raw = game
+        game_stats.played_champion_id = Champion.convert_riot_id(game['championId'])
+        game_stats.determine_played_at
+        game_stats.save
       end
     end
 
@@ -45,12 +48,16 @@ class GameStats < ActiveRecord::Base
 
   end
 
+  def determine_played_at
+   self.played_at = played_at
+  end
+
   def won?
     raw['stats']['win']
   end
 
   def played_at
-    Time.at(raw['createDate']/1000).to_datetime
+    super || Time.at(raw['createDate']/1000).to_datetime
   end
 
   def summoner_riot_ids
