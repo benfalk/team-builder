@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140523163941) do
+ActiveRecord::Schema.define(version: 20140523185843) do
 
   create_table "champion_preferences", force: true do |t|
     t.integer  "user_id"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 20140523163941) do
 
   add_index "games_summoners", ["summoner_id", "game_id"], name: "index_games_summoners_on_summoner_id_and_game_id", unique: true
 
+  create_table "notifications", force: true do |t|
+    t.text     "message"
+    t.string   "notification_type"
+    t.integer  "source_id"
+    t.integer  "source_type"
+    t.integer  "stream_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "role_preferences", force: true do |t|
     t.integer  "user_id"
     t.integer  "role_id"
@@ -69,6 +79,13 @@ ActiveRecord::Schema.define(version: 20140523163941) do
   create_table "roles", force: true do |t|
     t.string   "map"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "streams", force: true do |t|
+    t.integer  "owner_id"
+    t.string   "owner_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

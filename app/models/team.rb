@@ -1,5 +1,7 @@
 class Team < ActiveRecord::Base
 
+  include StreamOwner
+
   CUSTOM_SQL = '
     SELECT 
       game_id

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :teams do
     resources :memberships, except:[:show]
+    resources :notifications, controller: :team_notifications
   end
 
   root 'pages#index'

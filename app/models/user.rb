@@ -2,7 +2,9 @@ require "#{Rails.root}/app/uploaders/avatar_uploader"
 
 class User < ActiveRecord::Base
 
-  GAMING_TIME_OPTIONS = {
+ include StreamOwner
+
+ GAMING_TIME_OPTIONS = {
     'Nights & Weekends'=> 'nights_and_weekends',
     'All Day Everyday'=> 'all_day_everyday',
     'Weekends Only'=> 'weekends_only',
