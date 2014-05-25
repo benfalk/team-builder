@@ -26,8 +26,7 @@
           .fileupload
             = f.file_field :avatar
             - unless @team.avatar_url.blank?
-              #user_avatar_preview.team-avatar
-                = image_tag @team.avatar_url
+              #user_avatar_preview.team-avatar{style:"background-image:url(#{@team.avatar_url})"}
             - else
               #user_avatar_preview.team-pic-square
                 %i.fa.fa-picture-o{style:'font-size:5em;'}
@@ -70,10 +69,10 @@
               %label.col-lg-3.control-label Play Style
               .col-lg-9
                 %label.radio-inline
-                  = f.radio_button :play_style, 'competitive', checked: true
+                  = f.radio_button :play_style, 'competitive', checked: @team.play_style == 'competitive' ?  true : false
                   Competitive
                 %label.radio-inline
-                  = f.radio_button :play_style, 'casual'
+                  = f.radio_button :play_style, 'casual', checked: @team.play_style == 'casual' ?  true : false
                   Casual
 
             .form-group

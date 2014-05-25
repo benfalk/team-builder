@@ -1,7 +1,28 @@
 class TeamsController < ApplicationController
   
   before_action :authenticate_user!, only:[:new,:create,:edit]
-  
+
+  def edit
+    @team = Team.including_membership_data.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json { render json: @team }
+    end
+  end
+
+  def update
+    @team = Team.including_membership_data.find(params[:id])
+    respond_to do |format|
+      if @team.update(team_create_params)
+        format.html { redirect_to team_url(params[:id]), alert: 'Team updated' }
+        format.json { render json: { success: true } }
+      else
+        format.html { render edit_team_path(params[:id]) }
+        format.json { render json: { success: false, errors: @team.errors.full_messages } }
+      end
+    end
+  end
+
   def new
     @team = Team.new
   end
@@ -38,7 +59,7 @@ class TeamsController < ApplicationController
     ).permit(
       :avatar,
       :name,
-      :game_style,
+      :play_style,
       :about_us
     )
   end

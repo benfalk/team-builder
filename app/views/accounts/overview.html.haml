@@ -29,9 +29,9 @@
               .col-lg-4
                 %h2
                   = current_user.summoner.name
-              .col-lg-1{style:'padding-top:12px;'}
-                HEAT:
-              .col-lg-7{style:'padding-top:10px;'}
+              .col-lg-2{style:'padding-top:12px;'}
+                Gold/Minute:
+              .col-lg-5{style:'padding-top:10px;'}
                 .progress{style:'background-color:#46525E; height:16px;'}
                   .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "80", role: "progressbar", style: "width: 80%"}
                     %span.sr-only 80% Complete
@@ -191,10 +191,6 @@
       .col-lg-9
         = render partial:'play_calender', locals:{data: current_user.summoner.games.amount_played_by_day}
 
-
-
-
-
         %legend
           Your Match History
         = render partial: 'match', collection: @game_stats, as: :match
@@ -212,7 +208,7 @@
     %br
     %br
     %br
-    = debug current_user
-    = debug current_user.summoner
-    = debug current_user.summoner.stats_summary.raw
+    -#= debug current_user
+    -#= debug current_user.summoner
+    -#= debug current_user.summoner.stats_summary.raw
 

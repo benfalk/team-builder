@@ -72,7 +72,7 @@
 
       - match.bottom_team.each do |p|
 
-        -#= debug p['stats'].raw['stats'] if p['stats']
+        = debug p
         %tr{class:"#{ 'friend' if team_ids.include? p['summoner'].id }"}
           %td
             %i.fa.fa-user
