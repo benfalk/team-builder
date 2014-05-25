@@ -49,7 +49,7 @@
             %th
             %th KDA
             %th Role
-            %th Skill
+            %th GOLD/MINUTE
         %tbody
           - team_ids = []
           - @team.team_memberships.each do |tm|
@@ -66,12 +66,10 @@
               %td 2
               %td 
                 = tm.role.try(:name)
-              %td{style:'width:200px'}
+              %td{style:'width:150px'}
                 .progress
                   .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => '80', role: 'progressbar', style: 'width: 80%'}
                     %span.sr-only 80% Complete
-
-
 
 
       .row
@@ -79,9 +77,6 @@
           %legend
             Gold Per Minute
           = render 'gold_chart'
-
-
-
 
 
       %br

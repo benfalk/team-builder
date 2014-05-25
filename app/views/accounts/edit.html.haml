@@ -109,8 +109,12 @@
               %label.radio-inline
                 = f.radio_button :play_style, 'casual'
                 Casual
+
+
           .form-group
             %label.col-lg-3.control-label{:for => "select"} Favorite Champs
+
+
             .col-lg-9
               .col-lg-3
                 %select#summoner-select-1.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
@@ -128,7 +132,6 @@
                 %select#summoner-select-4.js-summoner-picker.summoner-picker-old{name:'favorite_champs[]'}
                   %option
 
-
             :javascript
 
               buildSummonersoptionsList($('.js-summoner-picker'))
@@ -145,10 +148,14 @@
 
 
               var gameChamps = []
-
-            - @summoner.game_stats.each do |game|
-              :javascript
-                gameChamps.push(#{game.raw['championId']})
+            - unless current_user.favorite_champions
+              - @summoner.game_stats.each do |game|
+                :javascript
+                  gameChamps.push(#{game.raw['championId']})
+            - else
+              - current_user.favorite_champions.each do |champ|
+                :javascript
+                  gameChamps.push(#{champ.riot_id})
 
             :javascript
               var i=1

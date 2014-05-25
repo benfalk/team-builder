@@ -89,11 +89,16 @@
     percent = d3.format(".1%"),
     format = d3.time.format("%Y-%m-%d"),
     currentDate  = new Date(),
+    startDate  = new Date(),
     endDate    = new Date();
+    startDate.setTime(currentDate.getTime() + (1 * 24 * 60 * 60 * 1000));
     endDate.setTime(currentDate.getTime() - (365 * 24 * 60 * 60 * 1000));
 
+    console.log([[format(endDate),format(currentDate)]])
+    console.log(data)
+
   var svg = d3.select("#cal").selectAll("svg")
-     .data([[format(endDate),format(currentDate)]])
+     .data([[format(endDate),format(startDate)]])
    .enter().append("svg")
      .attr("width", width)
      .attr("height", height)
@@ -133,6 +138,7 @@
      .datum(format)
 
   rect.attr("class", function(d) {
+    console.log(d, data[d])
     if(data[d]){
       return "day g" + (data[d]<9 || data[d]==15 || data[d]==20 ? data[d] : 9 );
     }else{

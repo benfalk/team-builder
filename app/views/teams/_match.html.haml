@@ -1,13 +1,13 @@
 .match
   .row.well{style:'margin:2px; padding:15px 0'}
-    .col-lg-2
-      -#= image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png', class:'champ'
-    .col-lg-3{style:'text-align:left; color:#d9534f; padding-top:8px;'}
-      %strong LOSE
-    .col-lg-3{style:'text-align:center; padding-top:8px;'} 
-    .col-lg-4{style:'text-align:right; padding-top:8px;'}
+    .col-lg-6
+      %span{style:"color:#5CB85C"}
+        WIN
+      &nbsp;&nbsp;&nbsp;
+      Summoners Rift
+    .col-lg-6{style:'text-align:right;'}
       = match.played_at.strftime('%a, %b %-d | %l:%M%p')
-
+  -#= debug match
   %table.table.matches
     %thead
       %tr
@@ -19,47 +19,50 @@
         %th CREEPS
         %th WARDS
         %th DAMAGE
-        %th ROLE
+        %th GOLD/MIN
     %tbody
       - match.top_team.each do |p|
-
-        -#= debug p['stats'].raw['spell1'] if p['stats']
-
         %tr{class:"#{ 'friend' if team_ids.include? p['summoner'].id }"}
           %td
             %i.fa.fa-user
             = p['summoner'].name
-          %td
-            - ['spell1','spell2'].each do |i|
-              - if p['stats']
-                - unless p['stats'].raw['stats'][i].blank?
-                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ p['stats'].raw[i] if p['stats'] }.png", style:'width:15px'}
-                - else
-                  .empty-item
-              - else
-                .empty-item
-          %td
-            = p['stats'].raw['stats']['item0'] if p['stats']
-          %td
-            - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
-              - if p['stats']
-                - unless p['stats'].raw['stats'][i].blank?
-                  %img{src:"http://lkimg.zamimg.com/shared/riot/images/items/#{p['stats'].raw['stats'][i] if p['stats']}_32.png", style:'width:15px'}
-                - else
-                  .empty-item
-              - else
-                .empty-item
-          %td 9k
-          %td 72
-          %td 00
-          %td 9.5k
-          %td{style:'width:200px'}
-            .progress
-              .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => '80', role: 'progressbar', style: 'width: 80%'}
-                %span.sr-only 80% Complete
-          %td
 
-          %td
+          - if p['stats']
+            - raw = p['stats'].raw
+            - raws = raw['stats']
+            %td
+              - ['spell1','spell2'].each do |i|
+                - unless raw[i].blank?
+                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ raw[i] }.png", style:'width:24px'}
+                - else
+                  .empty-item
+            %td
+              = "#{raws['championsKilled']}/#{raws['numDeaths']}/#{raws['assists']}"
+            %td
+              - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
+
+                - unless raws[i].blank?
+                  %img{src:"http://lkimg.zamimg.com/shared/riot/images/items/#{raws[i]}_32.png"}
+                - else
+                  .empty-item
+            %td
+              = raws['goldEarned']
+            %td
+              = raws['minionsKilled']
+            %td
+              = raws['wardPlaced']
+            %td
+              = raws['totalDamageDealt']
+            %td
+              .progress
+                .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => '80', role: 'progressbar', style: 'width: 80%'}
+                  %span.sr-only 80% Complete
+          - else
+            %td.no-data{colspan:'9'}
+              No Data for this summoner
+          -#%td
+          -#
+          -#%td
 
 
 
@@ -68,42 +71,50 @@
           %hr
 
       - match.bottom_team.each do |p|
+
+        -#= debug p['stats'].raw['stats'] if p['stats']
         %tr{class:"#{ 'friend' if team_ids.include? p['summoner'].id }"}
           %td
             %i.fa.fa-user
             = p['summoner'].name
-          %td
-            - ['spell1','spell2'].each do |i|
-              - if p['stats']
-                - unless p['stats'].raw['stats'][i].blank?
-                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ p['stats'].raw[i] if p['stats'] }.png", style:'width:15px'}
+
+          - if p['stats']
+            - raw = p['stats'].raw
+            - raws = raw['stats']
+            %td
+              - ['spell1','spell2'].each do |i|
+                - unless raw[i].blank?
+                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ raw[i] }.png", style:'width:24px'}
                 - else
                   .empty-item
-              - else
-                .empty-item
-          %td
-            = p['stats'].raw['stats']['item0'] if p['stats']
-          %td
-            - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
-              - if p['stats']
-                - unless p['stats'].raw['stats'][i].blank?
-                  %img{src:"http://lkimg.zamimg.com/shared/riot/images/items/#{p['stats'].raw['stats'][i] if p['stats']}_32.png", style:'width:15px'}
+            %td
+              = "#{raws['championsKilled']}/#{raws['numDeaths']}/#{raws['assists']}"
+            %td
+              - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
+
+                - unless raws[i].blank?
+                  %img{src:"http://lkimg.zamimg.com/shared/riot/images/items/#{raws[i]}_32.png"}
                 - else
                   .empty-item
-              - else
-                .empty-item
-          %td 9k
-          %td 72
-          %td 00
-          %td 9.5k
-          %td{style:'width:200px'}
-            .progress
-              .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => '80', role: 'progressbar', style: 'width: 80%'}
-                %span.sr-only 80% Complete
-          %td
-            %i.fa.fa-plus.has-tooltip{style:'color:#5cb85c', 'data-placement' => 'top', 'data-toggle' => 'tooltip', title: 'Request Comrade'}
-          %td
-            %i.fa.fa-minus-circle.has-tooltip{style:'color:#d9534f', 'data-placement' => 'top', 'data-toggle' => 'tooltip', title: 'Mark Foe'}
+            %td
+              = raws['goldEarned']
+            %td
+              = raws['minionsKilled']
+            %td
+              = raws['wardPlaced']
+            %td
+              = raws['totalDamageDealt']
+            %td
+              .progress
+                .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => '80', role: 'progressbar', style: 'width: 80%'}
+                  %span.sr-only 80% Complete
+          - else
+            %td.no-data{colspan:'9'}
+              No Data for this summoner
+          -#%td
+          -#  %i.fa.fa-plus.has-tooltip{style:'color:#5cb85c', 'data-placement' => 'top', 'data-toggle' => 'tooltip', title: 'Request Comrade'}
+          -#%td
+          -#  %i.fa.fa-minus-circle.has-tooltip{style:'color:#d9534f', 'data-placement' => 'top', 'data-toggle' => 'tooltip', title: 'Mark Foe'}
 
 
   .row

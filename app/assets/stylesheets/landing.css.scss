@@ -222,9 +222,10 @@
 
 
 
+
 .lolr {
   text-align: center;
-  padding: 50px 0;
+  padding: 28px 0;
   border: 1px dashed #fff;
   border-radius: 10px;
 }
@@ -541,11 +542,29 @@ table.team-table {
 }
 
 table.matches {
+  img {
+    width: 23px;
+    display: inline-block;
+    margin-right: 3px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
   tr{
 //    opacity: 0.2;
     &.friend {
 //      opacity: 1;
       color: #f0ad4e;
+    }
+    td {
+      font-size: 1.3em;
+      .progress {
+        width: 100px;
+      }
+      &.no-data {
+        font-size: 1.1em;
+        color: #697a86;
+        text-align: left;
+      }
     }
   }
 }
