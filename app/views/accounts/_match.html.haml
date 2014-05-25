@@ -9,7 +9,7 @@
           %span{style:"color:#{match.won? ? '#5CB85C' : '#D9534F'}"}
             = match.won? ? 'WIN' : 'LOSS'
           &nbsp;&nbsp;&nbsp;
-          Summoners Rift
+          = match.map_name
 
           .items
             - ['spell1','spell2'].each do |i|

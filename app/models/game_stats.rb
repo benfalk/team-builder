@@ -1,5 +1,15 @@
 class GameStats < ActiveRecord::Base
   
+  MAP_NAMES = {
+    1 => "Summoner's Rift",
+    2 => "Summoner's Rift",
+    3 => "The Proving Grounds",
+    4 => "Twisted Treeline",
+    8 => "The Crystal Scar",
+    10 => "Twisted Treeline",
+    12 => "Howling Abyss"
+  }
+  
   belongs_to :summoner
 
   belongs_to :played_champion, class_name: 'Champion', foreign_key: :played_champion_id
@@ -62,6 +72,10 @@ class GameStats < ActiveRecord::Base
 
   def summoner_riot_ids
     raw['fellowPlayers'].map { |p| p['summonerId'] }
+  end
+
+  def map_name
+    MAP_NAMES.fetch(map_id){ 'Unkown' }
   end
 
 end
