@@ -719,7 +719,6 @@ summoners =
 var getSummoner = function(id){
     return _.find(summoners, function(sumOBJ){ return sumOBJ.id == id; })
 }
-console.log(getSummoner(81))
 
 
 var buildSummonersoptionsList = function(elmt){

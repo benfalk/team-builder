@@ -94,8 +94,8 @@
     startDate.setTime(currentDate.getTime() + (1 * 24 * 60 * 60 * 1000));
     endDate.setTime(currentDate.getTime() - (365 * 24 * 60 * 60 * 1000));
 
-    console.log([[format(endDate),format(currentDate)]])
-    console.log(data)
+    //console.log([[format(endDate),format(currentDate)]])
+    //console.log(data)
 
   var svg = d3.select("#cal").selectAll("svg")
      .data([[format(endDate),format(startDate)]])
@@ -138,7 +138,7 @@
      .datum(format)
 
   rect.attr("class", function(d) {
-    console.log(d, data[d])
+    //console.log(d, data[d])
     if(data[d]){
       return "day g" + (data[d]<9 || data[d]==15 || data[d]==20 ? data[d] : 9 );
     }else{
