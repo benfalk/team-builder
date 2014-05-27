@@ -26,6 +26,7 @@ class GameStats < ActiveRecord::Base
         game_stats = GameStats.where(riot_game_uid: game['gameId'], summoner_id: summoner.id).first_or_create
         game_stats.raw = game
         game_stats.played_champion_id = Champion.convert_riot_id(game['championId'])
+        game_stats.set_fields_from_raw!
         game_stats.determine_played_at
         game_stats.save
       end
@@ -60,6 +61,13 @@ class GameStats < ActiveRecord::Base
 
   def determine_played_at
    self.played_at = played_at
+  end
+
+  def set_fields_from_raw!
+    self.game_type = raw['gameType']
+    self.sub_type = raw['subType']
+    self.game_mode = raw['gameMode']
+    self.map_id = raw['mapId']
   end
 
   def won?
