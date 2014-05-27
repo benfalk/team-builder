@@ -594,7 +594,10 @@ table.matches {
 
 .summery-stats {
   padding-top: 10px;
-  font-size: 0.8em;
+  font-size: 0.7em;
+  span {
+    color: #f0ad4e;
+  }
 }
 
 
@@ -604,7 +607,13 @@ table.matches {
   overflow: hidden;
 }
 
-
+.kda {
+  display: inline-block;
+  padding-top: 1px;
+  span {
+    color: #f0ad4e;
+  }
+}
 
 
 

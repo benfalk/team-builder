@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140525181751) do
+ActiveRecord::Schema.define(version: 20140527155329) do
 
   create_table "champion_preferences", force: true do |t|
     t.integer  "user_id"

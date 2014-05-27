@@ -24,8 +24,8 @@
       - match.top_team.each do |p|
         %tr{class:"#{ 'friend' if team_ids.include? p['summoner'].id }"}
           %td
-            %i.fa.fa-user
-            = p['summoner'].name
+            = image_tag "http://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", style:'width:26px'
+            = p['summoner'].name.capitalize
 
           - if p['stats']
             - raw = p['stats'].raw
@@ -33,7 +33,7 @@
             %td
               - ['spell1','spell2'].each do |i|
                 - unless raw[i].blank?
-                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ raw[i] }.png", style:'width:24px'}
+                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ raw[i] }.png"}
                 - else
                   .empty-item
             %td
@@ -72,11 +72,11 @@
 
       - match.bottom_team.each do |p|
 
-        = debug p
+        -#= debug p
         %tr{class:"#{ 'friend' if team_ids.include? p['summoner'].id }"}
           %td
-            %i.fa.fa-user
-            = p['summoner'].name
+            = image_tag "http://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", style:'width:26px'
+            = p['summoner'].name.capitalize
 
           - if p['stats']
             - raw = p['stats'].raw
@@ -84,7 +84,7 @@
             %td
               - ['spell1','spell2'].each do |i|
                 - unless raw[i].blank?
-                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ raw[i] }.png", style:'width:24px'}
+                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ raw[i] }.png"}
                 - else
                   .empty-item
             %td
