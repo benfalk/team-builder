@@ -30,7 +30,6 @@ class AccountsController < ApplicationController
       .game_stats.non_bot_matches
       .includes({game:[:summoners,{game_stats:[:summoner]}]},:played_champion)
       .order(played_at: :desc)
-    fresh_when([@game_stats.first, current_user])   
   end
 
   private
