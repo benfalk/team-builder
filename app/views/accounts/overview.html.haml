@@ -193,7 +193,8 @@
 
         %legend
           Your Match History
-        = render partial: 'match', collection: @game_stats, as: :match
+        - cache(@game_stats.first) do
+          = render partial: 'match', collection: @game_stats, as: :match
 
         :javascript
           $('.has-tooltip').tooltip()

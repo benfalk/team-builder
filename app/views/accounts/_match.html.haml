@@ -1,63 +1,62 @@
-- cache(match) do
-  .match
-    .row
-      .col-lg-6
-        .row
-          -#= debug match
-          .col-lg-3
+.match
+  .row
+    .col-lg-6
+      .row
+        -#= debug match
+        .col-lg-3
 
 
-            - if match.played_champion
-              = image_tag match.played_champion.avatar_url, class:'champ'
-          .col-lg-9
-            %span{style:"color:#{match.won? ? '#5CB85C' : '#D9534F'}"}
-              = match.won? ? 'WIN' : 'LOSS'
-            &nbsp;&nbsp;&nbsp;
-            = match.map_name
-
-            .items
-              - ['spell1','spell2'].each do |i|
-                - unless match.raw[i].blank?
-                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ match.raw[i] }.png", class:'overview-summoner-items'}
-                - else
-                  .empty-item
-              &nbsp;&nbsp;
-              - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
-                - unless match.raw['stats'][i].blank?
-                  %img{src:"http://lkimg.zamimg.com/shared/riot/images/items/#{match.raw['stats'][i] }_32.png", class:'overview-summoner-items'}
-                - else
-                  .empty-item
-
-        .summery-stats
-
-          = match.played_at.strftime('%a, %b %-d | %l:%M%p')
-
+          - if match.played_champion
+            = image_tag match.played_champion.avatar_url, class:'champ'
+        .col-lg-9
+          %span{style:"color:#{match.won? ? '#5CB85C' : '#D9534F'}"}
+            = match.won? ? 'WIN' : 'LOSS'
           &nbsp;&nbsp;&nbsp;
-          %span GOLD:
-          = "#{match.raw['stats']['goldEarned'].to_i/(match.raw['stats']['timePlayed']/60)}/min"
+          = match.map_name
 
-          &nbsp;&nbsp;&nbsp;
-          %span IP:
-          = match.raw['ipEarned']
+          .items
+            - ['spell1','spell2'].each do |i|
+              - unless match.raw[i].blank?
+                %img{src:"http://lkimg.zamimg.com/images/spells/#{ match.raw[i] }.png", class:'overview-summoner-items'}
+              - else
+                .empty-item
+            &nbsp;&nbsp;
+            - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
+              - unless match.raw['stats'][i].blank?
+                %img{src:"http://lkimg.zamimg.com/shared/riot/images/items/#{match.raw['stats'][i] }_32.png", class:'overview-summoner-items'}
+              - else
+                .empty-item
 
-          &nbsp;&nbsp;&nbsp;
-          .kda
-            %span KDA:
-            = "#{match.raw['stats']['championsKilled'].to_i}/#{match.raw['stats']['numDeaths'].to_i}/#{match.raw['stats']['assists'].to_i}"
+      .summery-stats
+
+        = match.played_at.strftime('%a, %b %-d | %l:%M%p')
+
+        &nbsp;&nbsp;&nbsp;
+        %span GOLD:
+        = "#{match.raw['stats']['goldEarned'].to_i/(match.raw['stats']['timePlayed']/60)}/min"
+
+        &nbsp;&nbsp;&nbsp;
+        %span IP:
+        = match.raw['ipEarned']
+
+        &nbsp;&nbsp;&nbsp;
+        .kda
+          %span KDA:
+          = "#{match.raw['stats']['championsKilled'].to_i}/#{match.raw['stats']['numDeaths'].to_i}/#{match.raw['stats']['assists'].to_i}"
 
 
-      .col-lg-6
-        .row.overview-match
-          .col-lg-6
-            - match.game.top_team.each do |p|
-              .top-team
-                = image_tag "http://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
-                = p['summoner'].name.capitalize
-                %i.fa.fa-plus.has-tooltip{style:'color:#45587A', title: 'Request Comrade', class:'pull-right'}
+    .col-lg-6
+      .row.overview-match
+        .col-lg-6
+          - match.game.top_team.each do |p|
+            .top-team
+              = image_tag "http://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
+              = p['summoner'].name.capitalize
+              %i.fa.fa-plus.has-tooltip{style:'color:#45587A', title: 'Request Comrade', class:'pull-right'}
 
-          .col-lg-6
-            - match.game.bottom_team.each do |p|
-              .bottom-team
-                = image_tag "http://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
-                = p['summoner'].name.capitalize
-                %i.fa.fa-plus.has-tooltip{style:'color:#45587A',  title: 'Request Comrade', class:'pull-right'}
+        .col-lg-6
+          - match.game.bottom_team.each do |p|
+            .bottom-team
+              = image_tag "http://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
+              = p['summoner'].name.capitalize
+              %i.fa.fa-plus.has-tooltip{style:'color:#45587A',  title: 'Request Comrade', class:'pull-right'}
