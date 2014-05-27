@@ -88,4 +88,16 @@ class GameStats < ActiveRecord::Base
     MAP_NAMES.fetch(map_id){ 'Unkown' }
   end
 
+  def gold_per_minute
+    ( raw['stats']['goldEarned'] / duration_in_minutes ).floor
+  end
+
+  def duration_in_minutes
+    ( raw['stats']['timePlayed'] / 60.0 ).round(2)
+  end
+
+  def kda
+    "#{raw['stats']['championsKilled']}/#{raw['stats']['numDeaths']}/#{raw['stats']['assists']}"
+  end
+
 end
