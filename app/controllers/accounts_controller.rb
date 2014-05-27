@@ -15,6 +15,7 @@ class AccountsController < ApplicationController
     @user = current_user
     respond_to do |format|
       if @user.update(update_params)
+        @user.touch
         format.html { redirect_to edit_account_url, alert: 'Account updated' }
         format.json { render json: { success: true } }
       else
@@ -29,6 +30,7 @@ class AccountsController < ApplicationController
       .game_stats.non_bot_matches
       .includes({game:[:summoners,{game_stats:[:summoner]}]},:played_champion)
       .order(played_at: :desc)
+    fresh_when([@game_stats.first, current_user])   
   end
 
   private
