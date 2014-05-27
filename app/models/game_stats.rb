@@ -18,6 +18,8 @@ class GameStats < ActiveRecord::Base
 
   serialize :raw, Hash
 
+  scope :non_bot_matches, ->{ where.not(sub_type: ['BOT','BOT_3x3','URF_BOT']) }
+
   class << self
 
     def update_recent_for(summoner)
