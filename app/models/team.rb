@@ -14,6 +14,8 @@ class Team < ActiveRecord::Base
 
   has_many :team_memberships
 
+  has_many :team_notes
+
   has_many :users, through: :team_memberships, source: :user
 
   mount_uploader :avatar, AvatarUploader
