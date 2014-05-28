@@ -84,7 +84,8 @@
       %br
       %legend
         Match History
-      = render partial: 'match', collection: @team.games.order(played_at: :desc), as: :match, locals:{team_ids: team_ids}
+      - cache([@team, @team_games.first]) do
+        = render partial: 'match', collection: @team_games, as: :match, locals:{team_ids: team_ids}
 
 
 
