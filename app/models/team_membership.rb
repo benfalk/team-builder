@@ -2,7 +2,7 @@ class TeamMembership < ActiveRecord::Base
 
   belongs_to :user
 
-  belongs_to :team
+  belongs_to :team, touch: true
 
   belongs_to :role
 
