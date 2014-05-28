@@ -22,7 +22,13 @@ class GameStatsHarvester
       games.each do |game|
         puts "Doing game #{game}"
         if game.summoners.any?
-          game.summoners.each { |s| GameStats.update_recent_for(s); sleep(2); }
+          game.summoners.each do |s|
+            GameStats.update_recent_for(s)
+            sleep(2)
+            s.game_stats.where(game_id: nil).all.each do |s|
+              Game.from_stats(s)
+            end
+          end
         end
         game.update(harvested: true)
       end
