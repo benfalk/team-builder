@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140527170002) do
+ActiveRecord::Schema.define(version: 20140528165249) do
 
   create_table "champion_preferences", force: true do |t|
     t.integer  "user_id"
@@ -68,10 +68,11 @@ ActiveRecord::Schema.define(version: 20140527170002) do
     t.text     "message"
     t.string   "notification_type"
     t.integer  "source_id"
-    t.integer  "source_type"
+    t.string   "source_type"
     t.integer  "stream_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "from",              default: ""
   end
 
   create_table "role_preferences", force: true do |t|
