@@ -20,16 +20,12 @@ class GameStatsHarvester
       games = team.games.where(harvested: false, played_at:(2.days.ago..1.minute.from_now))
       puts "Doing team #{team.name}... they have #{games.count}"
       games.each do |game|
-        puts "Doing game #{game}"
-        if game.summoners.any?
-          game.summoners.each do |s|
-            GameStats.update_recent_for(s)
-            sleep(2)
-            s.game_stats.where(game_id: nil).all.each do |s|
-              Game.from_stats(s)
-            end
-          end
+        summoners = Summoner.where(id: game.missing_summoner_id_stats)
+        summoners.each do |summoner|
+          GameStats.update_recent_for(summoner)
+          sleep(3)
         end
+        GameStats.where(game_id: nil, riot_game_uid: game.riot_id).update_all(game_id: game.id)
         game.update(harvested: true)
       end
     end

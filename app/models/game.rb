@@ -30,6 +30,10 @@ class Game < ActiveRecord::Base
 
   end
 
+  def missing_summoner_id_stats
+    summoner_ids - game_stats.pluck(:summoner_id)
+  end
+
   def bind_to_summoners
     stats = game_stats.first
     ids = stats.summoner_riot_ids + [stats.summoner.riot_uid]
