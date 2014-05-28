@@ -1,14 +1,18 @@
 .match
+  .badges
+    - if match.raw['stats']['largestMultiKill'] == 2
+      = image_tag 'badges/badge-quadrakill.png'
+    - if match.raw['stats']['largestMultiKill'] == 3
+      = image_tag 'badges/badge-pentakill.png'
   .row
     .col-lg-6
       .row
-        -#= debug match
+        -#= debug match.raws
         .col-lg-3
-
-
           - if match.played_champion
             = image_tag match.played_champion.avatar_url, class:'champ'
         .col-lg-9
+
           %span{style:"color:#{match.won? ? '#5CB85C' : '#D9534F'}"}
             = match.won? ? 'WIN' : 'LOSS'
           &nbsp;&nbsp;&nbsp;
