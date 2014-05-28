@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140528191545) do
+ActiveRecord::Schema.define(version: 20140528224337) do
 
   create_table "champion_preferences", force: true do |t|
     t.integer  "user_id"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20140528191545) do
     t.string   "game_type"
     t.string   "sub_type"
     t.integer  "map_id"
+    t.integer  "gold_per_minute",    default: 0
   end
 
   add_index "game_stats", ["sub_type"], name: "index_game_stats_on_sub_type"

@@ -30,6 +30,7 @@ class GameStats < ActiveRecord::Base
         game_stats.played_champion_id = Champion.convert_riot_id(game['championId'])
         game_stats.set_fields_from_raw!
         game_stats.determine_played_at
+        game_stats.calculate_gold_per_minute
         game_stats.save
       end
     end
@@ -88,8 +89,12 @@ class GameStats < ActiveRecord::Base
     MAP_NAMES.fetch(map_id){ 'Unkown' }
   end
 
-  def gold_per_minute
-    ( raw['stats']['goldEarned'] / duration_in_minutes ).floor
+  def gold_per_minute_percentage
+    ( gold_per_minute / 500.00 * 100 ).floor
+  end
+
+  def calculate_gold_per_minute
+    self.gold_per_minute = ( raw['stats']['goldEarned'] / duration_in_minutes ).floor
   end
 
   def duration_in_minutes

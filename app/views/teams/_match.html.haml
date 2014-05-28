@@ -20,6 +20,7 @@
         %th WARDS
         %th DAMAGE
         %th GOLD/MIN
+        %th
     %tbody
       - match.top_team.each do |p|
         %tr{class:"#{ 'friend' if team_ids.include? p['summoner'].id }"}
@@ -55,8 +56,10 @@
               = raws['totalDamageDealt']
             %td
               .progress
-                .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => '80', role: 'progressbar', style: 'width: 80%'}
+                .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => "#{p['stats'].gold_per_minute_percentage}", role: 'progressbar', style: "width: #{p['stats'].gold_per_minute_percentage}%"}
                   %span.sr-only 80% Complete
+            %td
+              = p['stats'].gold_per_minute
           - else
             %td.no-data{colspan:'9'}
               No Data for this summoner
@@ -106,8 +109,10 @@
               = raws['totalDamageDealt']
             %td
               .progress
-                .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => '80', role: 'progressbar', style: 'width: 80%'}
+                .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => "#{p['stats'].gold_per_minute_percentage}", role: 'progressbar', style: "width: #{p['stats'].gold_per_minute_percentage}%"}
                   %span.sr-only 80% Complete
+            %td
+              = p['stats'].gold_per_minute
           - else
             %td.no-data{colspan:'9'}
               No Data for this summoner
