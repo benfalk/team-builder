@@ -218,6 +218,17 @@
   padding-bottom: 20px;
   border-bottom: 1px dotted #495B6F;
   font-size: 1.2em;
+  position: relative;
+  .badges {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    display: inline-block;
+    z-index: 999999;
+    img {
+      width: 70px;
+    }
+  }
 }
 
 
