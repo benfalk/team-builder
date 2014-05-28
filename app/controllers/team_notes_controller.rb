@@ -4,7 +4,7 @@ class TeamNotesController < ApplicationController
     @note = team.team_notes.build(create_params)
     respond_to do |format|
       if @note.save
-        format.html { redirect_to team_url(team), status: 'Note Created' }
+        format.html { redirect_to team_url(team), notice: 'Note Created' }
         format.json { render json: { success: true, errors: @note.errors.full_messages } }
       else
         format.html { redirect_to team_url(team), alert: 'Note Creation Failed' }
@@ -17,7 +17,7 @@ class TeamNotesController < ApplicationController
     @note = team.team_notes.find(params[:id])
     respond_to do |format|
       if @note.update(update_params)
-        format.html { redirect_to team_url(team), status: 'Note Created' }
+        format.html { redirect_to team_url(team), notice: 'Note Updated' }
         format.json { render json: { success: true, errors: @note.errors.full_messages } }
       else
         format.html { redirect_to team_url(team), alert: 'Note Creation Failed' }

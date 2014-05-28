@@ -118,16 +118,26 @@
 
 
   .row
-    .col-lg-4
-      .lolr
-        = image_tag 'lolr.png', style:'width:130px'
-        %br
-        %i.fa.fa-arrow-up
-        Upload lolreplay for archives.
+    - note = @team.team_notes.where(game_id: match.id).first_or_create
+    = form_for(note, url: team_team_note_path(@team, note)) do |f|
+      .col-lg-4
+        .lolr
+          - if f.object.league_replay_url.blank?
+            = image_tag 'lolr.png', style:'width:130px'
+            = f.file_field :league_replay
+            %br
+            %i.fa.fa-arrow-up
+            Upload LOL Replay to archives.
+          - else
+            = link_to image_tag('lolr.png', style:'width:130px'), f.object.league_replay_url
+            %br
+            %i.fa.fa-arrow-down
+            Download LOL Replay from archives.
 
-    .col-lg-8
-      Game Notes:
-      %textarea{style:'width:100%; height:111px; background-color: #4E6274; color:#fff; padding: 3px 6px;'}
-      .btn.btn-primary.pull-right Save
+
+      .col-lg-8
+        Game Notes:
+        = f.text_area :note, style:'width:100%; height:111px; background-color: #4E6274; color: #fff; padding: 3px 6px;'
+        = f.submit 'Save', class: 'btn btn-primary pull-right'
   .row
     .col-lg-12
