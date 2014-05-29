@@ -53,7 +53,7 @@
             - team_ids.push(tm.summoner_id)
             %tr
               %td 
-                = tm.summoner.name
+                = tm.summoner.name.capitalize
               %td 
                 = tm.user.try(:full_name)
               %td 
@@ -64,7 +64,7 @@
               %td 
                 = tm.role.try(:name)
               %td{style:'width:150px'}
-                .progress
+                .progress.has-tooltip{title:'Overall Gold per minute'}
                   .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => '80', role: 'progressbar', style: 'width: 80%'}
                     %span.sr-only 80% Complete
 
@@ -93,6 +93,12 @@
 
 
 
+
+:javascript
+  $('.has-tooltip').tooltip()
+  $('.numeral').each(function(){
+    $(this).text(numeral($(this).text()).format('0.0a'))
+  })
 
 
 

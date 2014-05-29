@@ -93,8 +93,12 @@ class GameStats < ActiveRecord::Base
     MAP_NAMES.fetch(map_id){ 'Unkown' }
   end
 
+  def earned_gold_per_minute
+    gold_per_minute - 114 # 19 free gold every 10sec
+  end
+
   def gold_per_minute_percentage
-    ( gold_per_minute / 500.00 * 100 ).floor
+     ( earned_gold_per_minute / (500.00 - 114.00) * 100 ).floor
   end
 
   def calculate_gold_per_minute

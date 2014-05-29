@@ -17,110 +17,14 @@
         %th ITEMS
         %th FARM
         %th CREEPS
-        %th WARDS
-        %th DAMAGE
-        %th GOLD/MIN
-        %th
+        %th{colspan:'2'} GOLD/MINUTE
+
     %tbody
-      - match.top_team.each do |p|
-        %tr{class:"#{ 'friend' if team_ids.include? p['summoner'].id }"}
-          %td
-            = image_tag "http://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", style:'width:26px'
-            = p['summoner'].name.capitalize
-
-          - if p['stats']
-            - raw = p['stats'].raw
-            - raws = raw['stats']
-            %td
-              - ['spell1','spell2'].each do |i|
-                - unless raw[i].blank?
-                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ raw[i] }.png"}
-                - else
-                  .empty-item
-            %td
-              = "#{raws['championsKilled']}/#{raws['numDeaths']}/#{raws['assists']}"
-            %td
-              - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
-
-                - unless raws[i].blank?
-                  %img{src:"http://lkimg.zamimg.com/shared/riot/images/items/#{raws[i]}_32.png"}
-                - else
-                  .empty-item
-            %td
-              = raws['goldEarned']
-            %td
-              = raws['minionsKilled']
-            %td
-              = raws['wardPlaced']
-            %td
-              = raws['totalDamageDealt']
-            %td
-              .progress
-                .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => "#{p['stats'].gold_per_minute_percentage}", role: 'progressbar', style: "width: #{p['stats'].gold_per_minute_percentage}%"}
-                  %span.sr-only 80% Complete
-            %td
-              = p['stats'].gold_per_minute
-          - else
-            %td.no-data{colspan:'9'}
-              No Data for this summoner
-          -#%td
-          -#
-          -#%td
-
-
-
+      = render partial: 'match_team', collection: match.top_team, as: 'p', locals:{team_ids:team_ids}
       %tr
         %td{colspan:'10', style:'text-align:center'}
           %hr
-
-      - match.bottom_team.each do |p|
-
-        -#= debug p
-        %tr{class:"#{ 'friend' if team_ids.include? p['summoner'].id }"}
-          %td
-            = image_tag "http://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", style:'width:26px'
-            = p['summoner'].name.capitalize
-
-          - if p['stats']
-            - raw = p['stats'].raw
-            - raws = raw['stats']
-            %td
-              - ['spell1','spell2'].each do |i|
-                - unless raw[i].blank?
-                  %img{src:"http://lkimg.zamimg.com/images/spells/#{ raw[i] }.png"}
-                - else
-                  .empty-item
-            %td
-              = "#{raws['championsKilled']}/#{raws['numDeaths']}/#{raws['assists']}"
-            %td
-              - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
-
-                - unless raws[i].blank?
-                  %img{src:"http://lkimg.zamimg.com/shared/riot/images/items/#{raws[i]}_32.png"}
-                - else
-                  .empty-item
-            %td
-              = raws['goldEarned']
-            %td
-              = raws['minionsKilled']
-            %td
-              = raws['wardPlaced']
-            %td
-              = raws['totalDamageDealt']
-            %td
-              .progress
-                .progress-bar.progress-bar-success{'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => "#{p['stats'].gold_per_minute_percentage}", role: 'progressbar', style: "width: #{p['stats'].gold_per_minute_percentage}%"}
-                  %span.sr-only 80% Complete
-            %td
-              = p['stats'].gold_per_minute
-          - else
-            %td.no-data{colspan:'9'}
-              No Data for this summoner
-          -#%td
-          -#  %i.fa.fa-plus.has-tooltip{style:'color:#5cb85c', 'data-placement' => 'top', 'data-toggle' => 'tooltip', title: 'Request Comrade'}
-          -#%td
-          -#  %i.fa.fa-minus-circle.has-tooltip{style:'color:#d9534f', 'data-placement' => 'top', 'data-toggle' => 'tooltip', title: 'Mark Foe'}
-
+      = render partial: 'match_team', collection: match.bottom_team, as: 'p', locals:{team_ids:team_ids}
 
   .row
     - note = @team.team_notes.where(game_id: match.id).first_or_create
@@ -138,7 +42,6 @@
             %br
             %i.fa.fa-arrow-down
             Download LOL Replay from archives.
-
 
       .col-lg-8
         Game Notes:
