@@ -82,7 +82,11 @@ class GameStats < ActiveRecord::Base
   end
 
   def summoner_riot_ids
-    raw['fellowPlayers'].map { |p| p['summonerId'] }
+    if raw['fellowPlayer']
+      raw['fellowPlayers'].map { |p| p['summonerId'] }
+    else
+      []
+    end
   end
 
   def map_name
