@@ -26,10 +26,10 @@ class MembershipsController < ApplicationController
     @membership = @team.find(params[:id])
     respond_to do |format|
       if @membership.update(update_params)
-        format.html { redirect_to team_url(@team) }
+        format.html { redirect_to new_team_membership_url(@team) }
         format.json { render json: { success: true, errors: @membership.errors.full_messages } }
       else
-        format.html { redirect_to team_url(@team), alert: 'Unable to update team member' }
+        format.html { redirect_to new_team_membership_url(@team), alert: 'Unable to update team member' }
         format.json { render json: { success: false, errors: @membership.errors.full_messages } }
       end
     end
@@ -40,10 +40,10 @@ class MembershipsController < ApplicationController
     @membership = @team.team_memberships.build(create_params)
     respond_to do |format|
       if @membership.save
-        format.html { redirect_to team_path(@team), notice: "#{@membership.summoner_name} added!" }
+        format.html { redirect_to new_team_membership_url(@team), notice: "#{@membership.summoner_name} added!" }
         format.json { render json: { success: true, errors: @membership.errors.full_messages } }
       else
-        format.html { redirect_to team_url(@team), alert: 'Unable to add team member' }
+        format.html { redirect_to new_team_membership_url(@team), alert: 'Unable to add team member' }
         format.json { render json: { success: false, errors: @membership.errors.full_messages } }
       end
     end
@@ -53,10 +53,10 @@ class MembershipsController < ApplicationController
     @membership = Team.find(params[:team_id]).team_memberships.find(params[:id])
     respond_to do |format|
       if @membership.destroy
-        format.html { redirect_to edit_team_url(@membership.team) }
+        format.html { redirect_to new_team_membership_url(@membership.team) }
         format.json { render json: { success: true, errors: @membership.errors.full_messages } }
       else
-        format.html { redirect_to edit_team_url(@membership.team), alert: 'Unable to remove team member' }
+        format.html { redirect_to new_team_membership_url(@membership.team), alert: 'Unable to remove team member' }
         format.json { render json: { success: false, errors: @membership.errors.full_messages } }
       end
     end
