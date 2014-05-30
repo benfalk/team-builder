@@ -16,7 +16,7 @@
       - k = raws['championsKilled'].to_i
       - d = raws['numDeaths'].to_i
       - a = raws['assists'].to_i
-      - kda = (k+a)/d
+      - kda = d > 0 ? (k+a)/d : k+a
       %span.has-tooltip{title:"Ratio of: #{k}/#{d}/#{a}"}
         = kda
     %td
