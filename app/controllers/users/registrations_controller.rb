@@ -16,6 +16,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     ).permit(
       :first_name,
       :last_name,
+      :skype,
       :location_city,
       :location_state,
       :short_bio,

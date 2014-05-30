@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     GameBuilder.perform_async(summoner_id)
   end
 
+  def self.skype_names
+    where.not(skype: [nil, '']).pluck(:skype)
+  end
+
   def attempt_summoner_verification
     summoner.verify_account! unless summoner.nil? or summoner.verified?
   end
