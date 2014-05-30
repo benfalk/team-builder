@@ -13,11 +13,11 @@
         - else
           .empty-item
     %td
-      - k = raws['championsKilled'].to_i
-      - d = raws['numDeaths'].to_i
-      - a = raws['assists'].to_i
-      - kda = d > 0 ? (k+a)/d : k+a
-      %span.has-tooltip{title:"Ratio of: #{k}/#{d}/#{a}"}
+      - k = raws['championsKilled'].to_f
+      - d = raws['numDeaths'].to_f
+      - a = raws['assists'].to_f
+      - kda = ( d > 0 ? (k+a)/d : k+a).round(1)
+      %span.has-tooltip{title:"Ratio of: #{k.to_i}/#{d.to_i}/#{a.to_i}"}
         = kda
     %td
       - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|

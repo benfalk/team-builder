@@ -4,6 +4,8 @@
       = image_tag 'badges/badge-quadrakill.png'
     - if match.raw['stats']['largestMultiKill'] == 3
       = image_tag 'badges/badge-pentakill.png'
+    - if match.raw['stats']['firstBlood']
+      = image_tag 'badges/badge-firstblood.png'
   .row
     .col-lg-6
       .row
