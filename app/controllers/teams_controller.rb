@@ -46,6 +46,7 @@ class TeamsController < ApplicationController
   def show
     @team = Team.including_membership_data.find(params[:id])
     @team_games = @team.games.order(played_at: :desc)
+    @skype_names = @team.users.skype_names
     respond_to do |format|
       format.html
       format.json { render json: @team }

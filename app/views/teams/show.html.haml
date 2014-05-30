@@ -5,8 +5,7 @@
         .team-avatar{style:"background-image:url(#{@team.avatar_url})"}
 
       %legend Team Comm
-      - participants = ['echo123','benjamin.falk','changingworld358']
-      %a.skype-button{:href => "skype:#{participants.join(';')}?call&topic=Team%20Call", title:" Conference: #{participants.join(', ')}", 'data-placement'=>"top"}
+      %a.skype-button{:href => "skype:#{@skype_names.join(';')}?call&topic=Team%20Call", title:" Conference: #{@skype_names.join(', ')}", 'data-placement'=>"top"}
         = image_tag 'skype.png'
         Start Group Call
       :javascript
