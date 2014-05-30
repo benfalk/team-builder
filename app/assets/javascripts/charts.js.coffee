@@ -22,5 +22,5 @@ jQuery ->
     pointLabelFontColor : "#fff"
   }
 
-  myNewChart = new Chart($("#canvas").get(0).getContext("2d")).Radar(data,options)
+  myNewChart = new Chart($("#canvas").get(0).getContext("2d")).Radar(data,options) if $("#canvas").get(0)
 
