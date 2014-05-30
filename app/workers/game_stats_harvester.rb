@@ -30,6 +30,9 @@ class GameStatsHarvester
       end
     end
 
+    Summoner.actively_tracked.all.each do |s|
+      s.calculate_agpm!
+    end
 
   end
 
