@@ -26,7 +26,7 @@
             .champ-list-short-small
               - if tm.user
                 - tm.user.favorite_champions.each do |champ|
-                  = image_tag "http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/#{champ.key}.png"
+                  = image_tag champ.avatar_url
           -#%td
           -#  = tm.membership_type
           %td
