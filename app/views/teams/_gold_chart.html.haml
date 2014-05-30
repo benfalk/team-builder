@@ -2,18 +2,7 @@
 .chart-keys
 :javascript
 
-  var ajax_data =
-  [
-    {
-      summoner: 'potterbaum',
-      games :   [65,59,32,53]
-    },
-    {
-      summoner: 'test1',
-      games :   [[28],[48],[43],[87]]
-    }
-  ]
-
+  var ajax_data = #{Team::GoldPerMinuteGames.new(@team).call.to_json}
 
   var colors = [[0, 102, 153],[66, 139, 202],[93, 166, 189],[158, 196, 217],[238, 238, 238]]
   ,   datasets = []
