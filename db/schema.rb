@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530203801) do
+ActiveRecord::Schema.define(version: 20140530230610) do
 
   create_table "champion_preferences", force: true do |t|
     t.integer  "user_id"
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 20140530203801) do
     t.string   "gaming_times"
     t.string   "avatar"
     t.string   "skype"
+    t.string   "twitch_name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

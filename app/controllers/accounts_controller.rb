@@ -39,6 +39,7 @@ class AccountsController < ApplicationController
       :first_name,
       :last_name,
       :skype,
+      :twitch_name,
       :location_city,
       :location_state,
       :short_bio,
