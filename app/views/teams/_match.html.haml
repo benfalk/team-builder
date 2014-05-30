@@ -28,26 +28,31 @@
 
   .row
     - note = @team.team_notes.where(game_id: match.id).first_or_create
-    = form_for(note, url: team_team_note_path(@team, note)) do |f|
+    = form_for note, url: team_team_note_path(@team, note) do |f|
       .col-lg-4
         - if f.object.league_replay_url.blank?
-          .lolr{style:'border:1px solid #f1ae43;'}
+          .lolr
             = image_tag 'lolr.png', style:'width:130px'
             %br
             %i.fa.fa-arrow-up
             Upload LOL Replay to archives.
-            = f.file_field :league_replay
+            = f.file_field :league_replay, id:"team_note_league_replay_#{note.id}", class:'team_note_league_replay'
         - else
-        = link_to f.object.league_replay_url, target:'_blank', class:'clean-link' do
-          .lolr{style:'border:1px solid #f1ae43;'}
-            = image_tag 'lolr.png', style:'width:130px'
-            %br
-            %i.fa.fa-arrow-down
-            Download LOL Replay.
+          = link_to f.object.league_replay_url, target:'_blank', class:'clean-link' do
+            .lolr{style:'border:1px solid #f1ae43;'}
+              = image_tag 'lolr.png', style:'width:130px'
+              %br
+              %i.fa.fa-arrow-down
+              Download LOL Replay.
 
       .col-lg-8
         Game Notes:
         = f.text_area :note, class:'match-note'
-        = f.submit 'Save', class: 'btn btn-primary pull-right'
+        = f.submit 'Save', class: 'btn btn-primary pull-right', id:"team_note_#{note.id}"
+
+      :javascript
+        $("#team_note_league_replay_#{note.id}").change(function(){
+         $("#team_note_#{note.id}").click()
+        })
   .row
     .col-lg-12
