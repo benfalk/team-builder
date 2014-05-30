@@ -5,10 +5,21 @@
 #
 class Summoner < ActiveRecord::Base
 
+  include GoldPerMinuteCalculations
+  self.gold_per_minute_field = :agpm
+  
   def self.prepare_binding(params)
     params = params[:summoner] if params[:summoner]
     params.keys.each { |k| params[k].downcase! }
     where(region: params[:region], name: params[:name]).first || new(params)
+  end
+
+  def self.actively_tracked_ids
+    TeamMembership.pluck(:summoner_id) | User.pluck(:summoner_id)
+  end
+
+  def self.actively_tracked
+    where(id: actively_tracked_ids)
   end
 
   # Given a list of summoner ids, most likely from game states
@@ -74,6 +85,20 @@ class Summoner < ActiveRecord::Base
     fetch_riot_info
     populate_stats_summary
     boot_game_stats
+  end
+
+  def calculate_agpm
+    gpms = game_stats.gold_per_minute_matches.pluck(:gold_per_minute)
+    self.agpm = 
+      if gpms.count == 0
+        0
+      else
+        gpms.inject(0){ |sum,total| sum + total } / gpms.count
+      end
+  end
+
+  def calculate_agpm!
+    calculate_agpm.tap { |_| save! }
   end
 
   private

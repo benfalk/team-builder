@@ -30,6 +30,7 @@ class GameStatsHarvester
       end
     end
 
+
   end
 
 end

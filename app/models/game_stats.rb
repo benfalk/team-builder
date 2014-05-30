@@ -1,5 +1,7 @@
 class GameStats < ActiveRecord::Base
   
+  include GoldPerMinuteCalculations
+
   MAP_NAMES = {
     1 => "Summoner's Rift",
     2 => "Summoner's Rift",
@@ -16,9 +18,13 @@ class GameStats < ActiveRecord::Base
 
   belongs_to :game
 
+  scope :summoners_rift, ->{ where(map_id:[1,2]) }
+
   serialize :raw, Hash
 
   scope :non_bot_matches, ->{ where.not(sub_type: ['BOT','BOT_3x3','URF_BOT']) }
+
+  scope :gold_per_minute_matches, ->{ non_bot_matches.summoners_rift.where.not(gold_per_minute: nil) }
 
   class << self
 
@@ -91,14 +97,6 @@ class GameStats < ActiveRecord::Base
 
   def map_name
     MAP_NAMES.fetch(map_id){ 'Unkown' }
-  end
-
-  def earned_gold_per_minute
-    gold_per_minute - 114 # 19 free gold every 10sec
-  end
-
-  def gold_per_minute_percentage
-     ( earned_gold_per_minute / (500.00 - 114.00) * 100 ).floor
   end
 
   def calculate_gold_per_minute
