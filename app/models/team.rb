@@ -18,6 +18,8 @@ class Team < ActiveRecord::Base
 
   has_many :users, through: :team_memberships, source: :user
 
+  has_many :summoners, through: :team_memberships, source: :summoner
+
   mount_uploader :avatar, AvatarUploader
 
   def game_ids
