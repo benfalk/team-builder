@@ -79,45 +79,5 @@
               = f.submit 'Save', class: 'btn btn-primary save-team'
 
 
-  .row.page-top-pad
-    .col-lg-12
-      %legend Team Roster
-
-      %table.table.table-hover
-        %thead
-          %tr
-            %th Team Roster
-            %th Location
-            %th item
-            %th item
-            %th item
-            %th KDA
-            %th Role
-            %th Skill
-            %th{colspan:'2'} Pick
-        %tbody
-          - @hash = [1]
-          - @hash.each do |v|
-            = render '/pages/user'
-
-      %legend Suggested Comrades
-
-      %table.table.table-hover
-        %thead
-          %tr
-            %th Team Roster
-            %th Location
-            %th item
-            %th item
-            %th item
-            %th KDA
-            %th Role
-            %th Skill
-            %th{colspan:'2'} Pick
-        %tbody
-          - @hash = (1...5).to_a
-          - @hash.each do |v|
-            = render '/pages/user'
-
 
 

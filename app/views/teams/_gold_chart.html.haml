@@ -1,45 +1,40 @@
 %canvas#myChart{height: "200", width: "870", style:'margin-left: -14px;'}
+.chart-keys
 :javascript
+
+  var ajax_data =
+  [
+    {
+      summoner: 'potterbaum',
+      games :   [65,59,32,53]
+    },
+    {
+      summoner: 'test1',
+      games :   [[28],[48],[43],[87]]
+    }
+  ]
+
+
+  var colors = [[0, 102, 153],[66, 139, 202],[93, 166, 189],[158, 196, 217],[238, 238, 238]]
+  ,   datasets = []
+
+  $.each(ajax_data, function(i,obj){
+    var ds = {
+      fillColor : "rgba("+colors[i][0]+", "+colors[i][1]+", "+colors[i][2]+", 0.2)",
+      strokeColor : "rgba("+colors[i][0]+", "+colors[i][1]+", "+colors[i][2]+", 0.8)",
+      pointColor : "rgba("+colors[i][0]+", "+colors[i][1]+", "+colors[i][2]+", 1)",
+      pointStrokeColor : "#fff",
+      data : obj.games
+    }
+    datasets.push(ds)
+    $('.chart-keys').append('<div class="key"><div class="dot" style="background:rgba('+colors[i][0]+', '+colors[i][1]+', '+colors[i][2]+', 1);"></div>'+obj.summoner+'</div>')
+  })
+
   var data = {
-      labels : ["Game 1","Game 2","Game 3","Game 4","Game 5","Game 6","Game 7","Game 8","Game 9","Game 10"],
-      datasets : [
-          {
-              fillColor : "rgba(0, 102, 153, 0.2)",
-              strokeColor : "rgba(0, 102, 153, 0.8)",
-              pointColor : "rgba(0, 102, 153, 1)",
-              pointStrokeColor : "#fff",
-              data : [65,59]
-          },
-          {
-              fillColor : "rgba(66, 139, 202, 0.2)",
-              strokeColor : "rgba(66, 139, 202, 0.8)",
-              pointColor : "rgba(66, 139, 202, 1)",
-              pointStrokeColor : "#fff",
-              data : [28,48]
-          },
-          {
-              fillColor : "rgba(93, 166, 189, 0.2)",
-              strokeColor : "rgba(93, 166, 189, 0.8)",
-              pointColor : "rgba(93, 166, 189, 1)",
-              pointStrokeColor : "#fff",
-              data : [45,59]
-          },
-          {
-              fillColor : "rgba(158, 196, 217, 0.2)",
-              strokeColor : "rgba(158, 196, 217, 0.8)",
-              pointColor : "rgba(158, 196, 217, 1)",
-              pointStrokeColor : "#fff",
-              data : [23,41]
-          },
-          {
-              fillColor : "rgba(238, 238, 238, 0.2)",
-              strokeColor : "rgba(238, 238, 238, 0.8)",
-              pointColor : "rgba(238, 238, 238, 1)",
-              pointStrokeColor : "#fff",
-              data : [75,29]
-          }
-      ]
+      labels    : ["Game 1","Game 2","Game 3","Game 4","Game 5","Game 6","Game 7","Game 8","Game 9","Game 10"],
+      datasets  : datasets
   }
+
   var options = {
 
     //Boolean - If we show the scale above the chart data
@@ -114,9 +109,4 @@
   var ctx = document.getElementById("myChart").getContext("2d");
   new Chart(ctx).Line(data,options);
 
-.chart-keys
-  - @hash = ['rgba(0, 102, 153, 1)','rgba(66, 139, 202, 1)','rgba(93, 166, 189, 1)','rgba(158, 196, 217, 1)','rgba(238, 238, 238, 1)']
-  - @hash.each do |v|
-    .key
-      .dot{style:"background:#{v};"}
-      potterbaum
+

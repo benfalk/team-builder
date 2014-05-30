@@ -1,0 +1,47 @@
+%table.table.team-builder-table.table-hover
+  %thead
+    %tr
+      %th{colspan:'2'} Team Roster
+      %th Name
+      %th Location
+      %th Champs
+      %th Level
+      %th Role
+      - unless edit
+        %th{colspan:'2'} GOLD/MINUTE
+  %tbody
+    - team.team_memberships.each do |tm|
+      - if tm.id
+        -#= debug tm
+        %tr
+          %td
+            = image_tag tm.user.avatar_url, class:'small-avatar' if tm.user
+          %td
+            = tm.summoner.name.capitalize
+          %td
+            = tm.user.try(:full_name)
+          %td
+            = tm.user.try(:location)
+          %td
+            .champ-list-short-small
+              - if tm.user
+                - tm.user.favorite_champions.each do |champ|
+                  = image_tag "http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/#{champ.key}.png"
+          -#%td
+          -#  = tm.membership_type
+          %td
+            = tm.summoner.level
+          %td
+            = tm.role.try(:name)
+
+          - unless edit
+            %td{style:'width:4%'}
+              999
+            %td{style:'width:16%'}
+              .progress.has-tooltip{title:"#{0} Gold per minute - #{0}% of best"}
+                .progress-bar{class: 0 > 40 ? "progress-bar-success" : "progress-bar-warning" , 'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => "#{0}", role: 'progressbar', style: "width: #{80}%"}
+                  %span.sr-only 80% Complete
+          - if edit
+            %td
+              = link_to team_membership_path(team,tm), method: :delete do
+                %i.fa.fa-times{style:' color: #d9534f;'}

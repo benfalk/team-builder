@@ -30,18 +30,20 @@
     - note = @team.team_notes.where(game_id: match.id).first_or_create
     = form_for(note, url: team_team_note_path(@team, note)) do |f|
       .col-lg-4
-        .lolr
-          - if f.object.league_replay_url.blank?
+        - if f.object.league_replay_url.blank?
+          .lolr{style:'border:1px solid #f1ae43;'}
             = image_tag 'lolr.png', style:'width:130px'
             %br
             %i.fa.fa-arrow-up
             Upload LOL Replay to archives.
             = f.file_field :league_replay
-          - else
-            = link_to image_tag('lolr.png', style:'width:130px'), f.object.league_replay_url
+        - else
+        = link_to f.object.league_replay_url, target:'_blank', class:'clean-link' do
+          .lolr{style:'border:1px solid #f1ae43;'}
+            = image_tag 'lolr.png', style:'width:130px'
             %br
             %i.fa.fa-arrow-down
-            Download LOL Replay from archives.
+            Download LOL Replay.
 
       .col-lg-8
         Game Notes:

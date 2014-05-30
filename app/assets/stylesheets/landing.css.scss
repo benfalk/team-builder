@@ -276,7 +276,14 @@
 }
 
 
-
+.clean-link {
+  text-decoration: none;
+  color: inherit;
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+}
 
 
 
@@ -395,6 +402,7 @@
     display: inline-block;
     padding: 0 0 0 15px;
     font-size: 0.8em;
+    text-transform:capitalize;
     .dot {
       display: inline-block;
       margin: 0 3px -3px 0;
@@ -529,6 +537,31 @@ img.champ {
   overflow: hidden;
   box-shadow: 1px 1px 1px rgba(0,0,0, 0.1);
   margin-right: 10px;
+}
+
+.team_show {
+  table.team-builder-table {
+    tbody tr  {
+      vertical-align: middle;
+      td {
+
+        font-size: 1.2em;
+        vertical-align: middle;
+      }
+    }
+  }
+  .small-avatar {
+    height: 24px;
+    border-radius: 4px;
+    margin-right: 0;
+  }
+  .champ-list-short-small {
+    img {
+      height: 24px;
+      border-radius: 4px;
+      margin-right: 4px;
+    }
+  }
 }
 
 table.team-builder-table {

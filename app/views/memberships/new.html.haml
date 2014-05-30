@@ -3,51 +3,20 @@
     .row
       .col-lg-5
         %h2
-          Adding Summoners to
           = @team.name
+          Roster
       .col-lg-7
         = render partial: 'memberships/form'
 
 
 
 
-  %table.table.team-builder-table
-    %thead
-      %tr
-        %th CURRENT ROSTER
-        %th LOCATION
-        %th Level
-        %th ROLE
-        %th KDA
-        %th STYLE
-        %th Times
-        %th CHAMPS
-        %th
-    %tbody
-      - @hash = [1]
-      - @hash.each do |k, v|
-        %tr
-          %td
-            = image_tag 'dummy_avatar.png', class:'small-avatar'
-            potterbaum
-          %td
-            Las Vegas
-          %td
-            24
-          %td
-            Support
-          %td
-            0/0/0
-          %td
-            casual
-          %td
-            Nights and weekends
-          %td
-            .champ-list-short-small
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+
+  = render partial:'teams/team_memberships', locals:{team:@team, edit:true}
+
+
+
+
 
 
 

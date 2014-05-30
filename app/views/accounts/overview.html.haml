@@ -28,7 +28,7 @@
             .row
               .col-lg-4
                 %h2
-                  = current_user.summoner.name
+                  = current_user.summoner.name.capitalize
               .col-lg-2{style:'padding-top:12px;'}
                 Gold/Minute:
               .col-lg-5{style:'padding-top:10px;'}
@@ -189,12 +189,13 @@
             .message This is a note from someone. About the last game we played it was truly EPIC!!! Did you guys see that tipple kill?
 
       .col-lg-9
-        %object#live_embed_player_flash{:bgcolor => "#000000", :data => "http://www.twitch.tv/widgets/live_embed_player.swf?channel=dinglederper", :type => "application/x-shockwave-flash", height:'508px', :width => "100%"}
+        - twitch_name = 'sllverlady1'
+        %object#live_embed_player_flash{:bgcolor => "#000000", :data => "http://www.twitch.tv/widgets/live_embed_player.swf?channel=#{twitch_name}", :type => "application/x-shockwave-flash", height:'508px', :width => "100%"}
           %param{:name => "allowFullScreen", :value => "true"}/
           %param{:name => "allowScriptAccess", :value => "always"}/
           %param{:name => "allowNetworking", :value => "all"}/
           %param{:name => "movie", :value => "http://www.twitch.tv/widgets/live_embed_player.swf"}/
-          %param{:name => "flashvars", :value => "hostname=www.twitch.tv&channel=dinglederper&auto_play=true&start_volume=25"}/
+          %param{:name => "flashvars", :value => "hostname=www.twitch.tv&channel=#{twitch_name}&auto_play=true&start_volume=0"}/
 
         = render partial:'play_calender', locals:{data: current_user.summoner.games.amount_played_by_day}
 
