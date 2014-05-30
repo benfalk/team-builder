@@ -7,6 +7,7 @@
       %th Champs
       %th Level
       %th Role
+      %th MVP
       - unless edit
         %th{colspan:'2'} GOLD/MINUTE
   %tbody
@@ -33,11 +34,12 @@
             = tm.summoner.level
           %td
             = tm.role.try(:name)
-
+          %td
+            0
           - unless edit
             %td{style:'width:4%'}
               = tm.summoner.agpm
-            %td{style:'width:16%'}
+            %td{style:'width:15%'}
               .progress.has-tooltip{title:"#{tm.summoner.agpm} Gold per minute - #{tm.summoner.gold_per_minute_percentage}% of best"}
                 .progress-bar{class: tm.summoner.gold_per_minute_percentage > 40 ? "progress-bar-success" : "progress-bar-warning" , 'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => "#{tm.summoner.gold_per_minute_percentage}", role: 'progressbar', style: "width: #{tm.summoner.gold_per_minute_percentage}%"}
 

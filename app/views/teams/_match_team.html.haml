@@ -39,6 +39,9 @@
     %td
       .progress.has-tooltip{title:"#{p['stats'].gold_per_minute} Gold per minute - #{p['stats'].gold_per_minute_percentage}% of best"}
         .progress-bar{class: p['stats'].gold_per_minute_percentage > 40 ? "progress-bar-success" : "progress-bar-warning" , 'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => "#{p['stats'].gold_per_minute_percentage}", role: 'progressbar', style: "width: #{p['stats'].gold_per_minute_percentage}%"}
+    %td
+      %a.pick-mvp{href:'#'}
+        %i.fa.fa-trophy
 
   - else
     %td.no-data{colspan:'9'}

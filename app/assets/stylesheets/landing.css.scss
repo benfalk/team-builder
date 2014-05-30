@@ -455,7 +455,17 @@
 }
 
 
+.pick-mvp {
+  i {
+    color: #4e5d6c;
+  }
+  &:hover {
+    i {
+      color: #f0ad4e;
+    }
 
+  }
+}
 
 .profile-row {
   img {
