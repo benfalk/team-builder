@@ -25,7 +25,7 @@
         .activity
           .note
             .from
-              = msg.from
+              = msg.from.capitalize
             .message
               = msg.message
 
@@ -50,7 +50,7 @@
       %legend
         Match History
       - cache([@team, @team_games.first]) do
-        = render partial: 'match', collection: @team_games, as: :match, locals:{team_ids: @team.team_memberships.map(&:id)}
+        = render partial: 'match', collection: @team_games, as: :match, locals:{team_ids: @team.team_memberships.map(&:summoner_id)}
 
 
 
