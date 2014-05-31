@@ -21,6 +21,7 @@
               = f.file_field :avatar
               #user_avatar_preview.profile-pic-square
                 %i.fa.fa-user{style:'font-size:5em;'}
+                %br
                 Add
               :javascript
                 function readURL(input) {
@@ -111,6 +112,21 @@
             .col-lg-9
               = f.password_field :password_confirmation, class:"form-control", autocomplete: "off", :placeholder => "Password"
 
+
+          %legend Verification
+
+          .form-group
+            %label.col-lg-3.control-label Mastery name code
+            .col-lg-9
+              %h3{style:'margin-top: 3px;'}
+              = "<div class=\"well well-sm mastery-code\">#{@summoner.verify_string}</pre></div>".html_safe
+          %p
+            To verify your account just create a new masteries page and name it the code above.
+            When you hit "Verify and Save" we will go and look for a masteries page with the name
+            matching the code above. Make sure you name the masteries the code and only the code no
+            extra letters or numbers just the code.
+
+
           %legend Game Play
           .form-group
             %label.col-lg-3.control-label Play Style
@@ -184,19 +200,6 @@
             .col-lg-9
               = f.select :gaming_times, options_for_select(User::GAMING_TIME_OPTIONS,f.object.gaming_times), {}, class: 'form-control'
 
-
-          %legend Verification
-
-          .form-group
-            %label.col-lg-3.control-label Mastery name code
-            .col-lg-9
-              %h3{style:'margin-top: 3px;'}
-              = "<div class=\"well well-sm mastery-code\">#{@summoner.verify_string}</pre></div>".html_safe
-          %p
-            To verify your account just create a new masteries page and name it the code above.
-            When you hit "Verify and Save" we will go and look for a masteries page with the name
-            matching the code above. Make sure you name the masteries the code and only the code no
-            extra letters or numbers just the code.
           .form-group
 
             %a.btn.btn-default.col-lg-3{:href => "../"} Cancel
@@ -205,13 +208,6 @@
             = f.submit "Verify and Save", class:'btn btn-primary col-lg-3'
       %br
       %br
-        -#= debug @summoner
-        -#= debug @summoner.stats_summary
-        -#- @summoner.game_stats.each do |game|
-        -#  = debug game
-        -#  - game.raw.each_pair do |key, value|
-        -#    = key
-        -#    = value
 
     .col-lg-4.col-lg-offset-1
 
@@ -230,9 +226,18 @@
           - totalTurretsKilled += type['aggregatedStats']['totalTurretsKilled'].to_i
           - totalAssists += type['aggregatedStats']['totalAssists'].to_i
 
+      %br
+      %br
+      %br
+      %br
+      %br
+      %br
+      %br
+      %br
+      %br
 
-      %h4 Summoner Role Performance
-      %canvas#canvas{:height => "250", :width => "250", style:'margin-left: -16px;'}
+      -#%h4 Summoner Role Performance
+      -#%canvas#canvas{:height => "250", :width => "250", style:'margin-left: -16px;'}
 
       %h4 Time in game
       .row
@@ -283,22 +288,22 @@
       .list-group
         .list-group-item
           .row
-            .col-lg-4.list-group-item-text
-              Champ
             .col-lg-2.list-group-item-text
+              Champ
+            .col-lg-3.list-group-item-text
               KDA
             .col-lg-3.list-group-item-text
-              Role
+              Team
             .col-lg-3.list-group-item-text
               Outcome
         - @summoner.game_stats.each do |game|
 
           .list-group-item
             .row
-              .col-lg-4.list-group-item-text.js-champ
-                = game.raw['championId']
-              .col-lg-2.list-group-item-text
-                = (game.raw['stats']['numDeaths'].to_i == 0) ? 0 : (game.raw['stats']['championsKilled'].to_i + game.raw['stats']['assists'].to_i) / game.raw['stats']['numDeaths'].to_i
+              .col-lg-2.list-group-item-text.js-champ
+                = image_tag game.played_champion.avatar_url, style:'width:30px; '
+              .col-lg-3.list-group-item-text
+                = "#{game.raw['stats']['championsKilled'].to_i}/#{game.raw['stats']['numDeaths'].to_i}/#{game.raw['stats']['assists'].to_i}"
               .col-lg-3.list-group-item-text
                 = game.raw['teamId']
               .col-lg-3.list-group-item-text
@@ -308,37 +313,4 @@
           $('.js-champ').each(function(){
             $(this).text(getSummoner(parseInt($(this).text())).name)
           })
-
-          console.log()
-
-
-
-      -#%h4 Potential Teammates
-      -#.list-group
-      -#  %a.list-group-item.active{href: "#"}
-      -#    .row
-      -#      .col-lg-2
-      -#        %img.media-object{src:'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Akali.png', style:'width:44px'}
-      -#      .col-lg-10
-      -#        %h4.list-group-item-heading Potterbaum
-      -#        .row
-      -#          .col-lg-6.list-group-item-text
-      -#            Las Vegas NV
-      -#          .col-lg-3.list-group-item-text
-      -#            1
-      -#          .col-lg-3.list-group-item-text
-      -#            1
-      -#
-      -#
-      -#  %a.list-group-item{href: "#"}
-      -#    %h4.list-group-item-heading SomeName
-      -#    %p.list-group-item-text Something about it.
-      -#  %a.list-group-item{href: "#"}
-      -#    %h4.list-group-item-heading SomeName
-      -#    %p.list-group-item-text Something about it.
-      -#  %a.list-group-item{href: "#"}
-      -#    %h4.list-group-item-heading SomeName
-      -#    .list-group-item-text Something about it.
-
-
 
