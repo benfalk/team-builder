@@ -1,7 +1,8 @@
 !!!
 %html
   %head
-    %title TeamBuilder
+    %title lolFACTION
+    = favicon_link_tag '/favicon.png'
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
@@ -15,7 +16,7 @@
     .navbar.navbar-default.navbar-fixed-top
       .container
         .navbar-header
-          %a.navbar-brand{:href => "../"} League Team Builder
+          %a.navbar-brand{:href => "../"} lol FACTION
           %button.navbar-toggle{"data-target" => "#navbar-main", "data-toggle" => "collapse", :type => "button"}
             %span.icon-bar
             %span.icon-bar
@@ -79,7 +80,7 @@
         %p.pull-right.riot-text
           This product is not endorsed, certified or otherwise approved in any way by Riot Games, Inc. or any of its affiliates.
         %p
-          © 2014 LOL Team Builder
+          © 2014 LOL Faction - Amateur league Of Legends Teams
           %a{:href => "#"} Privacy
           ·
           %a{:href => "#"} Terms

@@ -84,7 +84,7 @@
     p {
       font-size: 1em;
     }
-    margin-bottom: 80px;
+    margin-bottom: 50px;
   }
 }
 .large-icon {
@@ -711,7 +711,40 @@ table.matches {
 
 
 
+// standings
+table tbody .standing-tr {
+  background: #24394c;
+  color: #fff;
+  padding: 10px;
+  border-bottom: 15px solid #2b3e50;
+  td {
+    vertical-align: middle;
+    padding: 10px;
+    font-size: 1.4em;
+  }
+  .team-standings-logo {
+    max-width: 40px;
+  }
+  .move {
+    i {
+      color: #58ba57;
+      font-size: 1.3em;
+      &.fa-arrow-circle-down{
+        color: #db524b;
+      }
+    }
 
+  }
+  .standings-team-avatars {
+    img {
+      max-width: 30px;
+      display: inline-block;
+      margin-right: 5px;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+  }
+}
 
 
 

@@ -16,7 +16,7 @@
       .small-text
         By clicking enter you are agreeing to the
         %a{:href => "#terms"} terms
-    .member-numbers 321,943 members and growing
+    -#.member-numbers 321,943 members and growing
 
 
 
@@ -41,49 +41,82 @@
     / Three columns of text below the carousel
     .row
       .col-lg-4.large-icon
-        %i.fa.fa-calendar
-        %h3 Schedule Games
-        %p Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.
+        %i.fa.fa-users
+        %h3 Easy Team Building
+        %p Our team building system takes the pain out of setting up a team. We automatically mach you with like players in your area with the skills to fill the desired roles for your team. No more scraping together a team.
 
       .col-lg-4.large-icon
         %i.fa.fa-headphones
-        %h3 Integrated Team Voice Chat
-        %p Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.
+        %h3 Skype Integration
+        %p Conveniently launch a Skype conference call with all team members without having to know there Skype names. Just hit the group call button and everyone will be in the same call.
 
       .col-lg-4.large-icon
         %i.fa.fa-bar-chart-o
         %h3 Full Team history and Stats
-        %p Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+        %p Full team analytics and team dynamic are charted out including gold per minute averages and and KDA ratios. You can also take team notes on a each match, vote on and MVP and upload your League Replay.
 
 
+.container
+  .page-header
+    %h2 Amateur Standings
+  %table.table
+    %thead
+      %tr
+        %th
+        %th{colspan:'2'} Team
+        %th Roster
+        %th Location
+        %th Wins
+        %th Losses
+    %tbody
+      - a = [0,1,0,1,0,4,6,3,0,7,0,2]
+      - a.each do |t|
+        %tr.standing-tr
+          %td.move
+            %i.fa{class:"fa-arrow-circle-#{t ==0 ? 'up': 'down'}"}
+          %td
+            = image_tag 'ALLlogo_0.png', class:'team-standings-logo'
+          %td ALLIANCE
+          %td.standings-team-avatars
+            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Bradley Potterbaum "Potterbaum"'
+            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
+            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
+            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
+            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
+          %td Las Vegas NV
+          %td 2
+          %td 4
+
+  :javascript
+    $('.has-tooltip').tooltip()
 
 
-  / START THE FEATURETTES
-  .row.featurette
-    .col-md-7
-      %h2.featurette-heading
-        First featurette heading.
-        %span.text-muted It'll blow your mind.
-      %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-    .col-md-5
-      %img.featurette-image.img-responsive{:alt => "500x500", "data-src" => "holder.js/500x500/auto", :src => "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4="}
-  %hr.featurette-divider
-  .row.featurette
-    .col-md-5
-      %img.featurette-image.img-responsive{:alt => "500x500", "data-src" => "holder.js/500x500/auto", :src => "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4="}
-    .col-md-7
-      %h2.featurette-heading
-        Oh yeah, it's that good.
-        %span.text-muted See for yourself.
-      %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-  %hr.featurette-divider
-  .row.featurette
-    .col-md-7
-      %h2.featurette-heading
-        And lastly, this one.
-        %span.text-muted Checkmate.
-      %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-    .col-md-5
-      %img.featurette-image.img-responsive{:alt => "500x500", "data-src" => "holder.js/500x500/auto", :src => "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4="}
-  %hr.featurette-divider
-    / /END THE FEATURETTES
+  -#/ START THE FEATURETTES
+  -#.row.featurette
+  -#  .col-md-7
+  -#    %h2.featurette-heading
+  -#      First featurette heading.
+  -#      %span.text-muted It'll blow your mind.
+  -#    %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+  -#  .col-md-5
+  -#    %img.featurette-image.img-responsive{:alt => "500x500", "data-src" => "holder.js/500x500/auto", :src => "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4="}
+  -#%hr.featurette-divider
+  -#.row.featurette
+  -#  .col-md-5
+  -#    %img.featurette-image.img-responsive{:alt => "500x500", "data-src" => "holder.js/500x500/auto", :src => "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4="}
+  -#  .col-md-7
+  -#    %h2.featurette-heading
+  -#      Oh yeah, it's that good.
+  -#      %span.text-muted See for yourself.
+  -#    %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+  -#%hr.featurette-divider
+  -#.row.featurette
+  -#  .col-md-7
+  -#    %h2.featurette-heading
+  -#      And lastly, this one.
+  -#      %span.text-muted Checkmate.
+  -#    %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+  -#  .col-md-5
+  -#    %img.featurette-image.img-responsive{:alt => "500x500", "data-src" => "holder.js/500x500/auto", :src => "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4="}
+  -#%hr.featurette-divider
+  -#  / /END THE FEATURETTES
