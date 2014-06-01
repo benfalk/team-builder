@@ -693,7 +693,18 @@ table.matches {
   }
 }
 
+.badges-well {
+  img, .empty-badge {
+    display: inline-block;
+    width: 66px;
+    margin: 12px 10px 8px 0;
+  }
 
+  .empty-badge {
+    opacity: 0.2;
+  }
+
+}
 
 
 

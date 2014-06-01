@@ -24,17 +24,17 @@
             .profile-pic-square-with-pic
               = image_tag  current_user.avatar_url
           .col-lg-10.overview-user-info
-
             .row
               .col-lg-4
                 %h2
                   = current_user.summoner.name.capitalize
               .col-lg-2{style:'padding-top:12px;'}
                 Gold/Minute:
-              .col-lg-5{style:'padding-top:10px;'}
-                .progress{style:'background-color:#46525E; height:16px;'}
-                  .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "80", role: "progressbar", style: "width: 80%"}
-                    %span.sr-only 80% Complete
+              .col-lg-1{style:'padding-top:12px; text-align:right;'}
+                = current_user.summoner.agpm
+              .col-lg-4{style:'padding-top:10px;'}
+                .progress.has-tooltip{title:"#{current_user.summoner.agpm} Gold per minute - #{current_user.summoner.gold_per_minute_percentage}% of best", style:'background: #485766;'}
+                  .progress-bar{class: current_user.summoner.gold_per_minute_percentage > 40 ? "progress-bar-success" : "progress-bar-warning" , 'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => "#{current_user.summoner.gold_per_minute_percentage}", role: 'progressbar', style: "width: #{current_user.summoner.gold_per_minute_percentage}%"}
 
             .row
               .col-lg-4
@@ -50,27 +50,23 @@
                 = current_user.play_style
 
               .col-lg-4
-
                 Region:&nbsp;&nbsp;
-                = current_user.summoner.region
+                = current_user.summoner.region.upcase
                 %br
                 Level:&nbsp;&nbsp;
                 = current_user.summoner.level
                 %br
-                KDA:&nbsp;&nbsp;
-                00
-
-              .col-lg-3
                 Wins:&nbsp;&nbsp;
                 = total_wins
-                %br
+
+              .col-lg-3
                 Total Kills:&nbsp;&nbsp;
                 = total_kills
                 %br
                 Total Assists:&nbsp;&nbsp;
                 = totalAssists
 
-        .row.pad{style:'padding-top:0; height:101px;overflow: auto;'}
+        .row.pad{style:'padding-top:0; overflow: auto;'}
           .col-lg-7
             %p.bio
               = current_user.short_bio.html_safe
@@ -79,7 +75,21 @@
               = image_tag champ.avatar_url
 
       .col-lg-3.right-Well
-        %canvas#canvas{:height => "250", :width => "250", style:'margin-left: -16px;'}
+        .badges-well
+
+          = image_tag 'badges/badge-mvp.png', class:'empty-badge has-tooltip', title:'MVP Badge'
+          = image_tag 'badges/badge-pentakill.png', class:'empty-badge has-tooltip', title:'Penta Kill Badge'
+          = image_tag 'badges/badge-quadrakill.png', class:'empty-badge has-tooltip', title:'Quadra Kill Badge'
+          -#= image_tag 'badges/badge-firstblood.png', class:'empty-badge has-tooltip', title:''
+          = image_tag 'badges/badge-heal.png', class:'empty-badge has-tooltip', title:'Heal Badge'
+          = image_tag 'badges/badge-jungle.png', class:'empty-badge has-tooltip', title:'jungle Badge'
+          = image_tag 'badges/badge-mage.png', class:'empty-badge has-tooltip', title:'Mage Badge'
+          = image_tag 'badges/badge-markmen.png', class:'empty-badge has-tooltip', title:'Marksman Badge'
+          = image_tag 'badges/badge-melee.png', class:'empty-badge has-tooltip', title:'Melee Badge'
+          = image_tag 'badges/badge-support.png', class:'empty-badge has-tooltip', title:'Support Badge'
+
+
+
 
   .page-top-pad
     .row
