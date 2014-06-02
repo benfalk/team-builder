@@ -91,9 +91,6 @@
           = image_tag 'badges/badge-melee.png', class:'empty-badge has-tooltip', title:'Melee Badge'
           = image_tag 'badges/badge-support.png', class:'empty-badge has-tooltip', title:'Support Badge'
 
-
-
-
   .page-top-pad
     .row
       .col-lg-3
@@ -213,13 +210,24 @@
 
         = render partial:'play_calender', locals:{data: current_user.summoner.games.amount_played_by_day}
 
-        %legend
-          Your Match History
+
+        %h2 Your Match History
         - cache(@game_stats.first) do
           = render partial: 'match', collection: @game_stats, as: :match
 
         :javascript
           $('.has-tooltip').tooltip()
+
+          var old_date = moment().format('DDMMYY');
+          $('.match').each(function(){
+            var new_date = $(this).data('date')
+            if(new_date == old_date){
+              $(this).addClass('today')
+            }
+            console.log(old_date,new_date)
+            old_date = new_date
+          })
+
 
 
         .row

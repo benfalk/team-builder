@@ -1,4 +1,4 @@
-.match
+.match{ 'data-date'=>"#{match.played_at.strftime('%d%m%y')}"}
   .badges
     - if match.raw['stats']['largestMultiKill'] == 4
       = image_tag 'badges/badge-quadrakill.png'

@@ -217,8 +217,8 @@
 
 .match {
   margin: 30px 0 30px;
-  padding-bottom: 20px;
-  border-bottom: 1px dotted #495B6F;
+  padding-top: 20px;
+  border-top: 1px dotted #f2ae43;
   font-size: 1.2em;
   position: relative;
   .badges {
@@ -230,6 +230,9 @@
     img {
       width: 70px;
     }
+  }
+  &.today{
+    border-top: 1px dotted #495B6F;
   }
 }
 
