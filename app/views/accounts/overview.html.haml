@@ -211,7 +211,7 @@
         = render partial:'play_calender', locals:{data: current_user.summoner.games.amount_played_by_day}
 
 
-        %h2 Your Match History
+        %h3 Your Match History
         - cache(@game_stats.first) do
           = render partial: 'match', collection: @game_stats, as: :match
 
