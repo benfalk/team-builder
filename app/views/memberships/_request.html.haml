@@ -1,0 +1,27 @@
+%tr
+  %td
+    = image_tag 'dummy_avatar.png', class:'small-avatar'
+    = request.user.summoner.name
+  %td
+    Las Vegas
+  %td
+    24
+  %td
+    Support
+  %td
+    0/0/0
+  %td
+    casual
+  %td
+    Nights and weekends
+  %td
+    .champ-list-short-small
+      = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+      = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+      = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+      = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+
+  %td
+    = form_for(request, url: team_request_url(@team,request)) do |f|
+      = f.hidden_field :status, value: :accepted 
+      = f.submit 'Except', class: 'btn btn-success'

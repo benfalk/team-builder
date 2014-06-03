@@ -41,34 +41,7 @@
         %th CHAMPS
         %th
     %tbody
-      - @hash = [1,1,1,1]
-      - @hash.each do |k, v|
-        %tr
-          %td
-            = image_tag 'dummy_avatar.png', class:'small-avatar'
-            potterbaum
-          %td
-            Las Vegas
-          %td
-            24
-          %td
-            Support
-          %td
-            0/0/0
-          %td
-            casual
-          %td
-            Nights and weekends
-          %td
-            .champ-list-short-small
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-
-          %td
-            .btn.btn-success Except
-
+      = render partial: 'request', collection: @team.requests.undecided.includes({user:[:summoner]}).to_a, as: :request
 
   %legend Recently played with
   %table.table.team-builder-table.table-hover
