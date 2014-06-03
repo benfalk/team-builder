@@ -14,7 +14,10 @@ Rails.application.routes.draw do
     resources :memberships, except:[:show]
     resources :notifications, controller: :team_notifications
     resources :team_notes, only:[:create,:update]
+    resources :requests, only:[:index,:update], controller: :team_requests
   end
+
+  resources :requests, only:[:index,:create,:destroy]
 
   root 'pages#index'
 

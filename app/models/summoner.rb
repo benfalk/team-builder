@@ -56,6 +56,8 @@ class Summoner < ActiveRecord::Base
 
   before_create :create_verify_string
 
+  has_many :team_invites, class_name: 'Team::SummonerInvite'
+
   #after_create :fetch_riot_info, :populate_stats_summary, :boot_game_stats
 
   def create_verify_string

@@ -40,6 +40,8 @@ class User < ActiveRecord::Base
 
   has_many :teams, through: :team_memberships, source: :team
 
+  has_many :team_requests, class_name: 'Team::Request'
+
   mount_uploader :avatar, AvatarUploader
 
   after_create do

@@ -1,9 +1,13 @@
 class TeamsController < ApplicationController
   
   before_action :authenticate_user!, only:[:new,:create,:edit]
+  before_action :only_captains!, only:[:edit,:update]
+  delegate :is_member?, :is_team_captain?, :has_request_pending?, to: :user_questions
+
+  class TeamCaptainOnlyException < Exception; end
 
   def edit
-    @team = Team.including_membership_data.find(params[:id])
+    @team = team
     respond_to do |format|
       format.html
       format.json { render json: @team }
@@ -11,7 +15,7 @@ class TeamsController < ApplicationController
   end
 
   def update
-    @team = Team.including_membership_data.find(params[:id])
+    @team = team
     respond_to do |format|
       if @team.update(team_create_params)
         format.html { redirect_to team_url(params[:id]), alert: 'Team updated' }
@@ -44,9 +48,12 @@ class TeamsController < ApplicationController
   end
 
   def show
-    @team = Team.including_membership_data.find(params[:id])
+    @team = team
     @team_games = @team.games.order(played_at: :desc)
     @skype_names = @team.users.skype_names
+    @team_user_questions = team.user_questions(current_user)
+    @is_a_member = is_member?
+    @request_pending = has_request_pending?
     respond_to do |format|
       format.html
       format.json { render json: @team }
@@ -54,6 +61,18 @@ class TeamsController < ApplicationController
   end
 
   private
+
+  def team
+    @_t ||= Team.including_membership_data.find(params[:id])
+  end
+
+  def user_questions
+    team.user_questions(current_user)
+  end
+
+  def only_captains!
+    raise TeamCaptainOnlyException unless is_team_captain?
+  end
 
   def team_create_params
     params.require(

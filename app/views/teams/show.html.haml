@@ -4,35 +4,45 @@
       - unless @team.avatar_url.blank?
         .team-avatar{style:"background-image:url(#{@team.avatar_url})"}
 
-      %legend Team Comm
-      %a.skype-button{:href => "skype:#{@skype_names.join(';')}?call&topic=Team%20Call", title:" Conference: #{@skype_names.join(', ')}", 'data-placement'=>"top"}
-        = image_tag 'skype.png'
-        Start Group Call
-      :javascript
-        $('.skype-button').tooltip()
 
-      %hr
+      - if @is_a_member
+        %legend Team Comm
+        %a.skype-button{:href => "skype:#{@skype_names.join(';')}?call&topic=Team%20Call", title:" Conference: #{@skype_names.join(', ')}", 'data-placement'=>"top"}
+          = image_tag 'skype.png'
+          Start Group Call
+        :javascript
+          $('.skype-button').tooltip()
 
-      = form_for(@team.stream.notifications.build, url: team_notifications_path(@team), html:{class: 'form-inline'}) do |f|
-        .form-group
-          = f.text_field :message, class: 'form-control', placeholder: 'Message'
-          = f.submit 'Post', class: 'btn btn-default chat-post'
-      -#%form.form-inline{role: 'form'}
-        -#.form-group
-          -#%input.form-control{placeholder: 'Message', type: 'text'}
-        -#%button.btn.btn-default.chat-post{type: 'submit'} Post
-      - @team.stream.notifications.order(created_at: :desc).each do |msg|
-        .activity
-          .note
-            .from
-              = msg.from.capitalize
-            .message
-              = msg.message
+        %hr
+
+        = form_for(@team.stream.notifications.build, url: team_notifications_path(@team), html:{class: 'form-inline'}) do |f|
+          .form-group
+            = f.text_field :message, class: 'form-control', placeholder: 'Message'
+            = f.submit 'Post', class: 'btn btn-default chat-post'
+        -#%form.form-inline{role: 'form'}
+          -#.form-group
+            -#%input.form-control{placeholder: 'Message', type: 'text'}
+          -#%button.btn.btn-default.chat-post{type: 'submit'} Post
+        - @team.stream.notifications.order(created_at: :desc).each do |msg|
+          .activity
+            .note
+              .from
+                = msg.from.capitalize
+              .message
+                = msg.message
 
     .col-lg-9.team_show
       %legend
-        = link_to 'Summoner Roster', new_team_membership_path(@team), class: 'btn pull-right'
-        = link_to 'Edit', edit_team_path(@team), class:'btn pull-right'
+        - if @is_a_member
+          = link_to 'Summoner Roster', new_team_membership_path(@team), class: 'btn pull-right'
+          = link_to 'Edit', edit_team_path(@team), class:'btn pull-right'
+        - elsif @request_pending
+          %span.btn.pull-right
+            Request Pending
+        - else
+          = form_for Team::Request.new(team: @team), url: requests_path do |f|
+            = f.hidden_field :team_id
+            = f.submit 'Request Invite', class: 'btn pull-right'
 
         = @team.name.upcase
 

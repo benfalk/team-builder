@@ -16,6 +16,8 @@ class Team < ActiveRecord::Base
 
   has_many :team_notes
 
+  has_many :requests, class_name: 'Team::Request'
+
   has_many :users, through: :team_memberships, source: :user
 
   has_many :summoners, through: :team_memberships, source: :summoner
@@ -28,6 +30,20 @@ class Team < ActiveRecord::Base
 
   def games
     Game.where(id: game_ids).includes(:summoners,{game_stats:[:summoner]})
+  end
+
+  def user_questions(user)
+    UserQuestions.new(self,user)
+  end
+
+  def has_member?(user)
+    return false unless user.is_a?(User)
+    user_ids.include?(user.id)
+  end
+
+  def is_team_captain?(user)
+    return false unless user.is_a?(User)
+    team_memberships.where(membership_type: 'captain', user_id: user.id).count > 0
   end
 
 end
