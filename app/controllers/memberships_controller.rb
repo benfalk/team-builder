@@ -8,13 +8,13 @@ class MembershipsController < ApplicationController
   end
 
   def new
-    @team = Team.find(params[:team_id])
+    @team = current_user.teams.find(params[:team_id])
     @membership = @team.team_memberships.build
     @canidates = User.includes(:favorite_champions,:summoner).where.not(id: @team.user_ids).page(params[:page])
   end
 
   def index
-    @team = Team.including_membership_data.find(params[:team_id])
+    @team = current_user.teams.find(params[:team_id]).including_membership_data
     @memberships = @team.team_memberships
     respond_to do |format|
       format.html
@@ -23,7 +23,7 @@ class MembershipsController < ApplicationController
   end
 
   def update
-    @team = Team.find(params[:team_id])
+    @team = current_user.teams.find(params[:team_id])
     @membership = @team.team_memberships.find(params[:id])
     respond_to do |format|
       if @membership.update(update_params)
@@ -37,7 +37,7 @@ class MembershipsController < ApplicationController
   end
 
   def create
-    @team = Team.find(params[:team_id])
+    @team = current_user.teams.find(params[:team_id])
     @membership = @team.team_memberships.build(create_params)
     respond_to do |format|
       if @membership.save
@@ -51,7 +51,7 @@ class MembershipsController < ApplicationController
   end
 
   def destroy
-    @membership = Team.find(params[:team_id]).team_memberships.find(params[:id])
+    @membership = current_user.teams.find(params[:team_id]).team_memberships.find(params[:id])
     respond_to do |format|
       if @membership.destroy
         format.html { redirect_to new_team_membership_url(@membership.team) }

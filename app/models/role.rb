@@ -6,4 +6,8 @@ class Role < ActiveRecord::Base
     name
   end
 
+  def self.full_list
+    @full_list ||= all.pluck(:name)
+  end
+
 end

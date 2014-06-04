@@ -61,7 +61,11 @@ class Team < ActiveRecord::Base
   end
 
   def positions
-    team_memberships.map { |s| s.role }.uniq.join(', ')
+    team_memberships.map { |s| s.role.to_s }.uniq
+  end
+
+  def open_positions
+    Role.full_list - positions
   end
 
 end
