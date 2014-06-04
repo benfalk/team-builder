@@ -30,52 +30,60 @@
           %tr
             %th
             %th Team Name
-            %th League
+            %th Level Range
             %th Style
             %th Location
-            %th Position
+            %th Positions
             %th Wins
             %th Founded
             %th Server
             %th Join Request
         %tbody
-          - @hash = (1...3).to_a
-          - @hash.each do |v|
+          - @teams.each do |team|
             %tr
               %td
-                = image_tag 'G2_logo.png'
-              %td GAMERS 2
-              %td Silver
-              %td Casual
-              %td Las Vegas
-              %td Support
-              %td 9
-              %td February 24th, 2014
-              %td NA
+                = image_tag team.avatar
               %td
-                .btn.btn-success Send Request
-
-          %tr
-            %td{colspan:'8', style:'text-align:center; font-size:1em; color: #fff;'}
-              Outside your Location
-
-          - @hash = (1...12).to_a
-          - @hash.each do |v|
-            %tr
+                = team.name
               %td
-
-              %td Renegade Cavalcade
-              %td Silver
-              %td Professional
-              %td Madrid Spain
-              %td Support
-              %td 5
-              %td February 24th, 2014
-              %td NA
+                = team.level_range
               %td
-                .btn.btn-success Send Request
+                = team.play_style
+              %td
+                = team.users.first.try(:location)
+              %td
+                = team.open_positions.join(', ')
+              %td
+              %td
+                = team.created_at.strftime('%Y-%m-%d')
+              %td
+                = team.summoners.first.try(:region).try(:upcase)
+              %td
+                = form_for Team::Request.new(team: team), url: requests_path do |f|
+                  = f.hidden_field :team_id
+                  = f.submit 'Request Invite', class: ' btn btn-success'
 
-      %a.btn.load-more Show More
+          -#%tr
+          -#  %td{colspan:'8', style:'text-align:center; font-size:1em; color: #fff;'}
+          -#    Outside your Location
+          -#
+          -#- @hash = (1...12).to_a
+          -#- @hash.each do |v|
+          -#  %tr
+          -#    %td
+          -#
+          -#    %td Renegade Cavalcade
+          -#    %td Silver
+          -#    %td Professional
+          -#    %td Madrid Spain
+          -#    %td Support
+          -#    %td 5
+          -#    %td February 24th, 2014
+          -#    %td NA
+          -#    %td
+          -#      .btn.btn-success Send Request
+
+      -#%a.btn.load-more Show More
 
 
 
