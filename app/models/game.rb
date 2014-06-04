@@ -54,11 +54,11 @@ class Game < ActiveRecord::Base
   end
 
   def top_team
-    overview.select{|o| o['teamId'] == 200}
+    overview.select{|o| o['teamId'] == 200} || []
   end
   
   def bottom_team
-    overview.select{|o| o['teamId'] == 100}
+    overview.select{|o| o['teamId'] == 100} || []
   end
 
   def all_players
