@@ -1,0 +1,20 @@
+%tr
+  %td
+    = image_tag user.avatar_url, style:'height:20px; display:inline-block; margin-right:3px;'
+    = user.summoner.name
+  %td
+    = user.location
+  %td 2
+  %td 2
+  %td 2
+  %td 2
+  %td
+    = user.favorite_roles.to_a.join(',')
+  %td{style:'width:200px'}
+    .progress
+      .progress-bar.progress-bar-success{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{user.summoner.gold_per_minute_percentage}", role: "progressbar", style: "width: #{user.summoner.gold_per_minute_percentage}%"}
+        %span.sr-only 80% Complete
+  %td
+    %i.fa.fa-plus.has-tooltip{style:'color:#5cb85c', 'data-placement' => 'top', 'data-toggle' => 'tooltip', title: 'Request Comrade'}
+  %td
+    %i.fa.fa-minus-circle.has-tooltip{style:'color:#d9534f', 'data-placement' => 'top', 'data-toggle' => 'tooltip', title: 'Mark Foe'}

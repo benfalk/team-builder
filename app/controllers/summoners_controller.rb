@@ -13,6 +13,10 @@ class SummonersController < ApplicationController
     end
   end
 
+  def available
+    @users = User.includes(:favorite_roles,:summoner).page(params[:page])
+  end
+
   def lookup
     @summoner = Summoner.prepare_binding(params.permit(:name,:region))
     respond_to do |format|

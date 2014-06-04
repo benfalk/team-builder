@@ -14,6 +14,7 @@ gem 'underscore-rails'
 gem 'momentjs-rails'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'kaminari'
 
 gem 'pg'
 gem 'capistrano3-puma'

@@ -1,0 +1,68 @@
+.container.page-top-pad
+  .row.page-top-pad
+    .col-lg-3
+      %legend Recently Joined
+      .list-group
+        %a.list-group-item{href: "#"}
+          .pull-right Level 29
+          BenFalk
+        %a.list-group-item{href: "#"}
+          .pull-right Level 29
+          BenFalk
+        %a.list-group-item{href: "#"}
+          .pull-right Level 29
+          BenFalk
+
+    .col-lg-9
+
+      %legend
+        Summoners
+
+      %table.table.table-hover
+        %thead
+          %tr
+            %th Team Roster
+            %th Location
+            %th item
+            %th item
+            %th item
+            %th KDA
+            %th Role
+            %th Gold Per Minute
+            %th{colspan:'2'} Pick
+        %tbody
+          = render partial: 'user', collection: @users, as: :user
+
+
+
+
+      .row
+        .col-lg-12
+
+
+
+
+
+      :javascript
+        $('.has-tooltip').tooltip()
+
+
+
+
+
+
+
+
+
+
+
+
+
+  %br
+  %br
+  %br
+  %br
+  %br
+  %br
+
+  -#= debug current_user

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   end
 
   resources :summoners, only:[:create] do
+    get 'available', on: :collection, as: :available, action: :available
     get 'lookup/:region/:name', on: :collection, as: :lookup, action: :lookup
   end
 
