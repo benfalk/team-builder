@@ -104,6 +104,14 @@
             = link_to t.name, team_path(t), class:'list-group-item'
 
 
+        %legend Team Invites
+        .list-group
+          - @invites.each do |invite|
+            = link_to invite.team.name, team_path(invite.team)
+            = form_for(invite, url: team_summoner_invite_path(invite.team, invite)) do |f|
+              = f.hidden_field :status, value: 'accepted'
+              = f.submit "Accept", class: 'btn btn-primary'
+
         %legend Teammate Activity
         .activity
           .note

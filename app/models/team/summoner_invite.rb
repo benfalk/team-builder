@@ -6,4 +6,8 @@ class Team::SummonerInvite < ActiveRecord::Base
 
   belongs_to :summoner
 
+  after_save do
+    team.team_memberships.create(user: summoner.user, summoner: summoner) if accepted?
+  end
+
 end

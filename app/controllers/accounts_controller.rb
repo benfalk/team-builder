@@ -30,6 +30,7 @@ class AccountsController < ApplicationController
       .game_stats.non_bot_matches
       .includes({game:[:summoners,{game_stats:[:summoner]}]},:played_champion)
       .order(played_at: :desc)
+    @invites = current_user.team_invites.undecided
   end
 
   private
