@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :teams do
+    resources :summoner_invites, only:[:create]
     resources :memberships, except:[:show]
     resources :notifications, controller: :team_notifications
     resources :team_notes, only:[:create,:update]

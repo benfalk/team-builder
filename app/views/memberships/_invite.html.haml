@@ -20,4 +20,9 @@
         = image_tag fc.avatar_url
 
   %td
-    .btn.btn-primary &nbsp; Invite &nbsp;
+    - if @team.user_questions(user).has_been_invited?
+      Invited
+    - else
+      = form_for(Team::SummonerInvite.new(summoner: user.summoner)) do |f|
+        = f.hidden_field :summoner_id
+        = f.submit 'Invite', class: 'btn btn-primary'

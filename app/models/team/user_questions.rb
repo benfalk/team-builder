@@ -17,10 +17,18 @@ class Team::UserQuestions
     Team::Request.undecided.where(user_id: user_id).count > 0
   end
 
+  def has_been_invited?
+    Team::SummonerInvite.undecided.where(summoner_id: summoner_id).count > 0
+  end
+
   private
 
   def user_id
     @user.is_a?(User) ? @user.id : nil
+  end
+
+  def summoner_id
+    @user.is_a?(User) ? @user.summoner.id : nil
   end
 
 end

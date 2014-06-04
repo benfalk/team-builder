@@ -20,6 +20,8 @@ class Team < ActiveRecord::Base
 
   has_many :users, through: :team_memberships, source: :user
 
+  has_many :summoner_invites, class_name: 'Team::SummonerInvite'
+
   has_many :summoners, through: :team_memberships, source: :summoner
 
   mount_uploader :avatar, AvatarUploader
