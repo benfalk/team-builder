@@ -48,4 +48,20 @@ class Team < ActiveRecord::Base
     team_memberships.where(membership_type: 'captain', user_id: user.id).count > 0
   end
 
+  def level_range
+    if levels.all? { |s| s == 30 }
+      'all 30'
+    else
+      "#{levels.min} - #{levels.max}"
+    end
+  end
+
+  def levels
+    summoners.map { |s| s.level }
+  end
+
+  def positions
+    team_memberships.map { |s| s.role }.uniq.join(', ')
+  end
+
 end

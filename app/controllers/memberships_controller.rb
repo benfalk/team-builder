@@ -4,7 +4,7 @@ class MembershipsController < ApplicationController
 
   def edit
     @team = Team.find(params[:team_id])
-    @membership = @team.find(params[:id])
+    @membership = @team.team_memberships.find(params[:id])
   end
 
   def new
@@ -24,7 +24,7 @@ class MembershipsController < ApplicationController
 
   def update
     @team = Team.find(params[:team_id])
-    @membership = @team.find(params[:id])
+    @membership = @team.team_memberships.find(params[:id])
     respond_to do |format|
       if @membership.update(update_params)
         format.html { redirect_to new_team_membership_url(@team) }
