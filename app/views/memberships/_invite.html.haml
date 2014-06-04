@@ -1,0 +1,23 @@
+%tr
+  %td
+    = image_tag user.avatar_url, class:'small-avatar'
+    = user.summoner.name
+  %td
+    = user.location
+  %td
+    = user.summoner.level
+  %td
+    = user.favorite_roles.to_a.join(", ")
+  %td
+    
+  %td
+    = user.play_style
+  %td
+    = user.gaming_times_pretty
+  %td
+    .champ-list-short-small
+      - user.favorite_champions.each do |fc|
+        = image_tag fc.avatar_url
+
+  %td
+    .btn.btn-primary &nbsp; Invite &nbsp;

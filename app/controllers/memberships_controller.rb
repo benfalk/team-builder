@@ -10,6 +10,7 @@ class MembershipsController < ApplicationController
   def new
     @team = Team.find(params[:team_id])
     @membership = @team.team_memberships.build
+    @canidates = User.includes(:favorite_champions,:summoner).where.not(id: @team.user_ids).page(params[:page])
   end
 
   def index

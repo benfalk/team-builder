@@ -70,4 +70,7 @@ class User < ActiveRecord::Base
     "#{location_city} #{location_state}".squish!
   end
 
+  def gaming_times_pretty
+    GAMING_TIME_OPTIONS.index(gaming_times)
+  end 
 end

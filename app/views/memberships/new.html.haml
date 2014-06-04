@@ -57,36 +57,9 @@
         %th CHAMPS
         %th
     %tbody
-      - @hash = [1,1]
-      - @hash.each do |k, v|
-        %tr
-          %td
-            = image_tag 'dummy_avatar.png', class:'small-avatar'
-            potterbaum
-          %td
-            Las Vegas
-          %td
-            24
-          %td
-            Support
-          %td
-            0/0/0
-          %td
-            casual
-          %td
-            Nights and weekends
-          %td
-            .champ-list-short-small
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+      = render partial: 'invite', collection: [], as: :user
 
-          %td
-            .btn.btn-primary &nbsp; Invite &nbsp;
-
-
-  %legend Fitting Candidates
+  %legend Candidates
   %table.table.team-builder-table.table-hover
     %thead
       %tr
@@ -100,31 +73,4 @@
         %th CHAMPS
         %th
     %tbody
-      - @hash = [1,1,1,1,1,1,1,1,1,1,1,1,1]
-      - @hash.each do |k, v|
-        %tr
-          %td
-            = image_tag 'dummy_avatar.png', class:'small-avatar'
-            potterbaum
-          %td
-            Las Vegas
-          %td
-            24
-          %td
-            Support
-          %td
-            0/0/0
-          %td
-            casual
-          %td
-            Nights and weekends
-          %td
-            .champ-list-short-small
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-              = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-
-          %td
-            .btn.btn-primary &nbsp; Invite &nbsp;
-  -#= debug @team
+      = render partial: 'invite', collection: @canidates, as: :user
