@@ -4,6 +4,11 @@ class Stream < ActiveRecord::Base
 
   belongs_to :owner, polymorphic: true
 
+  def self.interlaced_for(user)
+    ids = where(owner_type: 'Team', owner_id: user.team_ids).pluck(:id)
+    Notification.where(stream_id: ids)
+  end
+
   def parse_game_notifications(game)
     parse_team_game_notifications(game) if owner.is_a?(Team)
   end
