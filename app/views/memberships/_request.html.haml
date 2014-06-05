@@ -1,25 +1,23 @@
 %tr
   %td
-    = image_tag 'dummy_avatar.png', class:'small-avatar'
+    = image_tag request.user.avatar_url, class:'small-avatar'
     = request.user.summoner.name
   %td
-    Las Vegas
+    = request.user.location
   %td
-    24
+    = request.user.summoner.level
   %td
-    Support
+    = request.user.favorite_roles.to_a.join(", ")
   %td
-    0/0/0
+
   %td
-    casual
+    = request.user.play_style
   %td
-    Nights and weekends
+    = request.user.gaming_times_pretty
   %td
     .champ-list-short-small
-      = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-      = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-      = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
-      = image_tag 'http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/Heimerdinger.png'
+      - request.user.favorite_champions.each do |fc|
+        = image_tag fc.avatar_url
 
   %td
     = form_for(request, url: team_request_url(@team,request)) do |f|
