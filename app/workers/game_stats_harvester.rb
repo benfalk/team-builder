@@ -27,6 +27,11 @@ class GameStatsHarvester
         end
         GameStats.where(game_id: nil, riot_game_uid: game.riot_id).update_all(game_id: game.id)
         game.update(harvested: true)
+        begin
+          team.stream.parse_game_notifications(game)
+        rescue
+          nil
+        end
       end
     end
 
