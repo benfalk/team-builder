@@ -1,4 +1,4 @@
-%table.table.team-builder-table.table-hover.team-table
+%table.table.team-builder-table.team-table
   %thead
     %tr
       %th{colspan:'2'} Team Roster
@@ -33,8 +33,11 @@
           %td
             = tm.summoner.level
           %td
-            = form_for(tm, url: team_membership_path(@team, tm)) do |f|
-              = f.select :role_id, options_for_select(Role.all.pluck(:name,:id), tm.role_id), {}, class: 'form-control', onchange: '$(this).parent().submit()'
+            - if edit
+              = form_for(tm, url: team_membership_path(@team, tm)) do |f|
+                = f.select :role_id, options_for_select(Role.all.pluck(:name,:id), tm.role_id), {}, class: 'form-control', onchange: '$(this).parent().submit()'
+            - else
+              = tm.role
           %td
             0
           - unless edit

@@ -3,7 +3,7 @@
     .row
       .col-lg-5
         %h2
-          = @team.name
+          = @team.name.capitalize
           Roster
       .col-lg-7
         = render partial: 'memberships/form'
@@ -27,50 +27,69 @@
   %br
   %br
 
-  %legend Except Requests
-  %table.table.team-builder-table.table-hover
-    %thead
-      %tr
-        %th CANDIDATES
-        %th LOCATION
-        %th Level
-        %th ROLE
-        %th KDA
-        %th STYLE
-        %th Times
-        %th CHAMPS
-        %th
-    %tbody
-      = render partial: 'request', collection: @team.requests.undecided.includes({user:[:summoner]}).to_a, as: :request
+  %legend Requests
+  - req_ary = @team.requests.undecided.includes({user:[:summoner]}).to_a
+  - if req_ary.size > 0
+    %table.table.team-builder-table.table-hover
+      %thead
+        %tr
+          %th CANDIDATES
+          %th LOCATION
+          %th Level
+          %th ROLE
+          %th KDA
+          %th STYLE
+          %th Times
+          %th CHAMPS
+          %th
+      %tbody
+        = render partial: 'request', collection: req_ary, as: :request
+  - else
+    .row
+      .col-lg-12
+        .load-more
+          None at this time
 
-  %legend Recently played with
-  %table.table.team-builder-table.table-hover
-    %thead
-      %tr
-        %th CANDIDATES
-        %th LOCATION
-        %th Level
-        %th ROLE
-        %th KDA
-        %th STYLE
-        %th Times
-        %th CHAMPS
-        %th
-    %tbody
-      = render partial: 'invite', collection: [], as: :user
 
+  -#%legend Recently played with
+  -#%table.table.team-builder-table.table-hover
+  -#  %thead
+  -#    %tr
+  -#      %th CANDIDATES
+  -#      %th LOCATION
+  -#      %th Level
+  -#      %th ROLE
+  -#      %th KDA
+  -#      %th STYLE
+  -#      %th Times
+  -#      %th CHAMPS
+  -#      %th
+  -#  %tbody
+  -#    = render partial: 'invite', collection: [], as: :user
+  %br
+  %br
   %legend Candidates
-  %table.table.team-builder-table.table-hover
-    %thead
-      %tr
-        %th CANDIDATES
-        %th LOCATION
-        %th Level
-        %th ROLE
-        %th KDA
-        %th STYLE
-        %th Times
-        %th CHAMPS
-        %th
-    %tbody
-      = render partial: 'invite', collection: @canidates, as: :user
+
+  - if @canidates.size > 0
+    %table.table.team-builder-table.table-hover
+      %thead
+        %tr
+          %th CANDIDATES
+          %th LOCATION
+          %th Level
+          %th ROLE
+          %th KDA
+          %th STYLE
+          %th Times
+          %th CHAMPS
+          %th
+      %tbody
+        = render partial: 'invite', collection: @canidates, as: :user
+  - else
+    .row
+      .col-lg-12
+        .load-more
+          None at this time
+
+  %br
+  %br

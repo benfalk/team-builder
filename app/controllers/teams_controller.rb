@@ -60,6 +60,11 @@ class TeamsController < ApplicationController
     end
   end
 
+  def index
+    @teams = Team.including_membership_data.all.where.not(id: current_user.team_ids)
+
+  end
+
   private
 
   def team
