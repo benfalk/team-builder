@@ -25,7 +25,7 @@
         We have found these available positions perfect for you! If you dont find a position you want then create your own team.
         = link_to 'Create New Team', new_team_path, class:'pull-right'
 
-      %table.table.table-hover.teams-table
+      %table.table.teams-table
         %thead
           %tr
             %th
@@ -44,7 +44,7 @@
               %td
                 = image_tag team.avatar
               %td
-                = team.name
+                = link_to team.name, team_path(team)
               %td
                 = team.level_range
               %td
@@ -55,7 +55,7 @@
                 = team.open_positions.join(', ')
               %td
               %td
-                = team.created_at.strftime('%Y-%m-%d')
+                = team.created_at.strftime('%b %e, %Y')
               %td
                 = team.summoners.first.try(:region).try(:upcase)
               %td
