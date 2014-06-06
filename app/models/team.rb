@@ -1,6 +1,7 @@
 class Team < ActiveRecord::Base
 
   include StreamOwner
+  include GamingTimes
 
   CUSTOM_SQL = '
     SELECT 
