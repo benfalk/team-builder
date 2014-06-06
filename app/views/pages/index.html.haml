@@ -54,66 +54,76 @@
 
 
 .container
-  .page-header
-    %h2 Amateur Standings
-  %table.table
-    %thead
-      %tr
-        %th
-        %th{colspan:'2'} Team
-        %th Roster
-        %th Location
-        %th Wins
-        %th Losses
-    %tbody
-      - a = [0,1,0,1,0,4,6,3,0,7,0,2]
-      - a.each do |t|
-        %tr.standing-tr
-          %td.move
-            %i.fa{class:"fa-arrow-circle-#{t ==0 ? 'up': 'down'}"}
-          %td
-            = image_tag 'ALLlogo_0.png', class:'team-standings-logo'
-          %td ALLIANCE
-          %td.standings-team-avatars
-            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Bradley Potterbaum "Potterbaum"'
-            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
-            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
-            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
-            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
-          %td Las Vegas NV
-          %td 2
-          %td 4
+  -#  .page-header
+  -#    %h2 Amateur Standings
+  -#  %table.table
+  -#    %thead
+  -#      %tr
+  -#        %th
+  -#        %th{colspan:'2'} Team
+  -#        %th Roster
+  -#        %th Location
+  -#        %th Wins
+  -#        %th Losses
+  -#    %tbody
+  -#      - a = [0,1,0,1,0,4,6,3,0,7,0,2]
+  -#      - a.each do |t|
+  -#        %tr.standing-tr
+  -#          %td.move
+  -#            %i.fa{class:"fa-arrow-circle-#{t ==0 ? 'up': 'down'}"}
+  -#          %td
+  -#            = image_tag 'ALLlogo_0.png', class:'team-standings-logo'
+  -#          %td ALLIANCE
+  -#          %td.standings-team-avatars
+  -#            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Bradley Potterbaum "Potterbaum"'
+  -#            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
+  -#            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
+  -#            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
+  -#            = image_tag 'dummy_avatar.png', class:'has-tooltip', title:'Some Name'
+  -#          %td Las Vegas NV
+  -#          %td 2
+  -#          %td 4
+  -#
+  -#  :javascript
+  -#    $('.has-tooltip').tooltip()
 
-  :javascript
-    $('.has-tooltip').tooltip()
 
+  .row.featurette
+    .col-md-7
+      %h2.featurette-heading
+        First featurette heading.
+        %span.text-muted It'll blow your mind.
+      %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+    .col-md-5
+      = image_tag 'screens/screens_02.png', class:'featurette-image'
 
-  -#/ START THE FEATURETTES
-  -#.row.featurette
-  -#  .col-md-7
-  -#    %h2.featurette-heading
-  -#      First featurette heading.
-  -#      %span.text-muted It'll blow your mind.
-  -#    %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-  -#  .col-md-5
-  -#    %img.featurette-image.img-responsive{:alt => "500x500", "data-src" => "holder.js/500x500/auto", :src => "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4="}
-  -#%hr.featurette-divider
-  -#.row.featurette
-  -#  .col-md-5
-  -#    %img.featurette-image.img-responsive{:alt => "500x500", "data-src" => "holder.js/500x500/auto", :src => "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4="}
-  -#  .col-md-7
-  -#    %h2.featurette-heading
-  -#      Oh yeah, it's that good.
-  -#      %span.text-muted See for yourself.
-  -#    %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-  -#%hr.featurette-divider
-  -#.row.featurette
-  -#  .col-md-7
-  -#    %h2.featurette-heading
-  -#      And lastly, this one.
-  -#      %span.text-muted Checkmate.
-  -#    %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
-  -#  .col-md-5
-  -#    %img.featurette-image.img-responsive{:alt => "500x500", "data-src" => "holder.js/500x500/auto", :src => "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48cmVjdCB3aWR0aD0iNTAwIiBoZWlnaHQ9IjUwMCIgZmlsbD0iI2VlZSI+PC9yZWN0Pjx0ZXh0IHRleHQtYW5jaG9yPSJtaWRkbGUiIHg9IjI1MCIgeT0iMjUwIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjMxcHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NTAweDUwMDwvdGV4dD48L3N2Zz4="}
-  -#%hr.featurette-divider
-  -#  / /END THE FEATURETTES
+  %hr.featurette-divider
+  .row.featurette
+    .col-md-5
+      = image_tag 'screens/screens_01.png', class:'featurette-image'
+    .col-md-7
+      %h2.featurette-heading
+        Oh yeah, it's that good.
+        %span.text-muted See for yourself.
+      %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+  %hr.featurette-divider
+
+  .row.featurette
+    .col-md-7
+      %h2.featurette-heading
+        And lastly, this one.
+        %span.text-muted Checkmate.
+      %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+    .col-md-5
+      = image_tag 'screens/screens_03.png', class:'featurette-image'
+  %hr.featurette-divider
+
+  .row.featurette
+    .col-md-5
+      = image_tag 'screens/screens_04.png', class:'featurette-image'
+    .col-md-7
+      %h2.featurette-heading
+        Oh yeah, it's that good.
+        %span.text-muted See for yourself.
+      %p Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+  %hr.featurette-divider
