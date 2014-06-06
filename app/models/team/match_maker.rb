@@ -20,13 +20,18 @@ class Team::MatchMaker < Struct.new(:user)
   end
 
   def role_is_needed
-    membership = TeamMembership.arel_table
+    memberships = TeamMembership.arel_table
+    roles = Role.arel_table
+    teams = Team.arel_table
     query = 
-      membership
-        .project(membership[:team_id])
-        .group(membership[:team_id])
-        .group(membership[:role_id])
-        .having(membership[:role_id].not_in(user_roles))
+      teams
+      .project(teams[:id])
+      .join(roles, Arel::Nodes::OuterJoin).on(roles[:id].in(user_roles))
+      .join(memberships, Arel::Nodes::OuterJoin).on(
+        roles[:id].eq(memberships[:role_id])
+        .and(teams[:id].eq(memberships[:team_id]))
+      )
+      .where(memberships[:summoner_id].eq(nil))
     query.distinct
     team_ids = query.engine.connection.send(:select, query.to_sql, 'AREL').rows.flatten
     table[:id].in(team_ids)
