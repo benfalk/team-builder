@@ -40,8 +40,15 @@
     .col-lg-9.team_show
       %legend
         - if @is_a_member
-          = link_to 'Summoner Roster', new_team_membership_path(@team), class: 'btn pull-right'
+          - invites = @team.requests.undecided.includes({user:[:summoner]})
+          = link_to new_team_membership_path(@team), class: 'btn pull-right has-bubble' do
+            Summoner Roster
+            - if invites.count > 0
+              .bubble.has-tooltip{title:"#{invites.count} Invite #{invites.count == 1 ? 'request':'requests'}"}
+                = invites.count
+
           = link_to 'Edit', edit_team_path(@team), class:'btn pull-right'
+
         - elsif @request_pending
           %span.btn.pull-right
             Request Pending
