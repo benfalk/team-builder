@@ -339,7 +339,6 @@
 
 .activity {
   text-align: left;
-
 }
 
 .note {
@@ -348,11 +347,18 @@
     color: #df691a;
     font-size: 9px;
     text-align: left;
+    display: inline-block;
+    float: left;
+  }
+  .tops {
+    overflow: hidden;
   }
   .time {
     color: #909fa9;
     font-size: 9px;
-    text-align: center;
+    text-align: right;
+    display: inline-block;
+    float: right;
   }
   .message {
     font-size: 0.8em;

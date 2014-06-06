@@ -25,10 +25,16 @@
           -#%button.btn.btn-default.chat-post{type: 'submit'} Post
         - @team.stream.notifications.order(created_at: :desc).each do |msg|
           .activity
-            .note
-              .from
-                = msg.from.capitalize
-              .message
+            .note{ class:msg.source_type }
+              .tops
+                .from
+                  = msg.from.capitalize
+                .time
+                  = msg.stream.owner.try(:name)
+                  •
+                  = msg.updated_at.strftime('%b %e %l:%M %p')
+
+              %div{ class:msg.notification_type }
                 = msg.message
 
     .col-lg-9.team_show
