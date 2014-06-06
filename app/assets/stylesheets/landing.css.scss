@@ -339,7 +339,6 @@
 
 .activity {
   text-align: left;
-
 }
 
 .note {
@@ -348,11 +347,18 @@
     color: #df691a;
     font-size: 9px;
     text-align: left;
+    display: inline-block;
+    float: left;
+  }
+  .tops {
+    overflow: hidden;
   }
   .time {
     color: #909fa9;
     font-size: 9px;
-    text-align: center;
+    text-align: right;
+    display: inline-block;
+    float: right;
   }
   .message {
     font-size: 0.8em;
@@ -580,6 +586,23 @@ img.champ {
       height: 24px;
       border-radius: 4px;
       margin-right: 4px;
+    }
+  }
+  .has-bubble {
+    position: relative;
+    .bubble {
+      position: absolute;
+      display: inline-block;
+      background: #f0ad4e;
+      color: #fff;
+      font-size: 8px;
+      font-weight: 600;
+      border-radius: 32%;
+      padding: 2px 5px;
+      top: 0;
+      right: -2px;
+      text-shadow: 1px 1px 1px rgba(0,0,0, 0.2);
+      box-shadow: 1px 1px 1px rgba(0,0,0, 0.3);
     }
   }
 }

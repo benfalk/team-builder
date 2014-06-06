@@ -27,7 +27,7 @@
   %br
   %br
 
-  %legend Requests
+  %legend Invite Requests
   - req_ary = @team.requests.undecided.includes({user:[:summoner]}).to_a
   - if req_ary.size > 0
     %table.table.team-builder-table.table-hover
