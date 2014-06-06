@@ -2,14 +2,9 @@
   .page-header
     %h1 Summoner Profile Details
   %p
-    Nullam quis risus eget
-    %a{:href => "#"} urna mollis ornare
-    vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
-    vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
-
-
-
-
+    Welcome, we already have your summoner information, now we just need you to fill out the remaining details to verify and create
+    your account. Please be thorough and fill out all of your information. This will helps us determine the best fitting
+    teams for you, as well as help existing teams find and invite you.
 
   .row.page-top-pad
     .col-lg-6
@@ -49,7 +44,7 @@
 
           .col-lg-9
             %h1 
-              = @summoner.name
+              = @summoner.name.capitalize
             .karma
               Karma
               .val
@@ -123,8 +118,8 @@
           %p
             To verify your account just create a new masteries page and name it the code above.
             When you hit "Verify and Save" we will go and look for a masteries page with the name
-            matching the code above. Make sure you name the masteries the code and only the code no
-            extra letters or numbers just the code.
+            matching the code above. Please make sure there are no extra letters or numbers. Also
+            don't forget to save the mastery.
 
 
           %legend Game Play
