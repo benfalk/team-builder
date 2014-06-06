@@ -29,6 +29,7 @@
                 .empty-item
             &nbsp;&nbsp;
             - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
+              = "#{i=='item6'?'&nbsp;&nbsp;':''}".html_safe
               - unless match.raw['stats'][i].blank?
                 %img{src:"https://lkimg.zamimg.com/shared/riot/images/items/#{match.raw['stats'][i] }_32.png", class:'overview-summoner-items'}
               - else
@@ -47,9 +48,12 @@
         = match.raw['ipEarned']
 
         &nbsp;&nbsp;&nbsp;
-        .kda
-          %span KDA:
-          = "#{match.raw['stats']['championsKilled'].to_i}/#{match.raw['stats']['numDeaths'].to_i}/#{match.raw['stats']['assists'].to_i}"
+        - k = match.raw['stats']['championsKilled'].to_f
+        - d = match.raw['stats']['numDeaths'].to_f
+        - a = match.raw['stats']['assists'].to_f
+        .kda.has-tooltip{title:"#{k.to_i}/#{d.to_i}/#{a.to_i}"}
+          %span KDAR:
+          = ( d > 0 ? (k+a)/d : k+a).round(1)
 
 
     .col-lg-6

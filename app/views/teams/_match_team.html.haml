@@ -17,11 +17,12 @@
       - d = raws['numDeaths'].to_f
       - a = raws['assists'].to_f
       - kda = ( d > 0 ? (k+a)/d : k+a).round(1)
-      %span.has-tooltip{title:"Ratio of: #{k.to_i}/#{d.to_i}/#{a.to_i}"}
+      %span.has-tooltip{title:"#{k.to_i}/#{d.to_i}/#{a.to_i}"}
         = kda
     %td
       - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
 
+        = "#{i=='item6'?'&nbsp;&nbsp;':''}".html_safe
         - unless raws[i].blank?
           %img{src:"https://lkimg.zamimg.com/shared/riot/images/items/#{raws[i]}_32.png"}
         - else
