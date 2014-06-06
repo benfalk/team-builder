@@ -6,7 +6,7 @@
       = image_tag 'badges/badge-pentakill.png'
     - if match.raw['stats']['firstBlood']
       = image_tag 'badges/badge-firstblood.png'
-    - if match.raw['stats']['totalUnitsHealed'] > 10
+    - if match.raw['stats']['totalUnitsHealed'] && match.raw['stats']['totalUnitsHealed'] > 10
       = image_tag 'badges/badge-firstblood.png'
   .row
     .col-lg-6

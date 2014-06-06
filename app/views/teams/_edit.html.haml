@@ -76,6 +76,10 @@
                   Casual
 
             .form-group
+              %label.col-lg-3.control-label Convenient Gaming Times
+              .col-lg-9
+                = f.select :gaming_times, options_for_select(User::GAMING_TIME_OPTIONS,f.object.gaming_times), {}, class: 'form-control'
+            .form-group
               = f.submit 'Save', class: 'btn btn-primary save-team'
 
 

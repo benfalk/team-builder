@@ -62,7 +62,11 @@ class TeamsController < ApplicationController
 
   def index
     @teams = Team.including_membership_data.all.where.not(id: current_user.team_ids)
-
+    unless params[:all]
+      #@teams = @teams.where("teams.gaming_times = '#{current_user.gaming_times}'")
+      #@teams = @teams.where(play_style: current_user.play_style)
+      #@teams = @teams.where.not(team_memberships:{role_id: current_user.favorite_roles.pluck(:id)})
+    end
   end
 
   private
@@ -86,6 +90,7 @@ class TeamsController < ApplicationController
       :avatar,
       :name,
       :play_style,
+      :gaming_times,
       :about_us
     )
   end

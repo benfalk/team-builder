@@ -2,14 +2,8 @@ require "#{Rails.root}/app/uploaders/avatar_uploader"
 
 class User < ActiveRecord::Base
 
- include StreamOwner
-
- GAMING_TIME_OPTIONS = {
-    'Nights & Weekends'=> 'nights_and_weekends',
-    'All Day Everyday'=> 'all_day_everyday',
-    'Weekends Only'=> 'weekends_only',
-    'Daytime Only'=> 'daytime_only'
-  }
+  include StreamOwner
+  include GamingTimes
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -72,7 +66,4 @@ class User < ActiveRecord::Base
     "#{location_city} #{location_state}".squish!
   end
 
-  def gaming_times_pretty
-    GAMING_TIME_OPTIONS.index(gaming_times)
-  end 
 end
