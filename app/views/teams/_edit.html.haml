@@ -1,86 +1,77 @@
-.container.page-top-pad
-  .page-header
-    %h1 Create New Team
-  %p
-    Nullam quis risus eget
-    %a{:href => "#"} urna mollis ornare
-    vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+.row.page-top-pad
+
+  = form_for @team, html:{class:'page-top-pad form-horizontal'} do |f|
+
+    - if @team.errors.any?
+      #error_explanation.bs-callout.bs-callout-danger
+        %h4
+          = pluralize(@user.errors.count, "error")
+          prohibited this team from being saved:
+        %ul
+          - @user.errors.full_messages.each do |msg|
+            %li
+              * #{msg}
+
+    .row
+      .col-lg-3
+        .fileupload
+          = f.file_field :avatar
+          - unless @team.avatar_url.blank?
+            #user_avatar_preview.team-avatar{style:"background-image:url(#{@team.avatar_url})"}
+          - else
+            #user_avatar_preview.team-pic-square
+              %i.fa.fa-picture-o{style:'font-size:5em;'}
+              Team Avatar
+          :javascript
+            function readURL(input) {
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#user_avatar_preview').css(
+                        {'background-image':'url('+e.target.result+')',
+                        'border': 'none'}
+                        ).html('').addClass('team-avatar')
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+
+            $("#team_avatar").change(function(){
+                readURL(this);
+            });
 
 
-  .row.page-top-pad
+      .col-lg-5
+        %fieldset
+          .form-group
+            %label.col-lg-3.control-label{autofocus: true} Team Name
+            .col-lg-9
+              = f.text_field :name, class: 'form-control', placeholder: 'Team Name'
+          .form-group
+            %label.col-lg-3.control-label{autofocus: true} About Us
+            .col-lg-9
+              = f.text_area :about_us, class: 'form-control'
+      .col-lg-4
+        %fieldset
+          .form-group
+            %label.col-lg-3.control-label Play Style
+            .col-lg-9
+              %label.radio-inline
+                = f.radio_button :play_style, 'competitive', checked: @team.play_style == 'competitive' ?  true : false
+                Competitive
+              %label.radio-inline
+                = f.radio_button :play_style, 'casual', checked: @team.play_style == 'casual' ?  true : false
+                Casual
 
-    = form_for @team, html:{class:'page-top-pad form-horizontal'} do |f|
-
-      - if @team.errors.any?
-        #error_explanation.bs-callout.bs-callout-danger
-          %h4
-            = pluralize(@user.errors.count, "error")
-            prohibited this team from being saved:
-          %ul
-            - @user.errors.full_messages.each do |msg|
-              %li
-                * #{msg}
-
-      .row
-        .col-lg-3
-          .fileupload
-            = f.file_field :avatar
-            - unless @team.avatar_url.blank?
-              #user_avatar_preview.team-avatar{style:"background-image:url(#{@team.avatar_url})"}
-            - else
-              #user_avatar_preview.team-pic-square
-                %i.fa.fa-picture-o{style:'font-size:5em;'}
-                Team Avatar
-            :javascript
-              function readURL(input) {
-
-                  if (input.files && input.files[0]) {
-                      var reader = new FileReader();
-
-                      reader.onload = function (e) {
-                          $('#user_avatar_preview').css(
-                          {'background-image':'url('+e.target.result+')',
-                          'border': 'none'}
-                          ).html('').addClass('team-avatar')
-                      }
-
-                      reader.readAsDataURL(input.files[0]);
-                  }
-              }
-
-              $("#team_avatar").change(function(){
-                  readURL(this);
-              });
-
-
-        .col-lg-5
-          %fieldset
-            .form-group
-              %label.col-lg-3.control-label{autofocus: true} Team Name
-              .col-lg-9
-                = f.text_field :name, class: 'form-control', placeholder: 'Team Name'
-            .form-group
-              %label.col-lg-3.control-label{autofocus: true} About Us
-              .col-lg-9
-                = f.text_area :about_us, class: 'form-control'
-        .col-lg-4
-          %fieldset
-            .form-group
-              %label.col-lg-3.control-label Play Style
-              .col-lg-9
-                %label.radio-inline
-                  = f.radio_button :play_style, 'competitive', checked: @team.play_style == 'competitive' ?  true : false
-                  Competitive
-                %label.radio-inline
-                  = f.radio_button :play_style, 'casual', checked: @team.play_style == 'casual' ?  true : false
-                  Casual
-
-            .form-group
-              %label.col-lg-3.control-label Convenient Gaming Times
-              .col-lg-9
-                = f.select :gaming_times, options_for_select(User::GAMING_TIME_OPTIONS,f.object.gaming_times), {}, class: 'form-control'
-            .form-group
-              = f.submit 'Save', class: 'btn btn-primary save-team'
+          .form-group
+            %label.col-lg-3.control-label Convenient Gaming Times
+            .col-lg-9
+              = f.select :gaming_times, options_for_select(User::GAMING_TIME_OPTIONS,f.object.gaming_times), {}, class: 'form-control'
+          .form-group
+            = f.submit 'Save', class: 'btn btn-primary save-team'
 
 
 
