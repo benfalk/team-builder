@@ -1,6 +1,6 @@
 %tr{class:"#{ 'friend' if team_ids.include? p['summoner'].id }"}
   %td
-    = image_tag "http://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", style:'width:26px'
+    = image_tag "https://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", style:'width:26px'
     = p['summoner'].name.capitalize
 
   - if p['stats']
@@ -9,7 +9,7 @@
     %td
       - ['spell1','spell2'].each do |i|
         - unless raw[i].blank?
-          %img{src:"http://lkimg.zamimg.com/images/spells/#{ raw[i] }.png"}
+          %img{src:"https://lkimg.zamimg.com/images/spells/#{ raw[i] }.png"}
         - else
           .empty-item
     %td
@@ -23,7 +23,7 @@
       - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
 
         - unless raws[i].blank?
-          %img{src:"http://lkimg.zamimg.com/shared/riot/images/items/#{raws[i]}_32.png"}
+          %img{src:"https://lkimg.zamimg.com/shared/riot/images/items/#{raws[i]}_32.png"}
         - else
           .empty-item
     %td

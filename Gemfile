@@ -53,6 +53,8 @@ gem 'spring',        group: :development
 
 group :development do
   gem 'mailcatcher'
+  gem 'quiet_assets'
+  gem 'better_errors'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'foreman'

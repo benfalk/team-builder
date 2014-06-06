@@ -31,6 +31,7 @@ class AccountsController < ApplicationController
       .includes({game:[:summoners,{game_stats:[:summoner]}]},:played_champion)
       .order(played_at: :desc)
     @invites = current_user.team_invites.undecided
+    @notifications = Stream.interlaced_for(current_user).includes(stream:[:owner]).order(created_at: :desc)
   end
 
   private

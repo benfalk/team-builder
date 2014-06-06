@@ -83,6 +83,22 @@ class GameStats < ActiveRecord::Base
     raw['stats']['win']
   end
 
+  def quadra_kills?
+    multikill_for? 'quadraKills'
+  end
+
+  def penta_kills?
+    multikill_for? 'pentaKills'
+  end
+
+  def triple_kills?
+    multikill_for? 'tripleKills'
+  end
+
+  def raw_stats?
+    raw && raw['stats']
+  end
+
   def played_at
     super || Time.at(raw['createDate']/1000).to_datetime
   end
@@ -109,6 +125,12 @@ class GameStats < ActiveRecord::Base
 
   def kda
     "#{raw['stats']['championsKilled']}/#{raw['stats']['numDeaths']}/#{raw['stats']['assists']}"
+  end
+
+  private
+
+  def multikill_for?(name)
+    raw_stats? && raw['stats'][name] && raw['stats'][name] > 0
   end
 
 end

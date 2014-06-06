@@ -24,13 +24,13 @@
           .items
             - ['spell1','spell2'].each do |i|
               - unless match.raw[i].blank?
-                %img{src:"http://lkimg.zamimg.com/images/spells/#{ match.raw[i] }.png", class:'overview-summoner-items'}
+                %img{src:"https://lkimg.zamimg.com/images/spells/#{ match.raw[i] }.png", class:'overview-summoner-items'}
               - else
                 .empty-item
             &nbsp;&nbsp;
             - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
               - unless match.raw['stats'][i].blank?
-                %img{src:"http://lkimg.zamimg.com/shared/riot/images/items/#{match.raw['stats'][i] }_32.png", class:'overview-summoner-items'}
+                %img{src:"https://lkimg.zamimg.com/shared/riot/images/items/#{match.raw['stats'][i] }_32.png", class:'overview-summoner-items'}
               - else
                 .empty-item
 
@@ -57,13 +57,13 @@
         .col-lg-6
           - match.game.top_team.each do |p|
             .top-team
-              = image_tag "http://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
+              = image_tag "https://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
               = p['summoner'].name.capitalize
               %i.fa.fa-plus.has-tooltip{style:'color:#45587A', title: 'Request Comrade', class:'pull-right'}
 
         .col-lg-6
           - match.game.bottom_team.each do |p|
             .bottom-team
-              = image_tag "http://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
+              = image_tag "https://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
               = p['summoner'].name.capitalize
               %i.fa.fa-plus.has-tooltip{style:'color:#45587A',  title: 'Request Comrade', class:'pull-right'}
