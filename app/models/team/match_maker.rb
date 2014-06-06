@@ -25,7 +25,9 @@ class Team::MatchMaker < Struct.new(:user)
       membership
         .project(membership[:team_id])
         .group(membership[:team_id])
+        .group(membership[:role_id])
         .having(membership[:role_id].not_in(user_roles))
+    query.distinct
     team_ids = query.engine.connection.send(:select, query.to_sql, 'AREL').rows.flatten
     table[:id].in(team_ids)
   end
