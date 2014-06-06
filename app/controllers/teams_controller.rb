@@ -61,12 +61,12 @@ class TeamsController < ApplicationController
   end
 
   def index
-    @teams = Team.including_membership_data.all.where.not(id: current_user.team_ids)
-    unless params[:all]
-      #@teams = @teams.where("teams.gaming_times = '#{current_user.gaming_times}'")
-      #@teams = @teams.where(play_style: current_user.play_style)
-      #@teams = @teams.where.not(team_memberships:{role_id: current_user.favorite_roles.pluck(:id)})
+    if params[:all]
+      @teams = Team.all
+    else
+      @teams = Team::MatchMaker.new(current_user).teams
     end
+    @teams = @teams.including_membership_data
   end
 
   private
