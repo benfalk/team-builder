@@ -63,11 +63,11 @@
             .top-team
               = image_tag "https://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
               = p['summoner'].name.capitalize
-              %i.fa.fa-plus.has-tooltip{style:'color:#45587A', title: 'Request Comrade', class:'pull-right'}
+              %i.fa.fa-plus.has-tooltip{style:'color:#45587A', title: 'Request Comrade (coming soon)', class:'pull-right'}
 
         .col-lg-6
           - match.game.bottom_team.each do |p|
             .bottom-team
               = image_tag "https://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
               = p['summoner'].name.capitalize
-              %i.fa.fa-plus.has-tooltip{style:'color:#45587A',  title: 'Request Comrade', class:'pull-right'}
+              %i.fa.fa-plus.has-tooltip{style:'color:#45587A',  title: 'Request Comrade (coming soon)', class:'pull-right'}

@@ -116,17 +116,25 @@
         - @notifications.each do |msg|
           -#= debug msg
           .activity
-            .note{ class:msg.source_type }
-              .tops
-                .from
-                  = msg.from.capitalize
-                .time
-                  = msg.stream.owner.try(:name)
-                  •
-                  = msg.updated_at.strftime('%b %e %l:%M %p')
+            .note{ class:msg.source_type.downcase }
+              - if msg.source_type.downcase  == 'game'
+                .tops{class:msg.notification_type.downcase}
+                  .team
+                    = msg.stream.owner.try(:name)
+                  .outcome
+                    = msg.message
 
-              %div{ class:msg.notification_type }
-                = msg.message
+              - else
+                .tops
+                  .from
+                    = msg.from.capitalize
+                  .time
+                    = msg.stream.owner.try(:name)
+                    •
+                    = msg.updated_at.strftime('%b %e %l:%M %p')
+
+                %div{ class:msg.notification_type }
+                  = msg.message
 
 
         -#.activity
