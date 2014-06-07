@@ -63,6 +63,7 @@ class Game < ActiveRecord::Base
 
   def all_players
     @all_players ||= begin
+      first_game_stats.raw['fellowPlayers'] = [] if first_game_stats.raw['fellowPlayers'].nil?
       first_game_stats.raw['fellowPlayers'].tap do |p|
         p << { 
           'summonerId' => first_game_stats.summoner.riot_uid,
