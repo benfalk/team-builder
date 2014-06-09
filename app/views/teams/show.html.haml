@@ -87,6 +87,7 @@
       %br
       %legend
         Match History
+      = paginate @team_games
       .team-matches
         - cache([@team, @team_games.first]) do
           = render partial: 'match', collection: @team_games, as: :match, locals:{team_ids: @team.team_memberships.map(&:summoner_id)}

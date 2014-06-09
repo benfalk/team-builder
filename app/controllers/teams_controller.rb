@@ -49,7 +49,7 @@ class TeamsController < ApplicationController
 
   def show
     @team = team
-    @team_games = @team.games.order(played_at: :desc)
+    @team_games = @team.games.order(played_at: :desc).page(params[:page])
     @skype_names = @team.users.skype_names
     @team_user_questions = team.user_questions(current_user)
     @is_a_member = is_member?
