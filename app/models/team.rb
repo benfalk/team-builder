@@ -27,6 +27,8 @@ class Team < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
+  after_create :assign_region
+
   def game_ids
     Team.find_by_sql([CUSTOM_SQL, {summoner_list: team_memberships.pluck(:summoner_id)}]).map { |g| g['game_id'] }
   end
@@ -67,6 +69,12 @@ class Team < ActiveRecord::Base
 
   def open_positions
     Role.full_list - positions
+  end
+
+  private
+
+  def assign_region
+    update(region: summoners.first.try(:region))
   end
 
 end

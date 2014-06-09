@@ -29,7 +29,7 @@ class GameStats < ActiveRecord::Base
   class << self
 
     def update_recent_for(summoner)
-      games = LOL::Api::Client.new.game_recent_by_id(summoner.riot_uid)['games']
+      games = LOL::Api::Client.new(region: summoner.region).game_recent_by_id(summoner.riot_uid)['games']
       games.each do |game|
         game_stats = GameStats.where(riot_game_uid: game['gameId'], summoner_id: summoner.id).first_or_create
         game_stats.raw = game

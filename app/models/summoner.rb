@@ -28,7 +28,7 @@ class Summoner < ActiveRecord::Base
   def self.harvest_summoners(region,ids)
     missing = ids - where(riot_uid: ids).pluck(:riot_uid)
     return if missing.empty?
-    summoners = LOL::Api::Client.new.summoner_by_ids(missing)
+    summoners = LOL::Api::Client.new(region: region).summoner_by_ids(missing)
     summoners.each_pair do |id,data|
       Summoner.create!( riot_uid: data['id'],
                       name: data['name'].downcase,
@@ -106,7 +106,7 @@ class Summoner < ActiveRecord::Base
   private
 
   def api
-    LOL::Api::Client.new
+    LOL::Api::Client.new region: region
   end
 
   def fetch_riot_info

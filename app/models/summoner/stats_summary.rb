@@ -5,7 +5,7 @@ class Summoner::StatsSummary < ActiveRecord::Base
   serialize :raw, Array
 
   def update_from_api!
-    stats = LOL::Api::Client.new.stats_summary_by_id(summoner.riot_uid)['playerStatSummaries']
+    stats = LOL::Api::Client.new(region: summoner.region).stats_summary_by_id(summoner.riot_uid)['playerStatSummaries']
     update(raw: stats)
   end
 
