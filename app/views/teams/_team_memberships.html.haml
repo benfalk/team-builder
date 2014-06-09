@@ -18,7 +18,10 @@
           %td
             = image_tag tm.user.avatar_url, class:'small-avatar' if tm.user
           %td
-            = tm.summoner.name.capitalize
+            - if tm.user
+              = link_to tm.summoner.name, "/#{tm.summoner.url}"
+            - else
+              = tm.summoner.name.capitalize
           %td
             = tm.user.try(:full_name)
           %td
