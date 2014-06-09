@@ -87,10 +87,14 @@
       %br
       %legend
         Match History
-      = paginate @team_games
+        .pull-right{style: 'font-size: 13px; padding-top: 5px;'}
+          = paginate @team_games
       .team-matches
         - cache([@team, @team_games.first]) do
           = render partial: 'match', collection: @team_games, as: :match, locals:{team_ids: @team.team_memberships.map(&:summoner_id)}
+      %hr
+      .pull-right{style: 'font-size: 13px; padding-top: 5px;'}
+        = paginate @team_games
 
 
 
