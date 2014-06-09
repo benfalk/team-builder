@@ -7,7 +7,7 @@
     - if match.raw['stats']['firstBlood']
       = image_tag 'badges/badge-firstblood.png'
     - if match.raw['stats']['totalUnitsHealed'] && match.raw['stats']['totalUnitsHealed'] > 10
-      = image_tag 'badges/badge-firstblood.png'
+      = image_tag 'badges/badge-heal.png'
   .row
     .col-lg-6
       .row
@@ -63,11 +63,11 @@
             .top-team
               = image_tag "https://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
               = p['summoner'].name.capitalize
-              %i.fa.fa-plus.has-tooltip{style:'color:#45587A', title: 'Request Comrade', class:'pull-right'}
+              %i.fa.fa-plus.has-tooltip{style:'color:#45587A', title: 'Request Comrade (coming soon)', class:'pull-right'}
 
         .col-lg-6
           - match.game.bottom_team.each do |p|
             .bottom-team
               = image_tag "https://ddragon.leagueoflegends.com/cdn/4.8.2/img/champion/#{p['champion'].key}.png", class:'mini-champ'
               = p['summoner'].name.capitalize
-              %i.fa.fa-plus.has-tooltip{style:'color:#45587A',  title: 'Request Comrade', class:'pull-right'}
+              %i.fa.fa-plus.has-tooltip{style:'color:#45587A',  title: 'Request Comrade (coming soon)', class:'pull-right'}

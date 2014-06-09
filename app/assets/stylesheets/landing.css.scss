@@ -354,6 +354,12 @@ footer {
   }
   .tops {
     overflow: hidden;
+    .game_lost {
+
+    }
+    .game_won {
+
+    }
   }
   .time {
     color: #909fa9;
@@ -369,11 +375,23 @@ footer {
     font-size: 10px;
     color: #f0ad4e;
   }
-  .lost {
+  .game_lost {
     color: #d9534f;
   }
-  .win {
+  .game_won {
     color: #5cb85c;
+  }
+  .outcome {
+    font-size: 9px;
+    text-align: right;
+    display: inline-block;
+    float: right;
+  }
+  .team {
+    font-size: 9px;
+    text-align: right;
+    display: inline-block;
+    float: left;
   }
 }
 
@@ -540,13 +558,14 @@ footer {
 }
 
 .champ-list-short-small {
+  width: 154px;
   img {
-    height: 38px;
+    height: 32px;
     display: inline-block;
     border-radius: 6px;
     overflow: hidden;
     box-shadow: 1px 1px 1px rgba(0,0,0, 0.1);
-    margin-right: 10px;
+    margin-right: 4px;
   }
 }
 
@@ -616,7 +635,7 @@ table.team-builder-table {
    vertical-align: middle;
    td {
 
-     font-size: 1.4em;
+     font-size: 1.2em;
    }
 
  }
@@ -786,3 +805,6 @@ table tbody .standing-tr {
   }
 }
 
+.team-info {
+  font-size: 0.85em;
+}

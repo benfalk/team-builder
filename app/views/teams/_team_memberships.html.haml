@@ -35,7 +35,7 @@
           %td
             - if edit
               = form_for(tm, url: team_membership_path(@team, tm)) do |f|
-                = f.select :role_id, options_for_select(Role.all.pluck(:name,:id), tm.role_id), {}, class: 'form-control', onchange: '$(this).parent().submit()'
+                = f.select :role_id, options_for_select(Role.all.pluck(:name,:id), tm.role_id), {}, class: 'form-control', onchange: '$(this).parent().submit()', style:'font-size: 0.8em; height: 28px;'
             - else
               = tm.role
           %td

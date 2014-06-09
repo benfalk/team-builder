@@ -3,7 +3,10 @@
     .col-lg-3
       - unless @team.avatar_url.blank?
         .team-avatar{style:"background-image:url(#{@team.avatar_url})"}
-
+      - unless @team.about_us.blank?
+        .team-info
+          = simple_format(@team.about_us)
+        %br
 
       - if @is_a_member
         %legend Team Comm
@@ -25,17 +28,29 @@
           -#%button.btn.btn-default.chat-post{type: 'submit'} Post
         - @team.stream.notifications.order(created_at: :desc).each do |msg|
           .activity
-            .note{ class:msg.source_type }
-              .tops
-                .from
-                  = msg.from.capitalize
-                .time
-                  = msg.stream.owner.try(:name)
-                  •
-                  = msg.updated_at.strftime('%b %e %l:%M %p')
+            .note{ class:msg.source_type.downcase }
+              - if msg.source_type.downcase  == 'game'
+                .tops{class:msg.notification_type.downcase}
+                  .team
+                    = msg.stream.owner.try(:name)
+                  .outcome
+                    = msg.message
 
-              %div{ class:msg.notification_type }
-                = msg.message
+              - else
+                .tops
+                  .from
+                    = msg.from.capitalize
+                  .time
+                    = msg.stream.owner.try(:name)
+                    •
+                    = msg.updated_at.strftime('%b %e %l:%M %p')
+
+                %div{ class:msg.notification_type }
+                  = msg.message
+
+
+
+
 
     .col-lg-9.team_show
       %legend
@@ -55,7 +70,7 @@
         - else
           = form_for Team::Request.new(team: @team), url: requests_path do |f|
             = f.hidden_field :team_id
-            = f.submit 'Request Invite', class: 'btn pull-right'
+            = f.submit 'Request Invite', class: 'btn pull-right btn-primary', style:'margin: -6px 0; font-size: 11px;'
 
         = @team.name.upcase
 
