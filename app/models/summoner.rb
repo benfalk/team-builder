@@ -58,10 +58,26 @@ class Summoner < ActiveRecord::Base
 
   has_many :team_invites, class_name: 'Team::SummonerInvite'
 
+  acts_as_url :valid_slug_name
+
+  def to_param
+    url
+  end
+
   #after_create :fetch_riot_info, :populate_stats_summary, :boot_game_stats
 
   def create_verify_string
     self.verify_string = Array.new(18){ rand(36).to_s(36) }.join.upcase
+  end
+
+  def valid_slug_name
+    n = "#{region}-#{name}".to_url
+
+    if Summoner.where(url: n).count > 0
+      "#{region}-#{name}-#{id}".to_url
+    else
+      n
+    end
   end
 
   def name_found?

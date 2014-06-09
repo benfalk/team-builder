@@ -17,6 +17,14 @@ class SummonersController < ApplicationController
     @users = User.includes(:favorite_roles,:summoner).page(params[:page])
   end
 
+  def show
+    @summoner = Summoner.find_by_url(params[:id])
+    @target_user = @summoner.user
+    @game_stats = @summoner.game_stats.non_bot_matches
+      .includes({game:[:summoners,{game_stats:[:summoner]}]},:played_champion)
+      .order(played_at: :desc)
+  end
+
   def lookup
     @summoner = Summoner.prepare_binding(params.permit(:name,:region))
     respond_to do |format|

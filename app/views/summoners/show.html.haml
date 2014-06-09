@@ -1,0 +1,152 @@
+
+- total_wins = 0
+- total_kills = 0
+- totalTurretsKilled = 0
+- totalAssists = 0
+- days = ((@target_user.summoner.level * 413.42)/60)/24
+- hours = (24*(days - days.to_i))
+- minutes = (60*(hours - hours.to_i))
+
+- @target_user.summoner.stats_summary.raw.each do |type|
+  - if type['playerStatSummaryType'] != 'CoopVsAI'
+    - total_wins += type['wins'].to_i
+    - total_kills += type['aggregatedStats']['totalChampionKills'].to_i
+    - totalTurretsKilled += type['aggregatedStats']['totalTurretsKilled'].to_i
+    - totalAssists += type['aggregatedStats']['totalAssists'].to_i
+
+
+
+.container.page-top-pad
+  .page-top-pad
+    .row.dark-bg
+      .col-lg-9
+        .row.pad
+          .col-lg-2
+            .profile-pic-square-with-pic
+              = image_tag  @target_user.avatar_url
+          .col-lg-10.overview-user-info
+            .row
+              .col-lg-4
+                %h2
+                  = @target_user.summoner.name.capitalize
+              .col-lg-2{style:'padding-top:12px;'}
+                Gold/Minute:
+              .col-lg-1{style:'padding-top:12px; text-align:right;'}
+                = @target_user.summoner.agpm
+              .col-lg-4{style:'padding-top:10px;'}
+                .progress.has-tooltip{title:"#{@target_user.summoner.agpm} Gold per minute - #{@target_user.summoner.gold_per_minute_percentage}% of best", style:'background: #485766;'}
+                  .progress-bar{class: @target_user.summoner.gold_per_minute_percentage > 40 ? "progress-bar-success" : "progress-bar-warning" , 'aria-valuemax' => '100', 'aria-valuemin' => '0', 'aria-valuenow' => "#{@target_user.summoner.gold_per_minute_percentage}", role: 'progressbar', style: "width: #{@target_user.summoner.gold_per_minute_percentage}%"}
+
+            .row
+              .col-lg-4
+                %strong
+                  = @target_user.first_name
+                  = @target_user.last_name
+                %br
+                %i.fa.fa-map-marker
+                = @target_user.location_city
+                = @target_user.location_state
+                %br
+                Play Style:
+                = @target_user.play_style
+
+              .col-lg-4
+                Region:&nbsp;&nbsp;
+                = @target_user.summoner.region.upcase
+                %br
+                Level:&nbsp;&nbsp;
+                = @target_user.summoner.level
+                %br
+                Wins:&nbsp;&nbsp;
+                = total_wins
+
+              .col-lg-3
+                Total Kills:&nbsp;&nbsp;
+                = total_kills
+                %br
+                Total Assists:&nbsp;&nbsp;
+                = totalAssists
+                %br
+                KDA Ratio:&nbsp;&nbsp;
+                0.0
+
+        .row.pad{style:'padding-top:0; overflow: auto;'}
+          .col-lg-7
+            %p.bio
+              = @target_user.short_bio.html_safe
+          .col-lg-5.champ-list-short
+            - @target_user.favorite_champions.each do |champ|
+              = image_tag champ.avatar_url
+
+      .col-lg-3.right-Well
+        .badges-well
+
+          = image_tag 'badges/badge-mvp.png', class:'empty-badge has-tooltip', title:'MVP Badge'
+          = image_tag 'badges/badge-pentakill.png', class:'empty-badge has-tooltip', title:'Penta Kill Badge'
+          = image_tag 'badges/badge-quadrakill.png', class:'empty-badge has-tooltip', title:'Quadra Kill Badge'
+          -#= image_tag 'badges/badge-firstblood.png', class:'empty-badge has-tooltip', title:''
+          = image_tag 'badges/badge-heal.png', class:'empty-badge has-tooltip', title:'Heal Badge'
+          = image_tag 'badges/badge-jungle.png', class:'empty-badge has-tooltip', title:'jungle Badge'
+          = image_tag 'badges/badge-mage.png', class:'empty-badge has-tooltip', title:'Mage Badge'
+          = image_tag 'badges/badge-markmen.png', class:'empty-badge has-tooltip', title:'Marksman Badge'
+          = image_tag 'badges/badge-melee.png', class:'empty-badge has-tooltip', title:'Melee Badge'
+          = image_tag 'badges/badge-support.png', class:'empty-badge has-tooltip', title:'Support Badge'
+
+  .page-top-pad
+    .row
+      .col-lg-3
+        .team-titles{style:'overflow:hidden'}
+          %h4.pull-left Teams
+          = link_to 'Create', new_team_path, class:'btn pull-right'
+          = link_to 'Join', teams_path, class:'btn pull-right'
+
+        .list-group
+          - @target_user.teams.each do |t|
+            = link_to t.name, team_path(t), class:'list-group-item'
+
+      .col-lg-9
+        - unless @target_user.twitch_name.blank?
+          - twitch_name = @target_user.twitch_name
+          %object#live_embed_player_flash{:bgcolor => "#000000", :data => "http://www.twitch.tv/widgets/live_embed_player.swf?channel=#{twitch_name}", :type => "application/x-shockwave-flash", height:'508px', :width => "100%"}
+            %param{:name => "allowFullScreen", :value => "true"}/
+            %param{:name => "allowScriptAccess", :value => "always"}/
+            %param{:name => "allowNetworking", :value => "all"}/
+            %param{:name => "movie", :value => "http://www.twitch.tv/widgets/live_embed_player.swf"}/
+            %param{:name => "flashvars", :value => "hostname=www.twitch.tv&channel=#{twitch_name}&auto_play=true&start_volume=0"}/
+
+        = render partial: 'accounts/play_calender', locals:{data: @target_user.summoner.games.amount_played_by_day}
+
+
+        %h3 
+          = "#{@summoner.name.capitalize}'s match history"
+        - cache(@game_stats.first) do
+          = render partial: 'accounts/match', collection: @game_stats, as: :match
+
+        :javascript
+          $('.has-tooltip').tooltip()
+
+          var old_date = moment().format('DDMMYY');
+          $('.match').each(function(){
+            var new_date = $(this).data('date')
+            if(new_date == old_date){
+              $(this).addClass('today')
+            }
+            console.log(old_date,new_date)
+            old_date = new_date
+          })
+
+
+
+        .row
+          .col-lg-12
+            .load-more
+              %a Load More
+
+
+    %br
+    %br
+    %br
+    -#= debug @target_user
+    -#= debug @target_user.summoner
+    -#= debug @target_user.summoner.stats_summary.raw
+

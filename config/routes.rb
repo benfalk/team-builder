@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get 'overview', on: :collection, action: :overview
   end
 
-  resources :summoners, only:[:create] do
+  resources :summoners, only:[:create,:show] do
     get 'available', on: :collection, as: :available, action: :available
     get 'lookup/:region/:name', on: :collection, as: :lookup, action: :lookup
   end
@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   get 'comrades/' => 'pages#comrades'
   get 'join/' => 'pages#join'
   get 'playbook/' => 'pages#playbook'
+
+  get ':id', to: 'summoners#show'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
