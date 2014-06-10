@@ -40,6 +40,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
+  enum gender: [:nope, :male, :female]
+
   after_create do
     GameBuilder.perform_async(summoner_id)
   end

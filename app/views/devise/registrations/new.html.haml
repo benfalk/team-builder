@@ -90,6 +90,7 @@
                               console.log(k,v)
 
                               $('#user_'+k+'').val(v)
+                              $('#user_facebook_'+k).val(v)
 
                             })
 
@@ -122,6 +123,7 @@
                }(document, 'script', 'facebook-jssdk'));
 
 
+          = f.hidden_field :facebook_id
           .form-group
             %label.col-lg-3.control-label{:for => "inputEmail", autofocus: true} First Name
             .col-lg-9
@@ -154,6 +156,17 @@
             %label.col-lg-3.control-label{:for => "select"} State/Province
             .col-lg-9
               = f.text_field :location_state, class:'form-control', :placeholder => "State"
+          .form-group
+            %label.col-lg-3.control-label{:for => "inputEmail"}
+              Birthday
+              %br
+              (year-month-day)
+            .col-lg-9
+              = f.text_field :birthday, class:'form-control', placeholder: 'year-month-day'
+          .form-group
+            %label.col-lg-3.control-label{:for => "select"} Gender
+            .col-lg-9
+              = f.select :gender, [:nope, :male, :female], {}, class:'form-control'
           .form-group
             %label.col-lg-3.control-label{:for => "inputEmail"} Password*
             .col-lg-9
