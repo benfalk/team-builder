@@ -139,8 +139,21 @@
 
   rect.attr("class", function(d) {
     //console.log(d, data[d])
-    if(data[d]){
-      return "day g" + (data[d]<9 || data[d]==15 || data[d]==20 ? data[d] : 9 );
+    var x = data[d]
+    var y
+
+    if(x){
+      if( x < 9 ){
+        y = x
+      }else if( x > 9 && x < 15 ){
+        y = 9
+      }else if(x > 14 && x < 20){
+        y = 15
+      }else if(x > 19){
+        y = 20
+      }
+
+      return "day g" + y;
     }else{
       return "day g0"
     }
