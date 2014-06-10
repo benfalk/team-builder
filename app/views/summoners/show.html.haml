@@ -132,7 +132,9 @@
           %br
           %br
           - if @invites.size > 0
-            %legend Team Invites
+            %legend
+              Team Invites
+              %i.fa.fa-eye-slash.privet.has-tooltip{title:'Privet Section: Viewable by you only'}
             .list-group
               - @invites.each do |invite|
                 = link_to invite.team.name, team_path(invite.team)
@@ -140,8 +142,9 @@
                   = f.hidden_field :status, value: 'accepted'
                   = f.submit "Accept", class: 'btn btn-primary'
 
-
-          %legend Teammate Activity
+          %legend
+            Teammate Activity
+            %i.fa.fa-eye-slash.privet.has-tooltip{title:'Privet Section: Viewable by team members only'}
           - @notifications.each do |msg|
             -#= debug msg
             .activity
