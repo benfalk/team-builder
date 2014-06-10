@@ -1,3 +1,4 @@
+- mine = current_user && current_user.id == @target_user.id ? true : false
 
 - total_wins = 0
 - total_kills = 0
@@ -13,6 +14,53 @@
     - total_kills += type['aggregatedStats']['totalChampionKills'].to_i
     - totalTurretsKilled += type['aggregatedStats']['totalTurretsKilled'].to_i
     - totalAssists += type['aggregatedStats']['totalAssists'].to_i
+
+#fb-root
+:javascript
+
+   var get_me = function(){
+      /* make the API call */
+      FB.api(
+          "/me",
+          function (response) {
+            if (response && !response.error) {
+              console.log(response)
+            }
+          }
+      );
+   }
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '295438640631420',
+      xfbml      : true,
+      version    : 'v2.0'
+    });
+
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        get_me()
+      }
+      else {
+        FB.login(
+         get_me()
+        ,{scope: 'email'});
+      }
+    });
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+
+
 
 
 
@@ -74,6 +122,7 @@
           .col-lg-7
             %p.bio
               = @target_user.short_bio.html_safe
+
           .col-lg-5.champ-list-short
             - @target_user.favorite_champions.each do |champ|
               = image_tag champ.avatar_url
@@ -95,52 +144,93 @@
   .page-top-pad
     .row
       .col-lg-3
-        .team-titles{style:'overflow:hidden'}
-          %h4.pull-left Teams
-          = link_to 'Create', new_team_path, class:'btn pull-right'
-          = link_to 'Join', teams_path, class:'btn pull-right'
+        - if @target_user.teams
+          .team-titles{style:'overflow:hidden'}
+            %h4.pull-left Teams
+            - if mine
+              = link_to 'Create', new_team_path, class:'btn pull-right'
+              = link_to 'Join', teams_path, class:'btn pull-right'
 
-        .list-group
-          - @target_user.teams.each do |t|
-            = link_to t.name, team_path(t), class:'list-group-item'
+          .list-group
+            - @target_user.teams.each do |t|
+              = link_to t.name, team_path(t), class:'list-group-item'
+        .fb-like{"data-action" => "like", "data-href" => "https://lolfaction.com/#{@target_user.summoner.url}", "data-layout" => "standard", "data-share" => "true", "data-show-faces" => "false", "colorscheme" =>"dark"}
+
+        - if mine
+          - if @invites.size > 0
+            %legend Team Invites
+            .list-group
+              - @invites.each do |invite|
+                = link_to invite.team.name, team_path(invite.team)
+                = form_for(invite, url: team_summoner_invite_path(invite.team, invite)) do |f|
+                  = f.hidden_field :status, value: 'accepted'
+                  = f.submit "Accept", class: 'btn btn-primary'
+
+
+          %legend Teammate Activity
+          - @notifications.each do |msg|
+            -#= debug msg
+            .activity
+              .note{ class:msg.source_type.downcase }
+                - if msg.source_type.downcase  == 'game'
+                  .tops{class:msg.notification_type.downcase}
+                    .team
+                      = msg.stream.owner.try(:name)
+                    .outcome
+                      = msg.message
+
+                - else
+                  .tops
+                    .from
+                      = msg.from.capitalize
+                    .time
+                      = msg.stream.owner.try(:name)
+                      •
+                      = msg.updated_at.strftime('%b %e %l:%M %p')
+
+                  %div{ class:msg.notification_type }
+                    = msg.message
+
 
       .col-lg-9
-        - unless @target_user.twitch_name.blank?
-          - twitch_name = @target_user.twitch_name
-          %object#live_embed_player_flash{:bgcolor => "#000000", :data => "http://www.twitch.tv/widgets/live_embed_player.swf?channel=#{twitch_name}", :type => "application/x-shockwave-flash", height:'508px', :width => "100%"}
+        = render partial: 'accounts/play_calender', locals:{data: @target_user.summoner.games.amount_played_by_day}
+
+        - if mine
+          %h3
+            = "#{@summoner.name.capitalize}'s match history"
+          - cache(@game_stats.first) do
+            = render partial: 'accounts/match', collection: @game_stats, as: :match
+
+    - unless mine
+      .row
+        .col-lg-12
+          -#- unless @target_user.twitch_name.blank?
+          - twitch_name = 'sllverlady1'
+          %object#live_embed_player_flash{:bgcolor => "#000000", :data => "http://www.twitch.tv/widgets/live_embed_player.swf?channel=#{twitch_name}", :type => "application/x-shockwave-flash", height:'672px', :width => "100%"}
             %param{:name => "allowFullScreen", :value => "true"}/
             %param{:name => "allowScriptAccess", :value => "always"}/
             %param{:name => "allowNetworking", :value => "all"}/
             %param{:name => "movie", :value => "http://www.twitch.tv/widgets/live_embed_player.swf"}/
             %param{:name => "flashvars", :value => "hostname=www.twitch.tv&channel=#{twitch_name}&auto_play=true&start_volume=0"}/
 
-        = render partial: 'accounts/play_calender', locals:{data: @target_user.summoner.games.amount_played_by_day}
+          %h3
+            = "#{@summoner.name.capitalize}'s match history"
+          - cache(@game_stats.first) do
+            = render partial: 'accounts/match', collection: @game_stats, as: :match
 
+    :javascript
+      $('.has-tooltip').tooltip()
 
-        %h3 
-          = "#{@summoner.name.capitalize}'s match history"
-        - cache(@game_stats.first) do
-          = render partial: 'accounts/match', collection: @game_stats, as: :match
+      var old_date = moment().format('DDMMYY');
+      $('.match').each(function(){
+        var new_date = $(this).data('date')
+        if(new_date == old_date){
+          $(this).addClass('today')
+        }
+        console.log(old_date,new_date)
+        old_date = new_date
+      })
 
-        :javascript
-          $('.has-tooltip').tooltip()
-
-          var old_date = moment().format('DDMMYY');
-          $('.match').each(function(){
-            var new_date = $(this).data('date')
-            if(new_date == old_date){
-              $(this).addClass('today')
-            }
-            console.log(old_date,new_date)
-            old_date = new_date
-          })
-
-
-
-        .row
-          .col-lg-12
-            .load-more
-              %a Load More
 
 
     %br

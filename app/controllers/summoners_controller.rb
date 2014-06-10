@@ -23,6 +23,9 @@ class SummonersController < ApplicationController
     @game_stats = @summoner.game_stats.non_bot_matches
       .includes({game:[:summoners,{game_stats:[:summoner]}]},:played_champion)
       .order(played_at: :desc)
+
+    @invites = @summoner.user.team_invites.undecided
+    @notifications = Stream.interlaced_for(@summoner.user).includes(stream:[:owner]).order(created_at: :desc)
   end
 
   def lookup
