@@ -24,7 +24,7 @@
 
         = "#{i=='item6'?'&nbsp;&nbsp;':''}".html_safe
         - unless raws[i].blank?
-          %img{src:"https://lkimg.zamimg.com/shared/riot/images/items/#{raws[i]}_32.png"}
+          %img{src:GameStats.item_image(raws[i])}
         - else
           .empty-item
     %td

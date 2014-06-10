@@ -31,7 +31,7 @@
             - ['item0','item1','item2','item3','item4','item5','item6'].each do |i|
               = "#{i=='item6'?'&nbsp;&nbsp;':''}".html_safe
               - unless match.raw['stats'][i].blank?
-                %img{src:"https://lkimg.zamimg.com/shared/riot/images/items/#{match.raw['stats'][i] }_32.png", class:'overview-summoner-items'}
+                %img{src:GameStats.item_image(match.raw['stats'][i]), class:'overview-summoner-items'}
               - else
                 .empty-item
 

@@ -2,6 +2,10 @@ class GameStats < ActiveRecord::Base
   
   include GoldPerMinuteCalculations
 
+  def self.item_image(riot_id)
+    "https://ddragon.leagueoflegends.com/cdn/4.9.1/img/item/#{riot_id}.png"
+  end
+
   MAP_NAMES = {
     1 => "Summoner's Rift",
     2 => "Summoner's Rift",
