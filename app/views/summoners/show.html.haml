@@ -196,9 +196,13 @@
               %param{:name => "flashvars", :value => "hostname=www.twitch.tv&channel=#{twitch_name}&auto_play=true&start_volume=0"}/
 
           %h3
-            = "#{@summoner.name.capitalize}'s match history"
+            .pull-right{style: 'font-size: 14px; margin-top: -10px;'}
+              = paginate @game_stats  
           - cache(@game_stats.first) do
             = render partial: 'accounts/match', collection: @game_stats, as: :match
+          %hr
+            .pull-right{style: 'font-size: 14px; margin-top: -10px;'}
+              = paginate @game_stats  
 
     :javascript
       $('.has-tooltip').tooltip()
