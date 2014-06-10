@@ -41,7 +41,6 @@
 
 
 
-
           .col-lg-9
             %h1 
               = @summoner.name.capitalize
@@ -65,7 +64,64 @@
                   * #{msg}
 
         %fieldset
-          %legend Personal
+          %legend
+            Personal
+            .from-facebook.js-fb-import
+              %i.fa.fa-download
+              Inport from facebook
+
+            :javascript
+               var get_me = function(){
+
+                  $('.js-fb-import').click(function(){
+
+                    /* make the API call */
+                     FB.login(function(){
+
+                      FB.api(
+                          "/me",
+                          function (response) {
+                            if (response && !response.error) {
+                              //console.log(response)
+
+
+                            $.each(response, function(k,v){
+
+                              console.log(k,v)
+
+                              $('#user_'+k+'').val(v)
+
+                            })
+
+
+                            }
+                          }
+                        );
+                     },{scope: 'email'});
+                  })
+
+               }
+
+              window.fbAsyncInit = function() {
+                FB.init({
+                  appId      : '295438640631420',
+                  xfbml      : true,
+                  version    : 'v2.0'
+                });
+
+                get_me()
+
+              };
+
+              (function(d, s, id){
+                 var js, fjs = d.getElementsByTagName(s)[0];
+                 if (d.getElementById(id)) {return;}
+                 js = d.createElement(s); js.id = id;
+                 js.src = "//connect.facebook.net/en_US/sdk.js";
+                 fjs.parentNode.insertBefore(js, fjs);
+               }(document, 'script', 'facebook-jssdk'));
+
+
           .form-group
             %label.col-lg-3.control-label{:for => "inputEmail", autofocus: true} First Name
             .col-lg-9

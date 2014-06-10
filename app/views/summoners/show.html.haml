@@ -18,36 +18,12 @@
 #fb-root
 :javascript
 
-   var get_me = function(){
-      /* make the API call */
-      FB.api(
-          "/me",
-          function (response) {
-            if (response && !response.error) {
-              console.log(response)
-            }
-          }
-      );
-   }
-
   window.fbAsyncInit = function() {
     FB.init({
       appId      : '295438640631420',
       xfbml      : true,
       version    : 'v2.0'
     });
-
-    FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-        get_me()
-      }
-      else {
-        FB.login(
-         get_me()
-        ,{scope: 'email'});
-      }
-    });
-
   };
 
   (function(d, s, id){
@@ -57,10 +33,6 @@
      js.src = "//connect.facebook.net/en_US/sdk.js";
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
-
-
-
-
 
 
 
@@ -157,6 +129,8 @@
         .fb-like{"data-action" => "like", "data-href" => "https://lolfaction.com/#{@target_user.summoner.url}", "data-layout" => "standard", "data-share" => "true", "data-show-faces" => "false", "colorscheme" =>"dark"}
 
         - if mine
+          %br
+          %br
           - if @invites.size > 0
             %legend Team Invites
             .list-group

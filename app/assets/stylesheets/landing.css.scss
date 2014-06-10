@@ -808,3 +808,23 @@ table tbody .standing-tr {
 .team-info {
   font-size: 0.85em;
 }
+
+.from-facebook {
+  display: inline-block;
+  float: right;
+  font-size: 0.6em;
+  background: #4e69a2;
+  padding: 3px;
+
+  i {
+    display: inline-block;
+    font-size: 1.1em;
+    margin: 0 5px;
+    color:#fff;
+  }
+  &:hover {
+    background: #485a8f;
+    cursor: pointer;
+  }
+  margin-bottom: 2px;
+}
