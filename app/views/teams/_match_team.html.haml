@@ -9,7 +9,7 @@
     %td
       - ['spell1','spell2'].each do |i|
         - unless raw[i].blank?
-          %img{src:"https://lkimg.zamimg.com/images/spells/#{ raw[i] }.png"}
+          %img{src:SummonerSpell.image_url(raw[i])}
         - else
           .empty-item
     %td

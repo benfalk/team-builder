@@ -48,6 +48,9 @@ class AccountsController < ApplicationController
       :play_style,
       :gaming_times,
       :avatar,
+      :facebook_id,
+      :gender,
+      :birthday,
       { :favorite_role_ids => [] }
     ).tap do |p|
       if params[:favorite_champs]
