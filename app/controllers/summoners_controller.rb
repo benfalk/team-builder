@@ -22,7 +22,7 @@ class SummonersController < ApplicationController
     @target_user = @summoner.user
     @game_stats = @summoner.game_stats.non_bot_matches
       .includes({game:[:summoners,{game_stats:[:summoner]}]},:played_champion)
-      .order(played_at: :desc)
+      .order(played_at: :desc).page(params[:page]).per(15)
 
     @invites = @summoner.user.team_invites.undecided
     @notifications = Stream.interlaced_for(@summoner.user).includes(stream:[:owner]).order(created_at: :desc)
