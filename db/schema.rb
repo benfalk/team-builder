@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609215819) do
+ActiveRecord::Schema.define(version: 20140610184926) do
 
   create_table "champion_preferences", force: true do |t|
     t.integer  "user_id"
@@ -95,6 +95,14 @@ ActiveRecord::Schema.define(version: 20140609215819) do
   create_table "streams", force: true do |t|
     t.integer  "owner_id"
     t.string   "owner_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "summoner_spells", force: true do |t|
+    t.integer  "riot_id"
+    t.string   "key"
+    t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

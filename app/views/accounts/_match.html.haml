@@ -24,7 +24,8 @@
           .items
             - ['spell1','spell2'].each do |i|
               - unless match.raw[i].blank?
-                %img{src:"https://lkimg.zamimg.com/images/spells/#{ match.raw[i] }.png", class:'overview-summoner-items'}
+                %img{src:SummonerSpell.image_url(match.raw[i]), class:'overview-summoner-items'}
+                -#%img{src:"https://lkimg.zamimg.com/images/spells/#{ match.raw[i] }.png", class:'overview-summoner-items'}
               - else
                 .empty-item
             &nbsp;&nbsp;
