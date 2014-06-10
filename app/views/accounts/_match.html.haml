@@ -1,8 +1,8 @@
 .match{ 'data-date'=>"#{match.played_at.strftime('%d%m%y')}"}
   .badges
-    - if match.raw['stats']['largestMultiKill'] == 4
+    - if match.quadra_kills?
       = image_tag 'badges/badge-quadrakill.png'
-    - if match.raw['stats']['largestMultiKill'] == 5
+    - if match.penta_kills?
       = image_tag 'badges/badge-pentakill.png'
     - if match.raw['stats']['firstBlood']
       = image_tag 'badges/badge-firstblood.png'
