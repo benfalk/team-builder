@@ -35,7 +35,7 @@ class Summoner < ActiveRecord::Base
                       level: data['summonerLevel'],
                       region: region )
     end
-    sleep 1
+    sleep 1 if Rails.env.development?
   end
 
   def self.raw_create(data)
