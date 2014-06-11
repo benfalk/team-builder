@@ -1,7 +1,7 @@
 %tr
   %td
     = image_tag user.avatar_url, class:'small-avatar'
-    = user.summoner.name
+    = link_to user.summoner.name, "/#{user.summoner.url}"
   %td
     = user.location
   %td
