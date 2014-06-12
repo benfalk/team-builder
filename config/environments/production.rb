@@ -70,7 +70,7 @@ Rails.application.configure do
     address: 'smtp.sendgrid.net',
     port: 587,
     domain: 'lolfaction.com',
-    user_name: 'bn_falk@yahoo.com',
+    user_name: 'benlfalk',
     password: 'L3gacyW!zard',
     authentication: 'plain' }
 
