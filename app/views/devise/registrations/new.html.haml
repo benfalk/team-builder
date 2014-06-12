@@ -43,7 +43,7 @@
 
           .col-lg-9
             %h1 
-              = @summoner.name.capitalize
+              = @summoner.name
             .karma
               Karma
               .val
@@ -228,7 +228,7 @@
               $(".summoner-picker-old").customSelect({customClass:'summoner-picker'})
               $('.summoner-picker-old').change(function(){
                 $(this).siblings('span').css({
-                'background-image':'url(http://ddragon.leagueoflegends.com/cdn/4.5.4/img/champion/'+$(this).val()+'.png)',
+                'background-image':'url(https://ddragon.leagueoflegends.com/cdn/4.9.1/img/champion/'+$(this).val()+'.png)',
                 'background-size': 'contain',
                 'color': 'rgba(255, 255, 255, 0)',
                 'border': '1px solid #767F97'
@@ -360,7 +360,7 @@
               Team
             .col-lg-3.list-group-item-text
               Outcome
-        - @summoner.game_stats.each do |game|
+        - @summoner.game_stats.order(played_at: :desc).limit(15).each do |game|
 
           .list-group-item
             .row
