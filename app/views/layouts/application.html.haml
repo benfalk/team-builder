@@ -8,6 +8,26 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
+
+    #fb-root
+    :javascript
+
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '295438640631420',
+            xfbml      : true,
+            version    : 'v2.0'
+          });
+        };
+
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "//connect.facebook.net/en_US/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+
     - flash.each do |key, value|
       :javascript
         // {notice:'success', alert:'warning', error:'error'}
@@ -71,13 +91,20 @@
 
     %footer
       .container
-        %p.pull-right.riot-text
-          This product is not endorsed, certified or otherwise approved in any way by Riot Games, Inc. or any of its affiliates.
-        %p
-          © 2014 LOL Faction - Amateur league Of Legends Teams
-          %a{:href => "#"} Privacy
-          ·
-          %a{:href => "#"} Terms
+        .pull-right
+          .fb-like{"data-action" => "like", "data-href" => "https://www.lolfaction.com/", "data-layout" => "button_count", "data-share" => "true", "data-show-faces" => "true"}
+
+        © 2014 LOL Faction - Amateur league Of Legends Teams
+        %a{:href => "#"} Privacy
+        ·
+        %a{:href => "#"} Terms
+        &nbsp;&nbsp;&nbsp;&nbsp;
+
+        This product is not endorsed, certified or otherwise approved in any way by Riot Games, Inc. or any of its affiliates.
+
+      %br
+      %br
+
 
     - if Rails.env.production?
       :javascript
