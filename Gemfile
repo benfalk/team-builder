@@ -16,6 +16,7 @@ gem 'carrierwave'
 gem 'rmagick'
 gem 'kaminari'
 gem 'stringex'
+gem 'impressionist'
 
 gem 'pg'
 gem 'capistrano3-puma'

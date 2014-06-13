@@ -19,6 +19,7 @@ class SummonersController < ApplicationController
 
   def show
     @summoner = Summoner.find_by_url(params[:id])
+    impressionist(@summoner, "summoner view")
     @target_user = @summoner.user
     @game_stats = @summoner.game_stats.non_bot_matches
       .includes({game:[:summoners,{game_stats:[:summoner]}]},:played_champion)

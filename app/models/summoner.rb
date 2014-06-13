@@ -42,6 +42,12 @@ class Summoner < ActiveRecord::Base
     new(data)
   end
 
+  is_impressionable
+
+  def last_user_views
+    impressions.where.not(user_id: nil).group(:user_id).order(created_at: :desc)
+  end
+
   validates_presence_of :name, :region
 
   #validate :validate_summoner_name, on: :create
