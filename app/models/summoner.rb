@@ -44,8 +44,19 @@ class Summoner < ActiveRecord::Base
 
   is_impressionable
 
-  def last_user_views
-    impressions.where.not(user_id: nil).group(:user_id).order(created_at: :desc)
+  def latest_user_views(page_number=nil)
+    views = impressions
+              .where.not(user_id: [nil,user.id])
+              .select("user_id, MAX(created_at) as created_at")
+              .group(:user_id)
+              .page(page_number)
+              .order('MAX(impressions.created_at) DESC')
+              .to_a.map { |i| {user_id: i.user_id, time: i.created_at} }
+    users = User.includes(:summoner).where(id: views.map{|v| v[:user_id]}).to_a
+    views.each do |v|
+      v[:user] = users.find { |u| u.id == v[:user_id] }
+    end
+    views
   end
 
   validates_presence_of :name, :region
