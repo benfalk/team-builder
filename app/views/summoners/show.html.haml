@@ -129,6 +129,12 @@
         .fb-like{"data-action" => "like", "data-href" => "https://lolfaction.com/#{@target_user.summoner.url}", "data-layout" => "standard", "data-share" => "true", "data-show-faces" => "false", "colorscheme" =>"dark"}
 
         - if mine
+          .team-titles{style:'overflow:hidden'}
+            %h4.pull-left Checking you out
+
+          .list-group
+            - @target_user.summoner.latest_user_views.each do |t|
+              = link_to "#{t[:user].summoner.name.capitalize} #{t[:time].strftime('%b %e %H:%M')}", summoner_path(t[:user].summoner), class:'list-group-item'
           %br
           %br
           - if @invites.size > 0
