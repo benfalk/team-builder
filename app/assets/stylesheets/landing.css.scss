@@ -832,7 +832,18 @@ table tbody .standing-tr {
 .privet {
   display: inline-block;
   position: absolute;
-  color: #f0ad4e;
+  color: #5C8097;
   font-size: 12px;
 
+}
+
+.user-views {
+  display: inline-block;
+  border-radius: 6px;
+  height: 36px;
+  overflow: hidden;
+  width: 36px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }

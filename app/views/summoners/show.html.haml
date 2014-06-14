@@ -129,12 +129,14 @@
         .fb-like{"data-action" => "like", "data-href" => "https://lolfaction.com/#{@target_user.summoner.url}", "data-layout" => "standard", "data-share" => "true", "data-show-faces" => "false", "colorscheme" =>"dark"}
 
         - if mine
-          .team-titles{style:'overflow:hidden'}
-            %h4.pull-left Checking you out
-
-          .list-group
+          - if @target_user.summoner.latest_user_views.size > 0
+            %br
+            %br
+            %legend
+              Checking you out
+              %i.fa.fa-eye-slash.privet.has-tooltip{title:'Privet Section: Viewable by you only'}
             - @target_user.summoner.latest_user_views.each do |t|
-              = link_to "#{t[:user].summoner.name.capitalize} #{t[:time].strftime('%b %e %H:%M')}", summoner_path(t[:user].summoner), class:'list-group-item'
+              = link_to '',  summoner_path(t[:user].summoner), style:"background-image: url(#{t[:user].avatar_url})", title:"#{t[:user].summoner.name.capitalize}, #{time_ago_in_words(t[:time])} ago", class: 'user-views has-tooltip'
           %br
           %br
           - if @invites.size > 0
