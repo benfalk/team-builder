@@ -10,7 +10,7 @@ class Champion < ActiveRecord::Base
   end
 
   def avatar_url
-    "https://ddragon.leagueoflegends.com/cdn/4.9.1/img/champion/#{key}.png"
+    "https://ddragon.leagueoflegends.com/cdn/4.10.7/img/champion/#{key}.png"
   end
 
 end

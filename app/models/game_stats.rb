@@ -3,7 +3,7 @@ class GameStats < ActiveRecord::Base
   include GoldPerMinuteCalculations
 
   def self.item_image(riot_id)
-    "https://ddragon.leagueoflegends.com/cdn/4.9.1/img/item/#{riot_id}.png"
+    "https://ddragon.leagueoflegends.com/cdn/4.10.7/img/item/#{riot_id}.png"
   end
 
   MAP_NAMES = {
