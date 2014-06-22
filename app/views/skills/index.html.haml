@@ -1,0 +1,12 @@
+.container.page-top-pad
+  .page-header
+    .row
+      .col-lg-5
+        %h2 Skills
+      .col-lg-7
+        = render partial: 'form', locals:{ skill: Skill.new }
+      .col-lg-5
+        - @skills.each do |skill|
+          .col-lg-5
+            .skill-name
+              = skill.title

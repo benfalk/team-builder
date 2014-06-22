@@ -46,6 +46,8 @@
           - if current_user.present?
             %li
               = link_to 'Profile', "/#{current_user.summoner.url}"
+            %li
+              = link_to 'Skills', skills_url
             %li.dropdown
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 Teams

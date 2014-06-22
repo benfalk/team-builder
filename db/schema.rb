@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613163917) do
+ActiveRecord::Schema.define(version: 20140622193254) do
 
   create_table "champion_preferences", force: true do |t|
     t.integer  "user_id"
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 20140613163917) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "endorsements", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "skill_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "endorsements", ["skill_id", "user_id"], name: "endorsements_user_skill"
 
   create_table "game_stats", force: true do |t|
     t.integer  "summoner_id"
@@ -116,6 +125,15 @@ ActiveRecord::Schema.define(version: 20140613163917) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "skills", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "skills", ["user_id"], name: "index_skills_on_user_id"
 
   create_table "streams", force: true do |t|
     t.integer  "owner_id"

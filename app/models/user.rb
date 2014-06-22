@@ -38,6 +38,10 @@ class User < ActiveRecord::Base
 
   has_many :team_invites, through: :summoner, source: :team_invites
 
+  has_many :skills
+
+  has_many :endorsements
+
   mount_uploader :avatar, AvatarUploader
 
   enum gender: [:nope, :male, :female]

@@ -1,0 +1,35 @@
+class SkillsController < ApplicationController
+  
+  before_action :authenticate_user!
+
+  def index
+    @skills = current_user.skills.includes(endorsements:[:user])
+  end
+
+  def create
+    @skill = current_user.skills.build(create_params)
+
+    respond_to do |format|
+      if @skill.save
+        format.html { redirect_to skills_url }
+        format.json { render json: { success: true, errors: @skill.errors.full_messages } }
+      else
+        format.html { redirect_to summoner_url(current_user.summoner), alert: 'Unable to create skill' }
+        format.json { render json: { success: false, errors: @skill.errors.full_messages } }
+      end
+    end
+  end
+
+  def destroy
+    @skill = current_user.skills.find(params[:id])
+    @skill.destroy
+    redirect_to skills_url
+  end
+
+  private
+
+  def create_params
+    params.require(:skill).permit(:title) 
+  end
+
+end

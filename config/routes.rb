@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     resources :requests, only:[:index,:update], controller: :team_requests
   end
 
+  resources :skills, only:[:index,:create,:destroy]
+
   resources :requests, only:[:index,:create,:destroy]
 
   root 'pages#index'
