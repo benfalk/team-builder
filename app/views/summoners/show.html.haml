@@ -126,7 +126,6 @@
           .list-group
             - @target_user.teams.each do |t|
               = link_to t.name, team_path(t), class:'list-group-item'
-        .fb-like{"data-action" => "like", "data-href" => "https://lolfaction.com/#{@target_user.summoner.url}", "data-layout" => "standard", "data-share" => "true", "data-show-faces" => "false", "colorscheme" =>"dark"}
 
         - if mine
           - if @target_user.summoner.latest_user_views.size > 0
@@ -179,12 +178,22 @@
 
       .col-lg-9
         = render partial: 'accounts/play_calender', locals:{data: @target_user.summoner.games.amount_played_by_day}
-      .col-lg-9
+
+        .fb-like{"data-action" => "like", "data-href" => "https://lolfaction.com/#{@target_user.summoner.url}", "data-layout" => "standard", "data-share" => "true", "data-show-faces" => "false", "colorscheme" =>"dark"}
+
+
+        %h3
+          = "#{@summoner.name.capitalize}'s Skills"
+          .pull-right{style: 'font-size: 14px; margin-top: 10px;'}
+            = form_for Skill.new(user: @target_user) do |f|
+              = f.hidden_field :user_id
+              = f.select :title, options_for_select(Skill::OPTIONS), {}, {onchange:'$(this).parent().submit()', style:'border-radius: 4px; border: none; padding: 5px; background: #485663; color: #fff;'}
+        %hr
         = render partial: 'skills/skill', collection: @target_user.skills.includes(endorsements:[:user]), as: :skill
 
         - if mine
           %h3
-            = "#{@summoner.name.capitalize}'s match history"
+            = 'Match history'
             .pull-right{style: 'font-size: 14px; margin-top: -10px;'}
               = paginate @game_stats  
           - cache(@game_stats.first) do

@@ -1,17 +1,19 @@
 .row
   .col-lg-5
-    .row
-      .col-lg-5
-        %span.skill-name
-          = skill.title
-        %span.skill-total
-          = skill.endorsements.count
-      .col-lg-7
-        - skill.endorsements.each do |e|
-          .skill-profile-image
-            = image_tag e.user.avatar_url
-        - unless current_user.nil? || skill.user == current_user || skill.endorsements.map { |e| e.user_id }.include?(current_user.id)
-          = form_for Endorsement.new(skill: skill, user: current_user) do |f|
-            = f.hidden_field :skill_id
-            = link_to '#', onclick:'$(this).parent().submit()', class: 'skill-add' do
-              %i.fa.fa-plus
+    %span.skill-name
+      = skill.title
+    %span.skill-total
+      = skill.endorsements.count
+  .col-lg-7
+    - skill.endorsements.each do |e|
+      .skill-profile-image
+        = image_tag e.user.avatar_url
+    - unless current_user.nil? || skill.user == current_user || skill.endorsements.map { |e| e.user_id }.include?(current_user.id)
+      = form_for Endorsement.new(skill: skill, user: current_user) do |f|
+        = f.hidden_field :skill_id
+        = link_to '#', onclick:'$(this).parent().submit()', class: 'skill-add' do
+          %i.fa.fa-plus
+
+    - if skill.user == current_user
+      = link_to skill_path(skill), method: :delete, class:'remove-skill' do
+        \- Remove

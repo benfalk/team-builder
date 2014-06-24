@@ -4,4 +4,13 @@ class Skill < ActiveRecord::Base
 
   has_many :endorsements, dependent: :destroy
 
+  OPTIONS = [
+      'Add Skill',
+      'Top Lane',
+      'Mid Lane',
+      'Jungle',
+      'AD carry',
+      'Support'
+  ]
+
 end
