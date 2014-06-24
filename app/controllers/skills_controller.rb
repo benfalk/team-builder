@@ -7,11 +7,11 @@ class SkillsController < ApplicationController
   end
 
   def create
-    @skill = current_user.skills.build(create_params)
+    @skill = Skill.new(create_params)
 
     respond_to do |format|
       if @skill.save
-        format.html { redirect_to skills_url }
+        format.html { redirect_to "/#{@skill.user.summoner.url}" }
         format.json { render json: { success: true, errors: @skill.errors.full_messages } }
       else
         format.html { redirect_to summoner_url(current_user.summoner), alert: 'Unable to create skill' }
@@ -29,7 +29,7 @@ class SkillsController < ApplicationController
   private
 
   def create_params
-    params.require(:skill).permit(:title) 
+    params.require(:skill).permit(:title,:user_id) 
   end
 
 end
