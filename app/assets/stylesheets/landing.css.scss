@@ -847,3 +847,80 @@ table tbody .standing-tr {
   background-position: center;
   background-size: cover;
 }
+
+
+
+
+
+
+// skills
+
+.skill-name {
+  padding: 3px 5px;
+  font-size: 0.9em;
+  display: inline-block;
+  float: left;
+  background-color: #3d566d;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+  margin-top: 5px;
+}
+
+.skill-total {
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  display: inline-block;
+  float: left;
+  font-size: 0.65em;
+  color: #cae2f6;
+  font-weight: 600;
+  padding: 6px 6px 6px;
+  overflow: hidden;
+  background-color: #516e87;
+  margin-top: 5px;
+}
+
+.skill-profile-image {
+  margin-top: 7px;
+  border-radius: 6px;
+  height: 25px;
+  overflow: hidden;
+  width: 25px;
+  display: inline-block;
+  margin-left: 4px;
+  float: left;
+  img {
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+  }
+}
+
+.skill-add {
+  margin-top: 7px;
+  display: inline-block;
+  margin-left: 12px;
+  float: left;
+  i {
+    color: #58ba57;
+    &:hover {
+      color: #69f068;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

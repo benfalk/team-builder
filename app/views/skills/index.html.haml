@@ -1,12 +1,30 @@
 .container.page-top-pad
-  .page-header
+  .row
+    .col-lg-6
+      %h2 Skills
+      = render partial: 'form', locals:{ skill: Skill.new }
+      %br
+      %br
+
+
+  - @skills.each do |skill|
     .row
       .col-lg-5
-        %h2 Skills
-      .col-lg-7
-        = render partial: 'form', locals:{ skill: Skill.new }
-      .col-lg-5
-        - @skills.each do |skill|
+        .row
           .col-lg-5
-            .skill-name
+            %span.skill-name
               = skill.title
+            %span.skill-total
+              21
+          .col-lg-7
+            .skill-profile-image
+              = image_tag current_user.avatar_url
+            .skill-profile-image
+              = image_tag current_user.avatar_url
+            .skill-profile-image
+              = image_tag current_user.avatar_url
+            = link_to '#', class: 'skill-add' do
+              %i.fa.fa-plus
+
+
+
