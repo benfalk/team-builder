@@ -179,6 +179,8 @@
 
       .col-lg-9
         = render partial: 'accounts/play_calender', locals:{data: @target_user.summoner.games.amount_played_by_day}
+      .col-lg-9
+        = render partial: 'skills/skill', collection: @target_user.skills.includes(endorsements:[:user]), as: :skill
 
         - if mine
           %h3

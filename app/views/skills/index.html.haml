@@ -7,24 +7,4 @@
       %br
 
 
-  - @skills.each do |skill|
-    .row
-      .col-lg-5
-        .row
-          .col-lg-5
-            %span.skill-name
-              = skill.title
-            %span.skill-total
-              21
-          .col-lg-7
-            .skill-profile-image
-              = image_tag current_user.avatar_url
-            .skill-profile-image
-              = image_tag current_user.avatar_url
-            .skill-profile-image
-              = image_tag current_user.avatar_url
-            = link_to '#', class: 'skill-add' do
-              %i.fa.fa-plus
-
-
-
+  = render partial: 'skill', collection: @skills, as: :skill

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :skills, only:[:index,:create,:destroy]
+  resources :endorsements, only:[:create,:destroy]
 
   resources :requests, only:[:index,:create,:destroy]
 
