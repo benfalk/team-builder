@@ -14,24 +14,23 @@ class Skill < ActiveRecord::Base
       'Map Awareness',
       'Peeling',
       'Ganking',
-      'juggernaut',
+      'Juggernaut',
       'Mind Reader',
       'Long Shot',
-      'Farm, farm, farm',
+      'Farm, Farm, Farm',
       'Great Attitude',
-      'Ultimate disrespect',
-      'Made me laugh',
-      'encourager',
+      'Ultimate Disrespect',
+      'Made Me Laugh',
+      'Encouraging',
       'Good Advice',
-      'tasteful humor',
-      'Want on my team',
-      'Good communicator',
+      'Tasteful Humor',
+      'Want On My Team',
+      'Good Communicator',
       'Lane Freezing',
       'Proxying',
-      'Map awareness',
       'Streamer',
       'Lane Synergy'
-  
+
   ]
 
 end
