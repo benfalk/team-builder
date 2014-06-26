@@ -26,10 +26,19 @@ class Skill < ActiveRecord::Base
       'Tasteful Humor',
       'Want On My Team',
       'Good Communicator',
+      'Last Hitting',
       'Lane Freezing',
       'Proxying',
+      'Split Pushing',
       'Streamer',
-      'Lane Synergy'
+      'Lane Synergy',
+      'Tower Diving',
+      'Jungle Times',
+      'Warding',
+      'Saved My Ass',
+      'Team Carrier'
+
+
 
   ]
 

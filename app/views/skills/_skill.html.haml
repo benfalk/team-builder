@@ -14,6 +14,12 @@
         = link_to '#', onclick:'$(this).parent().submit()', class: 'skill-add' do
           %i.fa.fa-plus
 
+    - if current_user.nil?
+      = form_for Endorsement.new(skill: skill) do |f|
+        = f.hidden_field :skill_id
+        = link_to '#', onclick:'$(this).parent().submit()', class: 'skill-add' do
+          %i.fa.fa-plus
+
     - if skill.user == current_user
       = link_to skill_path(skill), method: :delete, class:'remove-skill' do
         \- Remove
