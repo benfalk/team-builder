@@ -13,6 +13,7 @@ class GameStatsHarvester
       u.summoner.game_stats.where(game_id: nil).all.each do |stats|
         Game.from_stats(stats)
       end
+      u.champion_preferences.all.each(&:update_played_count!)
       sleep 2
     end
 

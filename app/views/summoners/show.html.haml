@@ -96,8 +96,9 @@
               = @target_user.short_bio.html_safe
 
           .col-lg-5.champ-list-short
-            - @target_user.favorite_champions.each do |champ|
-              = image_tag champ.avatar_url
+            - @target_user.favorite_champion_preferences.includes(:champion).each do |pref|
+              = image_tag pref.champion.avatar_url
+              = "Play Count: #{pref.played_count}"
 
       .col-lg-3.right-Well
         .badges-well
