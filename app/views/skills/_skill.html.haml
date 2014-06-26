@@ -1,25 +1,27 @@
 .row
-  .col-lg-5
+  .col-lg-3
     %span.skill-name
       = skill.title
     %span.skill-total
       = skill.endorsements.count
-  .col-lg-7
+  .col-lg-9
     - skill.endorsements.each do |e|
-      .skill-profile-image
+
+      = link_to e.user.summoner.url, class:'skill-profile-image has-tooltip', title:"#{e.user.summoner.name}" do
         = image_tag e.user.avatar_url
+
     - unless current_user.nil? || skill.user == current_user || skill.endorsements.map { |e| e.user_id }.include?(current_user.id)
       = form_for Endorsement.new(skill: skill, user: current_user) do |f|
         = f.hidden_field :skill_id
-        = link_to '#', onclick:'$(this).parent().submit()', class: 'skill-add' do
+        = link_to '#', onclick:'$(this).parent().submit()', class: 'skill-add has-tooltip', title:'Endorse skill'  do
           %i.fa.fa-plus
 
     - if current_user.nil?
       = form_for Endorsement.new(skill: skill) do |f|
         = f.hidden_field :skill_id
-        = link_to '#', onclick:'$(this).parent().submit()', class: 'skill-add' do
+        = link_to '#', onclick:'$(this).parent().submit()', class: 'skill-add has-tooltip', title:'Endorse skill' do
           %i.fa.fa-plus
 
     - if skill.user == current_user
-      = link_to skill_path(skill), method: :delete, class:'remove-skill' do
-        \- Remove
+      = link_to skill_path(skill), method: :delete, class:'remove-skill has-tooltip', title:"Remove skill '#{skill.title}' from your profile" do
+        %i.fa.fa-minus-circle

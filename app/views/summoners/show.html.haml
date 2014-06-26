@@ -90,15 +90,17 @@
                 KDA Ratio:&nbsp;&nbsp;
                 0.0
 
-        .row.pad{style:'padding-top:0; overflow: auto;'}
+        .row.pad{style:'padding-top:0;'}
           .col-lg-7
             %p.bio
               = @target_user.short_bio.html_safe
 
           .col-lg-5.champ-list-short
             - @target_user.favorite_champion_preferences.includes(:champion).each do |pref|
-              = image_tag pref.champion.avatar_url
-              = "Play Count: #{pref.played_count}"
+              .camp-with-count.has-tooltip{title:"Played #{pref.played_count} times, #{pref.percent_of_favorite}% play rate"}
+                = image_tag pref.champion.avatar_url
+                .cont
+                  = pref.played_count
 
       .col-lg-3.right-Well
         .badges-well
@@ -133,7 +135,7 @@
             %br
             %br
             %legend
-              Checking you out
+              Viewed Your Stats
               %i.fa.fa-eye-slash.privet.has-tooltip{title:'Privet Section: Viewable by you only'}
             - @target_user.summoner.latest_user_views.each do |t|
               = link_to '',  summoner_path(t[:user].summoner), style:"background-image: url(#{t[:user].avatar_url})", title:"#{t[:user].summoner.name.capitalize}, #{time_ago_in_words(t[:time])} ago", class: 'user-views has-tooltip'
