@@ -16,7 +16,7 @@ class ChampionPreference < ActiveRecord::Base
     if total == 0
       0
     else
-      ( played_count / total.to_f ).round(4) * 100
+      ( played_count / total.to_f * 100 ).round(2)
     end
   end
 
